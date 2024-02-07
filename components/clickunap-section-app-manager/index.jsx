@@ -64,12 +64,12 @@ export default function ClickunapAppSectionManager({ title }) {
         />
 
         {/* DirectActu - App 5 */}
-        <ClickunapApp
+        {/* <ClickunapApp
           color="white"
           logo="/directActu.png"
           name="Direct Actu"
           link="https://padlet.com/unapeialpesprovence/direct-actu-jlwim6wvptipb2xm"
-        />
+        /> */}
 
         {/* Power BI App 6*/}
         <ClickunapApp 
@@ -79,14 +79,23 @@ export default function ClickunapAppSectionManager({ title }) {
         link="https://app.powerbi.com/"
          />
 
+        {/* Gessi = App 6 */}
+        <ClickunapApp
+          color="#d24726"
+          logo="/gessi.png"
+          name="Gessi"
+          onClick={() => openApp("gessi")}
+        />
+        
         {/* Support Nephyla - App 7 */}
         <ClickunapApp 
-        color="#fc4236" 
-        logo="/nephyla.png" 
-        name="Support Nephyla"
-         //link="C:\Users\m.robaston\Desktop\AnyDesk.exe" 
-        onClick={() => openApp("anydesk")}
-         />
+          color="#fc4236" 
+          logo="/nephyla.png" 
+          name="Support Nephyla"
+          //link="C:\Users\m.robaston\Desktop\AnyDesk.exe" 
+          onClick={() => openApp("anydesk")}
+          />
+
 
         {/* Word - App 8*/}
         <ClickunapApp
@@ -104,6 +113,8 @@ export default function ClickunapAppSectionManager({ title }) {
         name="Teams"
         link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
       />
+
+
       </div>
     </div>
   );

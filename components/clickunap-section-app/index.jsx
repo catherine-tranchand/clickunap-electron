@@ -35,20 +35,28 @@ export default function ClickunapAppSection({ title }) {
           link="https://imago.unapei-ap.fr/login"
         />
 
-        {/* Ageval - App 3 */}
-
+        {/* One drive App 3 */}
         <ClickunapApp
+          color="white"
+          logo="/onedrive.png"
+          name="One drive"
+          //link="C:\Users\"
+           onClick={() => openFolder("")}
+        />
+
+        {/* Ageval - App 3 */}
+        {/* <ClickunapApp
           color="white"
           logo="/ageval.jpeg"
           name="Ageval"
           onClick={() => openApp("ageval")}
-        />
+        /> */}
 
         {/* Octime - App 4 */}
         <ClickunapApp
           color="white"
           logo="/octime.png"
-          name="Octime"
+          name="Mon Octime"
           link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/weoctime100?ini=unapei-ap"
         />
 
@@ -60,30 +68,6 @@ export default function ClickunapAppSection({ title }) {
           link="https://padlet.com/unapeialpesprovence/direct-actu-jlwim6wvptipb2xm"
         />
 
-        {/* Gessi = App 6 */}
-        <ClickunapApp
-          color="#d24726"
-          logo="/gessi.png"
-          name="Gessi"
-          onClick={() => openApp("gessi")}
-        />
-
-        {/* Support Nephyla - App 7 */}
-        <ClickunapApp
-          color="#fc4236"
-          logo="/nephyla.png"
-          name="Support Nephyla"
-          onClick={() => openApp("anydesk")}
-        />
-
-        {/* Word - App 8*/}
-        <ClickunapApp
-          color="white"
-          logo="/word-carre.png"
-          name="Word"
-          onClick={() => openApp("msword")}
-        />
-
         {/* Microsoft Teams - App 6 */}
         <ClickunapApp
           color="white"
@@ -91,6 +75,38 @@ export default function ClickunapAppSection({ title }) {
           name="Teams"
           link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
         />
+
+        {/* Gessi = App 6 */}
+        {/* <ClickunapApp
+          color="#d24726"
+          logo="/gessi.png"
+          name="Gessi"
+          onClick={() => openApp("gessi")}
+        /> */}
+
+        {/* Support Nephyla - App 7 */}
+        {/* <ClickunapApp
+          color="#fc4236"
+          logo="/nephyla.png"
+          name="Support Nephyla"
+          onClick={() => openApp("anydesk")}
+        /> */}
+
+        {/* Word - App 8*/}
+        {/* <ClickunapApp
+          color="white"
+          logo="/word-carre.png"
+          name="Word"
+          onClick={() => openApp("msword")}
+        /> */}
+
+        {/* Microsoft Teams - App 6 */}
+        {/* <ClickunapApp
+          color="white"
+          logo="/mic-teams.svg"
+          name="Teams"
+          link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
+        /> */}
       </div>
     </div>
   );
