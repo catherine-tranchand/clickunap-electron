@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function ClickunapAuthAside() {
   return (
-    <div className="ClickunapAuthAside hidden relative rounded-3xl lg:flex justify-center items-center flex-col w-3/5 h-full m-2 bg-primary">
+    <div className="ClickunapAuthAside hidden overflow-hidden relative rounded-3xl lg:flex justify-center items-center flex-col w-3/5 h-full bg-primary">
 
       {/* Clickunap LogoName */}
       <Link href='/' className="relative -top-32">

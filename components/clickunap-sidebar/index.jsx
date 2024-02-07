@@ -43,7 +43,7 @@ export default function ClickunapSideBar({ managerLinkHidden }) {
         {/* Numbers Link */}
         {managerLinkHidden === false && (
           <li>
-            <Link href="/manager" className="NavLink">
+            <Link href="/login" className="NavLink">
               <span className="NavIcon material-symbols-outlined">manage_accounts</span>
               <span className="NavName">Mon espace</span>
             </Link>

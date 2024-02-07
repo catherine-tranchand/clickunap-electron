@@ -1,7 +1,8 @@
 // import { useState } from 'react';
 
 
-const CLICKUNAP_DOWNLOAD_LINK = 'https://github.com/catherine-tranchand/clickunap-electron/releases/download/v0.1.0-alpha/Clickunap-0.1.0-alpha.dmg';
+// const CLICKUNAP_DOWNLOAD_LINK = 'https://github.com/catherine-tranchand/clickunap-electron/releases/download/v0.1.0-alpha/Clickunap-0.1.0-alpha.dmg';
+const CLICKUNAP_DOWNLOAD_LINK = 'https://github.com/catherine-tranchand/clickunap-electron/releases';
 
 
 
@@ -32,7 +33,7 @@ export default function useApps() {
    * @example - To open the Gessi app/software:
    *   openApp("gessi")
    * 
-   * @param { String } appName - currently supported app names are "gessi", "msword", "anydesk"
+   * @param { String } appName - currently supported app names are "gessi", "msword", "anydesk", "ageval"
    */
   const openApp = (appName) => {
     
