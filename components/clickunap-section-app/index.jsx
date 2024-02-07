@@ -54,8 +54,8 @@ export default function ClickunapAppSection({ title }) {
 
         {/* DirectActu - App 5 */}
         <ClickunapApp
-          color="#312532"
-          logo="/logo.svg"
+          color="white"
+          logo="/directActu.png"
           name="Direct Actu"
           link="https://padlet.com/unapeialpesprovence/direct-actu-jlwim6wvptipb2xm"
         />
