@@ -1,6 +1,7 @@
 import ClickunapAppBar from '@/components/clickunap-appbar'
 import ClickunapNavBar from '@/components/clickunap-navbar';
-import ClickunapAppSection from '@/components/clickunap-section-app';
+import ClickunapAppSectionManager from '@/components/clickunap-section-app-manager';
+import ClickunapAppSection from '@/components/clickunap-section-app-manager';
 import ClickunapResourceSection from '@/components/clickunap-section-resource';
 
 import ClickunapSideBar from '@/components/clickunap-sidebar';
@@ -29,7 +30,7 @@ export default function ManagerPage(){
           <div className="Container flex grow flex-col lg:flex-row overflow-auto px-6 py-8 space-y-10 lg:space-y-0">
 
             {/* Apps - Section - Clickunap */}
-            <ClickunapAppSection 
+            <ClickunapAppSectionManager 
               title="Le Coin des Applis"
             />
 

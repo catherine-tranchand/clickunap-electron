@@ -80,6 +80,10 @@ app.on("ready", () => {
         //appPath =`C:\\Users\\m.robaston\\Desktop\\AnyDesk.exe`;
         appPath = path.join(os.homedir(), "Desktop", "AnyDesk.exe");
         break;
+      case "ageval":
+        appPath = path.join(os.homedir(), "Desktop", "Ageval.exe");
+
+      
       }
 
 
