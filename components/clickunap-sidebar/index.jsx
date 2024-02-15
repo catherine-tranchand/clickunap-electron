@@ -34,9 +34,10 @@ export default function ClickunapSideBar({ managerLinkHidden }) {
 
         {/* Numbers Link */}
         <li>
-          <Link href="/io" className="NavLink">
+          <Link href="https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap" className="NavLink">
             <span className="NavIcon material-symbols-outlined">check_circle</span>
             <span className="NavName">Badgeuse</span>
+
           </Link>
         </li>
 

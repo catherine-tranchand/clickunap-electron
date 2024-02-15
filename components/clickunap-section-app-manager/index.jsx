@@ -5,6 +5,11 @@ import ClickunapApp from "../clickunap-app";
 
 
 
+const openLinkInNewWindow = (e, url) =>{
+  e.preventDefault();
+  window.open(url, "__blanc")
+}
+
 
 
 
@@ -36,6 +41,7 @@ export default function ClickunapAppSectionManager({ title }) {
           logo="/airmes.png"
           name="Airmes"
           link="https://www.airmes-application.eu/"
+          onClick={(e) => openLinkInNewWindow(e, "https://www.airmes-application.eu/")}
         />
 
         {/* Imago DU - App 2 */}
@@ -44,6 +50,7 @@ export default function ClickunapAppSectionManager({ title }) {
           logo="/imagodu.png"
           name="Imago DU"
           link="https://imago.unapei-ap.fr/login"
+          onClick={(e) => openLinkInNewWindow(e, "https://imago.unapei-ap.fr/login")}
         />
 
         {/* One drive App 3 */}
@@ -52,15 +59,16 @@ export default function ClickunapAppSectionManager({ title }) {
           logo="/onedrive.png"
           name="One drive"
           //link="C:\Users\"
-           onClick={() => openFolder("")}
+           onClick={() => openApp("onedrive")}
         />
 
         {/* Octime - App 4 */}
         <ClickunapApp
           color="white"
           logo="/octime.png"
-          name="Octime"
+          name="Octime Manager"
           link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/weoctime100?ini=unapei-ap"
+          onClick={(e) => openLinkInNewWindow(e, "https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/weoctime100?ini=unapei-ap")}
         />
 
         {/* DirectActu - App 5 */}
@@ -79,7 +87,7 @@ export default function ClickunapAppSectionManager({ title }) {
         link="https://app.powerbi.com/"
          />
 
-        {/* Gessi = App 6 */}
+        {/* Gessi App 7 */}
         <ClickunapApp
           color="#d24726"
           logo="/gessi.png"
@@ -87,17 +95,17 @@ export default function ClickunapAppSectionManager({ title }) {
           onClick={() => openApp("gessi")}
         />
         
-        {/* Support Nephyla - App 7 */}
+        {/* Support Nephyla - App 8 */}
         <ClickunapApp 
           color="#fc4236" 
           logo="/nephyla.png" 
           name="Support Nephyla"
           //link="C:\Users\m.robaston\Desktop\AnyDesk.exe" 
-          onClick={() => openApp("anydesk")}
+          onClick={() => openApp("nephyla")}
           />
 
 
-        {/* Word - App 8*/}
+        {/* Word - App 9*/}
         <ClickunapApp
           color="white"
           logo="/word-carre.png"
@@ -111,11 +119,26 @@ export default function ClickunapAppSectionManager({ title }) {
         color="white"
         logo="/mic-teams.svg"
         name="Teams"
-        link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
+       //link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
+       // onClick={(e) => openLinkInNewWindow(e, "https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/" )}
+        onClick={() => openApp("teams")}
+       
       />
+      
 
 
       </div>
     </div>
   );
 }
+
+
+
+{/* Microsoft Teams - App 9 */}
+/*<ClickunapApp
+  color="white"
+  logo="/mic-teams.svg"
+  name="Teams"
+  link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
+  onClick={(e) => openLinkInNewWindow(e, "https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/")}
+/> */

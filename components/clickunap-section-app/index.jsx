@@ -13,11 +13,13 @@ export default function ClickunapAppSection({ title }) {
   return (
     <div className="ClickunapAppSection w-full h-fit flex flex-col p-4 justify-start items-center space-y-4">
       {/* Title */}
+
       <h2 className="AppSectionTitle uppercase font-extrabold opacity-50">
         {title}
       </h2>
 
       {/* Box */}
+
       <div className="AppSectionBox grid grid-cols-3 gap-4 lg:gap-6">
         {/* Airmes - App 1 */}
         <ClickunapApp
@@ -35,22 +37,13 @@ export default function ClickunapAppSection({ title }) {
           link="https://imago.unapei-ap.fr/login"
         />
 
-        {/* One drive App 3 */}
+        {/* Ageval App 3 */}
         <ClickunapApp
-          color="white"
-          logo="/onedrive.png"
-          name="One drive"
-          //link="C:\Users\"
-           onClick={() => openFolder("")}
-        />
-
-        {/* Ageval - App 3 */}
-        {/* <ClickunapApp
           color="white"
           logo="/ageval.jpeg"
           name="Ageval"
-          onClick={() => openApp("ageval")}
-        /> */}
+          link="https://unapei-ap.ageval.fr/"
+        />
 
         {/* Octime - App 4 */}
         <ClickunapApp

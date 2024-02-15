@@ -14,7 +14,7 @@ export default function ClickunapAuthAside() {
       {/* Clickunap LogoName */}
       <Link href='/' className="relative -top-32">
         <Image
-          src="/clickunap.svg"
+          src="/newlogo.png"
           width={500}
           height={100}
           alt="Clickunap logo"

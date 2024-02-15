@@ -12,8 +12,8 @@ const appServe = app.isPackaged
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 1400,
+    height: 1000,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -27,7 +27,7 @@ const createWindow = () => {
     win.loadURL("http://localhost:3000");
     win.webContents.openDevTools();
     win.webContents.on("did-fail-load", (e, code, desc) => {
-      win.webContents.reloadIgnoringCache();
+    win.webContents.reloadIgnoringCache();
     });
   }
 };
@@ -48,23 +48,20 @@ app.on("ready", () => {
       `\x1b[38;5;208m(message)\x1b[0m: message => \x1b[1;37m${message}\x1b[0m`
     );
   });
-  
 
   ipcMain.on("open-folder", (event, folderPath) => {
-    console.log(`open-folder command received!!!!!!!! folderPath to open is ${folderPath}`);
+    console.log(
+      `open-folder command received!!!!!!!! folderPath to open is ${folderPath}`
+    );
 
     const openFolderCommand = process.platform === "win32" ? "start" : "open";
 
-    if (process.platform === 'win32') {
-      spawn(openFolderCommand, [ path.join(os.homedir(), "", folderPath) ]);
-      
+    if (process.platform === "win32") {
+      spawn(openFolderCommand, [path.join(os.homedir(), "", folderPath)]);
     } else {
-      spawn(openFolderCommand, [ path.join(os.homedir(),folderPath) ]);
+      spawn(openFolderCommand, [path.join(os.homedir(), folderPath)]);
     }
-
   });
-
-
 
   ipcMain.on("open-app", (event, appName) => {
     console.log(`open-app command received!!!!!!!! app to open is ${appName}`);
@@ -75,34 +72,67 @@ app.on("ready", () => {
     switch (appName) {
       case "gessi":
         //appPath = `C:\\Users\\m.robaston\\AppData\\Local\\Apps\\Remote Desktop\\msrdcw.exe`;
-        appPath = path.join(os.homedir(), "AppData", "Local", "Apps", "Remote Desktop", "msrdcw.exe");
+        appPath = path.join(
+          os.homedir(),
+          "AppData",
+          "Local",
+          "Apps",
+          "Remote Desktop",
+          "msrdcw.exe"
+        );
         break;
       case "msword":
-        //appPath = `C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE`
-        const programfiles = (process.platform === "win32") ? process.env.PROGRAMFILES : "";
-        appPath = path.join(programfiles, "Microsoft Office", "root", "Office16", "WINWORD.EXE");
+        //appPath = `C:\\Program Files\Microsoft Office\root\Office16\WINWORD.EXE`
+        // appPath = `C:\\ ProgramData\Microsoft\Windows\Start Menu\Programs
+        // const programfiles =
+        //  process.platform === "win32" ? process.env.PROGRAMFILES : "";
+        appPath = path.join(
+          programfiles,
+          "Microsoft Office",
+          "root",
+          "Office16",
+          "WINWORD.EXE"
+        );
         break;
-      case "anydesk":
+     // case "nephyla":
         //appPath =`C:\\Users\\m.robaston\\Desktop\\AnyDesk.exe`;
-        appPath = path.join(os.homedir(), "Desktop", "AnyDesk.exe");
-        break;
-      case "ageval":
-        appPath = path.join(os.homedir(), "Desktop", "Ageval.exe");
-
+     //   appPath = path.join(
+      //   os.homedir(),
+      //   "Desktop",
+       //  "AnyDesk.exe");
+       // break;
       
-      }
+      case "teams":
+        //Microsoft  teams : C:\Users\m.robaston\AppData\Local\Microsoft\Teams
+        appPath = path.join(
+          os.homedir(),
+          "AppData",
+          "Local",
+          "Microsoft",
+          "Teams"
+        );
 
+      case "onedrive":
+        //OneDrive : C:\Users\m.robaston\OneDrive - UNAPEI ALPES PROVENCE
+        appPath = path.join(
+          os.homedir(),
+          "OneDrive - UNAPEI ALPES PROVENCE"
+        );
+
+      case "nephyla":
+        // Nephyla : C:\Program Files (x86)\AnyDesk-8de38dcb
+        appPath = path.join(
+          os.homedir(),
+          "Program Files (x86)",
+          "AnyDesk-8de38dcb"
+        );
+    }
 
     const openFolderCommand = process.platform === "win32" ? "start" : "open";
 
     spawn(openFolderCommand, [appPath]);
   });
-
-
 });
-
-
-
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
