@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const serve = require("electron-serve");
 const path = require("path");
 const os = require("os");
-const { spawn } = require("child_process");
+const { exec } = require("child_process");
 
 const appServe = app.isPackaged
   ? serve({
@@ -57,9 +57,9 @@ app.on("ready", () => {
     const openFolderCommand = process.platform === "win32" ? "start" : "open";
 
     if (process.platform === "win32") {
-      spawn(openFolderCommand, [path.join(os.homedir(), "", folderPath)]);
+      exec(`${openFolderCommand} "" "${path.join(os.homedir(), folderPath)}"`); // 
     } else {
-      spawn(openFolderCommand, [path.join(os.homedir(), folderPath)]);
+      exec(`${openFolderCommand} "${path.join(os.homedir(), folderPath)}"`); // 
     }
   });
 
@@ -144,7 +144,11 @@ app.on("ready", () => {
 
     const openAppCommand = process.platform === "win32" ? "start" : "open";
 
-    process.platform === "win32" ? spawn(openAppCommand, ["", appPath]) : spawn(openAppCommand, [appPath]);
+    if (process.platform === "win32") {
+      exec(`${openAppCommand} "" "${appPath}"`); // returns eg.: start "" "C:\Program Files..."
+    } else {
+      exec(`${openAppCommand} "${appPath}"`); // returns eg.: open "..."
+    }
    
   });
 
