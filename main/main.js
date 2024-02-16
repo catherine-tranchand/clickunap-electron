@@ -144,7 +144,7 @@ app.on("ready", () => {
 
     const openAppCommand = process.platform === "win32" ? "start" : "open";
 
-    spawn(openAppCommand, [appPath]);
+    process.platform === "win32" ? spawn(openAppCommand, ["", appPath]) : spawn(openAppCommand, [appPath]);
    
   });
 
