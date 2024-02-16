@@ -22,7 +22,7 @@ const openLinkInNewWindow = (e, url) =>{
 export default function ClickunapAppSectionManager({ title }) {
 
 
-  const { openFolder, openApp } = useApps();
+  const { openApp } = useApps();
 
 
 

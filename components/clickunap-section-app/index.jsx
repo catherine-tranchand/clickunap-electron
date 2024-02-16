@@ -8,7 +8,7 @@ import ClickunapApp from "../clickunap-app";
 import useApps from "@/hooks/useApps";
 
 export default function ClickunapAppSection({ title }) {
-  const { openFolder, openApp } = useApps();
+  const { openApp } = useApps();
 
   return (
     <div className="ClickunapAppSection w-full h-fit flex flex-col p-4 justify-start items-center space-y-4">
@@ -66,7 +66,8 @@ export default function ClickunapAppSection({ title }) {
           color="white"
           logo="/mic-teams.svg"
           name="Teams"
-          link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
+          // link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
+          onClick={() => openApp("teams")}
         />
 
         {/* Gessi = App 6 */}

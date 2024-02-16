@@ -65,7 +65,9 @@ app.on("ready", () => {
 
   ipcMain.on("open-app", (event, appName) => {
     console.log(`open-app command received!!!!!!!! app to open is ${appName}`);
-
+    const programFiles = process.platform === "win32" ? process.env.PROGRAMFILES : "";
+    const programData = process.platform === "win32" ? process.env.ALLUSERSPROFILE : "";
+    
     let appPath = "";
     // "gessi", "msword", "anydesk"
 
@@ -84,54 +86,71 @@ app.on("ready", () => {
       case "msword":
         //appPath = `C:\\Program Files\Microsoft Office\root\Office16\WINWORD.EXE`
         // appPath = `C:\\ ProgramData\Microsoft\Windows\Start Menu\Programs
-        // const programfiles =
-        //  process.platform === "win32" ? process.env.PROGRAMFILES : "";
-        appPath = path.join(
-          programfiles,
+        
+        
+          appPath = path.join(
+          programFiles,
           "Microsoft Office",
           "root",
           "Office16",
           "WINWORD.EXE"
         );
         break;
-     // case "nephyla":
-        //appPath =`C:\\Users\\m.robaston\\Desktop\\AnyDesk.exe`;
-     //   appPath = path.join(
-      //   os.homedir(),
-      //   "Desktop",
-       //  "AnyDesk.exe");
-       // break;
       
       case "teams":
-        //Microsoft  teams : C:\Users\m.robaston\AppData\Local\Microsoft\Teams
+        //Microsoft  teams : C:\Users\m.robaston\AppData\Local\Microsoft\Teams\current\Teams.exe
         appPath = path.join(
           os.homedir(),
           "AppData",
           "Local",
           "Microsoft",
-          "Teams"
+          "Teams",
+          "current",
+          "Teams.exe",
         );
+
+        break;
+
 
       case "onedrive":
         //OneDrive : C:\Users\m.robaston\OneDrive - UNAPEI ALPES PROVENCE
+        // C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneDrive
         appPath = path.join(
-          os.homedir(),
-          "OneDrive - UNAPEI ALPES PROVENCE"
+          // os.homedir(),
+         // "OneDrive - UNAPEI ALPES PROVENCE"
+         programData,
+         "Microsoft",
+         "Windows",
+         "Start Menu",
+         "Programs",
+         "OneDrive",
+      
         );
+
+        break;
 
       case "nephyla":
-        // Nephyla : C:\Program Files (x86)\AnyDesk-8de38dcb
+      case "anydesk":
+        // Nephyla : C:\Program Files (x86)\AnyDesk-8de38dcb.exe
         appPath = path.join(
-          os.homedir(),
+          "C:", 
           "Program Files (x86)",
-          "AnyDesk-8de38dcb"
+          "AnyDesk-8de38dcb.exe",
         );
+
+        break;
+
     }
 
-    const openFolderCommand = process.platform === "win32" ? "start" : "open";
+    const openAppCommand = process.platform === "win32" ? "start" : "open";
 
-    spawn(openFolderCommand, [appPath]);
+    spawn(openAppCommand, [appPath]);
+   
   });
+
+
+
+
 });
 
 app.on("window-all-closed", () => {
