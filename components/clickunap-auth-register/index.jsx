@@ -209,9 +209,42 @@ export default function ClickunapAuthRegister() {
   async function handleRegisterFormSubmit(event) {
     event.preventDefault();
 
-    setHasError(true);
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('role', role);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('confirmPassword', confirmPassword);
 
-    // const res = await fetch("https://")
+
+    if (password !== confirmPassword){
+      return alert('Passwords do not match!!!');
+    }
+
+
+
+    fetch('https://clickunap-api.vercel.app/users', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => {
+      console.log('response ==>> ', response);
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Failed to create a new user');
+      }
+    })
+    .then(data => {
+      setHasError(false);
+      console.log('data is ', data);
+    })
+    .catch(error => {    
+      setHasError(true);
+      console.error(error)
+    })
+
 
     console.log(`[handleRegisterFormSubmit]: email => ${email} & password => ${password}`);
   }
