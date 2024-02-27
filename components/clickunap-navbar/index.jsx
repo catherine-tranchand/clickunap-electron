@@ -26,7 +26,7 @@ export default function ClickunapNavBar({ managerLinkHidden }) {
 
       {/* Services Link */}
       <li>
-        <Link href="/services" onclassName="NavLink !flex-col">
+        <Link href="/services" className="NavLink !flex-col">
           <span className="NavIcon material-symbols-outlined">
             corporate_fare
           </span>
