@@ -11,6 +11,11 @@ import ClickunapIcon from "@/components/clickunap-icon";
 
 export default function ClickunapAuthLogin() {
   const [hasError, setHasError] = useState(false);
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+
+
+
 
   const emailInputProps = {
     startAdornment: (
@@ -69,6 +74,7 @@ export default function ClickunapAuthLogin() {
           placeholder="Votre email"
           defaultValue=""
           InputProps={emailInputProps}
+          onChange={(event) => setEmail(event.target.value)}
           //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
         />
 
@@ -84,6 +90,7 @@ export default function ClickunapAuthLogin() {
           type="password"
           autoComplete="current-password"
           InputProps={passwordInputProps}
+          onChange={(event) => setPassword(event.target.value)}
         />
 
         {/* Subbmit - Button */}
@@ -99,8 +106,13 @@ export default function ClickunapAuthLogin() {
     </div>
   );
 
-  function handleLoginFormSubmit(event) {
+  async function handleLoginFormSubmit(event) {
     event.preventDefault();
+
     setHasError(true);
+
+    // const res = await fetch("https://")
+
+    console.log(`[handleLoginFormSubmit]: email => ${email} & password => ${password}`);
   }
 }

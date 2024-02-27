@@ -74,6 +74,7 @@ app.on("ready", () => {
     switch (appName) {
       case "gessi":
         //appPath = `C:\\Users\\m.robaston\\AppData\\Local\\Apps\\Remote Desktop\\msrdcw.exe`;
+        //AppPath = C:\Users\..\OneDrive - UNAPEI ALPES PROVENCE\Bureau\Remote Desktop GESSI.Ink;
         appPath = path.join(
           os.homedir(),
           "AppData",
@@ -85,7 +86,7 @@ app.on("ready", () => {
         break;
       case "msword":
         //appPath = `C:\\Program Files\Microsoft Office\root\Office16\WINWORD.EXE`
-        // appPath = `C:\\ ProgramData\Microsoft\Windows\Start Menu\Programs
+        // appPath = `C:\\ProgramData\Microsoft\Windows\Start Menu\Programs
         
         
           appPath = path.join(
@@ -116,14 +117,14 @@ app.on("ready", () => {
         //OneDrive : C:\Users\m.robaston\OneDrive - UNAPEI ALPES PROVENCE
         // C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneDrive
         appPath = path.join(
-          // os.homedir(),
-         // "OneDrive - UNAPEI ALPES PROVENCE"
-         programData,
-         "Microsoft",
-         "Windows",
-         "Start Menu",
-         "Programs",
-         "OneDrive",
+          os.homedir(),
+          "OneDrive - UNAPEI ALPES PROVENCE"
+        
+         //"Microsoft",
+         //"Windows",
+         //"Start Menu",
+        // "Programs",
+        // "OneDrive",
       
         );
 
@@ -132,22 +133,23 @@ app.on("ready", () => {
       case "nephyla":
       case "anydesk":
         // Nephyla : C:\Program Files (x86)\AnyDesk-8de38dcb.exe
+        // C:\Users\Public\Desktop Support_Nephyla.Ink
         appPath = path.join(
           "C:", 
           "Program Files (x86)",
+          "AnyDesk-8de38dcb",
           "AnyDesk-8de38dcb.exe",
+
         );
 
         break;
 
     }
 
-    const openAppCommand = process.platform === "win32" ? "start" : "open";
-
     if (process.platform === "win32") {
-      exec(`${openAppCommand} "" "${appPath}"`); // returns eg.: start "" "C:\Program Files..."
+      exec(`start "" "${appPath}"`); // returns eg.: start "" "C:\Program Files..."
     } else {
-      exec(`${openAppCommand} "${appPath}"`); // returns eg.: open "..."
+      exec(`open "${appPath}"`); // returns eg.: open "..."
     }
    
   });

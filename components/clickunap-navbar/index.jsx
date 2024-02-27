@@ -1,15 +1,12 @@
-import Link from "next/link"
+import Link from "next/link";
 
-const openLinkInNewWindow = (e, url) =>{
+const openLinkInNewWindow = (e, url) => {
   e.preventDefault();
-  
+
   setTimeout(() => {
     window.open(url, "__blank");
   }, 100);
-  
 };
-
-
 
 export default function ClickunapNavBar({ managerLinkHidden }) {
   return (
@@ -52,13 +49,14 @@ export default function ClickunapNavBar({ managerLinkHidden }) {
       {/* Badge Link */}
       <li>
         <Link
-          href="/io"   onClick={(e) => openLinkInNewWindow(e, "https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap&SOCIETE=1&SSO=N&NUMINTER=0")} 
-          className="NavLink !flex-col"  >
+          href="https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap&SOCIETE=1&SSO=N&NUMINTER=0"
+          target="_blank"
+          className="NavLink !flex-col"
+        >
           <span className="NavIcon material-symbols-outlined">
             check_circle
           </span>
           <span className="NavName !text-xs truncate !w-12">Badgeuse</span>
-      
         </Link>
       </li>
 
