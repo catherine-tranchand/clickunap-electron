@@ -1,3 +1,4 @@
+'use client';
 /* Import your clickunap components here */
 import ClickunapAppBar from "@/components/clickunap-appbar";
 import ClickunapNavBar from "@/components/clickunap-navbar";

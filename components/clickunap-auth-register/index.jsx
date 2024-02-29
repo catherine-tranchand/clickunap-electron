@@ -75,20 +75,21 @@ export default function ClickunapAuthRegister() {
   };
 
   return (
-    <div className="ClickunapAuthRegister flex flex-col justify-center items-center rounded-xl shadow-md bg-white w-full h-auto max-w-[500px] p-4 lg:space-y-6">
+    <div className="ClickunapAuthRegister flex flex-col justify-center items-center rounded-xl shadow-md bg-white w-full h-auto max-w-[500px] p-4 lg:space-y-2">
       {/* Clickunap LogoName */}
       <Link href="/">
-        <Image
-          src="/newlogo-black.png"
-          width={224}
-          height={48}
+        <Image 
+          className="!w-64 !h-14"
+          src="/logo-black-sm.png"
+          width={256}
+          height={56}
           alt="Clickunap logo"
-          priority={true}
+          priority={false}
         />
       </Link>
 
       {/*  Title */}
-      <h2 className="text-black !-mt-6">Inscription à Clickunap</h2>
+      <h2 className="text-black">Inscription à Clickunap</h2>
 
       {/* Error message */}
       {hasError && (
@@ -101,7 +102,7 @@ export default function ClickunapAuthRegister() {
 
       <form
         noValidate={false}
-        className="flex flex-col justify-center w-full h-auto space-y-4 p-4"
+        className="flex flex-col justify-center w-full h-auto space-y-4 p-4 !mt-8"
         onSubmit={handleRegisterFormSubmit}
       >
 
@@ -160,6 +161,7 @@ export default function ClickunapAuthRegister() {
           label="Email"
           value={email}
           placeholder="Votre email"
+          autoComplete="email"
           InputProps={emailInputProps}
           onChange={(event) => setEmail(event.target.value)}
           //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
@@ -173,6 +175,7 @@ export default function ClickunapAuthRegister() {
           label="Password"
           value={password}
           placeholder="Votre mot de passe"
+          autoComplete="new-password"
           type="password"
           InputProps={passwordInputProps}
           onChange={(event) => setPassword(event.target.value)}
@@ -187,6 +190,7 @@ export default function ClickunapAuthRegister() {
           label="Confirm Password"
           value={confirmPassword}
           placeholder="Confirmez votre mot de passe"
+          autoComplete="new-password"
           type="password"
           InputProps={passwordInputProps}
           onChange={(event) => setConfirmPassword(event.target.value)}
@@ -210,10 +214,13 @@ export default function ClickunapAuthRegister() {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
+    // formData.append('firstName', firstName);
+    // formData.append('lastName', lastName);
+    formData.append('firstname', firstName);
+    formData.append('lastname', lastName);
     formData.append('role', role);
     formData.append('email', email);
+    formData.append('username', `test${(new Date()).getSeconds()}@clickunap.com`);
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
 
@@ -224,8 +231,13 @@ export default function ClickunapAuthRegister() {
 
 
 
-    fetch('https://clickunap-api.vercel.app/users', {
+    // fetch('https://clickunap-api.vercel.app/users', {
+    fetch('https://clickunap-nextjs-api.vercel.app/users', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
       body: formData,
     })
     .then(response => {
@@ -236,7 +248,7 @@ export default function ClickunapAuthRegister() {
         throw new Error('Failed to create a new user');
       }
     })
-    .then(data => {
+    .then(({ data }) => {
       setHasError(false);
       console.log('data is ', data);
     })

@@ -11,7 +11,7 @@ export default function RegisterPage() {
     <main className="LoginPage flex w-full h-full overflow-auto p-6 bg-neutral-100">
 
       {/* CONTAINER */}
-      <div className="Container flex flex-col justify-center items-center p-6 grow h-full">
+      <div className="Container flex flex-col justify-center items-center p-6 grow h-fit">
 
         {/* Clickunap - Auth - Register */}
         <ClickunapAuthRegister />
