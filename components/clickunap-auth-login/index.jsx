@@ -11,7 +11,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import ClickunapIcon from "@/components/clickunap-icon";
 
 // import { useSessionStorage } from "@uidotdev/usehooks";
-
+import useStorage from '@/hooks/useStorage';
 
 
 
@@ -27,7 +27,7 @@ export default function ClickunapAuthLogin() {
 
   const router = useRouter();
 
-
+  const { userToken, saveUserToken } = useStorage();
 
 
 
@@ -63,6 +63,8 @@ export default function ClickunapAuthLogin() {
 
       {/*  Title */}
       <h2 className="text-black">Mon Espace</h2>
+
+      <p className="truncate w-full h-auto text-xs text-center text-slate-300">{userToken}</p>
 
       {/* Error message */}
       {hasError && (
@@ -163,7 +165,8 @@ export default function ClickunapAuthLogin() {
       // router.push('/');
 
       // Now, let's authorize this user, using the `userToken`
-      router.push('/authorize?user_token=' + userToken);
+      // router.push('/authorize?user_token=' + userToken);
+      saveUserToken(userToken);
 
     } catch (error) {
       setHasError(true);
