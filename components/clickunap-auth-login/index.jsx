@@ -10,7 +10,6 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import ClickunapIcon from "@/components/clickunap-icon";
 
-// import { useSessionStorage } from "@uidotdev/usehooks";
 import useStorage from '@/hooks/useStorage';
 
 
@@ -19,10 +18,7 @@ import useStorage from '@/hooks/useStorage';
 
 export default function ClickunapAuthLogin() {
   const [hasError, setHasError] = useState(false);
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
-
-  // const [ userToken, setUserToken ] = useSessionStorage('userToken', '');
+  const [errorMessage, setErrorMessage] = useState("");
 
 
   const router = useRouter();
@@ -69,9 +65,7 @@ export default function ClickunapAuthLogin() {
       {/* Error message */}
       {hasError && (
         <p className="text-rose-600 text-xs lg:text-sm px-6 text-center py-4 lg:py-0">
-          Votre email ou le mot de passe n'est pas correct.
-          <br className="hidden lg:block" />
-          Saisissez-le à nouveau!
+          {errorMessage}
         </p>
       )}
 
@@ -92,8 +86,6 @@ export default function ClickunapAuthLogin() {
           placeholder="Votre email"
           defaultValue=""
           InputProps={emailInputProps}
-          onChange={(event) => setEmail(event.target.value)}
-          //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
         />
 
         {/* Password - Input */}
@@ -109,7 +101,6 @@ export default function ClickunapAuthLogin() {
           type="password"
           autoComplete="current-password"
           InputProps={passwordInputProps}
-          onChange={(event) => setPassword(event.target.value)}
         />
 
         {/* Subbmit - Button */}
@@ -128,17 +119,14 @@ export default function ClickunapAuthLogin() {
   async function handleLoginFormSubmit(event) {
     event.preventDefault();
 
-
     const formData = new FormData(event.target);
-
-    const email = formData.get('email');
-    const password = formData.get('password');
 
 
     try {
 
+      const loginUrl = "https://clickunap-api.vercel.app/auth/login"
 
-      const response = await fetch('https://clickunap-nextjs-api.vercel.app/auth/login', {
+      const response = await fetch(loginUrl, {
         method: 'POST',
         body: formData
       });
@@ -148,6 +136,7 @@ export default function ClickunapAuthLogin() {
       
       if (error) {
         setHasError(true);
+        setErrorMessage(error);
         console.log(`[handleLoginFormSubmit]: error ==>> `, error);
         return;
       }
@@ -156,27 +145,17 @@ export default function ClickunapAuthLogin() {
       // setUserToken(data.token);
       const userToken = data.token;
       
-      // wait for 2 seconds
-      // await new Promise(resolve => setTimeout(resolve, 2000));
-      // set error to FALSE ;)
-      // setHasError(false);
-      
-      // Now redirect to the home page
-      // router.push('/');
-
-      // Now, let's authorize this user, using the `userToken`
-      // router.push('/authorize?user_token=' + userToken);
       saveUserToken(userToken);
+
+      router.push("/manager");
+
+      console.log(`userToken = ${userToken}`, data);
 
     } catch (error) {
       setHasError(true);
+      setErrorMessage(error);
       console.log(`[handleLoginFormSubmit]: error ==>> `, error);
     }
 
-
-
-    // const res = await fetch("https://")
-
-    console.log(`[handleLoginFormSubmit]: email => ${email} & password => ${password}`);
   }
 }

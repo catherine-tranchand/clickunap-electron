@@ -232,7 +232,7 @@ export default function ClickunapAuthRegister() {
 
 
     // fetch('https://clickunap-api.vercel.app/users', {
-    fetch('https://clickunap-nextjs-api.vercel.app/users', {
+    fetch('https://clickunap-api.vercel.app/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
