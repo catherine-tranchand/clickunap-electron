@@ -99,16 +99,29 @@ app.on("ready", () => {
         break;
       
       case "teams":
-        //Microsoft  teams : C:\Users\m.robaston\AppData\Local\Microsoft\Teams\current\Teams.exe
+          //Microsoft  teams : C:\Users\m.robaston\AppData\Local\Microsoft\Teams\current\Teams.exe
+         // appPath = path.join(
+         //  os.homedir(),
+         //  "AppData",
+         //  "Local",
+         //  "Microsoft",
+         //  "Teams",
+         // "current",
+         //  "Teams.exe",
+         // );
+         
+ //C:\Users\m.robaston\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Teams.exe
         appPath = path.join(
           os.homedir(),
           "AppData",
-          "Local",
+          "Roaming",
           "Microsoft",
-          "Teams",
-          "current",
+          "Start Menu",
+          "Programs",
           "Teams.exe",
         );
+
+
 
         break;
 
