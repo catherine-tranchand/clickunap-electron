@@ -67,8 +67,8 @@ export default function ClickunapAppSectionManager({ title }) {
           color="white"
           logo="/octime.png"
           name="Octime Manager"
-          link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/weoctime100?ini=unapei-ap"
-          onClick={(e) => openLinkInNewWindow(e, "https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/weoctime100?ini=unapei-ap")}
+          link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/wmoctime100?ini=unapei-ap"
+          onClick={(e) => openLinkInNewWindow(e, "https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/wmoctime100?ini=unapei-ap")}
         />
 
         {/* DirectActu - App 5 */}

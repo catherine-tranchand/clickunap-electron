@@ -24,12 +24,12 @@ export default function ClickunapSideBar({ managerLinkHidden }) {
         </li>
 
         {/* Numbers Link */}
-        <li>
+       {/*<li>
           <Link href="/numbers" className="NavLink">
             <span className="NavIcon material-symbols-outlined">call</span>
             <span className="NavName">Contacts siège</span>
           </Link>
-        </li>
+  </li>*/}
 
 
         {/* Numbers Link */}

@@ -124,6 +124,22 @@ app.on("ready", () => {
 
 
         break;
+      
+      case "outlook":
+       // C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Outlook.exe
+       //C:\Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE
+       appPath = path.join(
+        "C:", 
+        "Program Files (x86)",
+        "Microsoft Office",
+        "root",
+        "Office16",
+        "OUTLOOK.EXE"
+      );
+
+      break;
+
+      
 
 
       case "onedrive":

@@ -79,28 +79,31 @@ export default function ClickunapAppSection({ title }) {
         /> */}
 
         {/* Support Nephyla - App 7 */}
-        {/* <ClickunapApp
-          color="#fc4236"
-          logo="/nephyla.png"
+       <ClickunapApp 
+          color="#fc4236" 
+          logo="/nephyla.png" 
           name="Support Nephyla"
-          onClick={() => openApp("anydesk")}
-        /> */}
+          //link="C:\Users\m.robaston\Desktop\AnyDesk.exe" 
+          onClick={() => openApp("nephyla")}
+          />
 
         {/* Word - App 8*/}
-        {/* <ClickunapApp
+        <ClickunapApp
           color="white"
           logo="/word-carre.png"
           name="Word"
           onClick={() => openApp("msword")}
-        /> */}
+        /> 
 
-        {/* Microsoft Teams - App 6 */}
-        {/* <ClickunapApp
+        
+
+        {/* Outlook - App 6 */}
+      <ClickunapApp
           color="white"
-          logo="/mic-teams.svg"
-          name="Teams"
-          link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
-        /> */}
+          logo="/outlook.png"
+          name="Outlook"
+          onClick={() => openApp("outlook")}
+        />
       </div>
     </div>
   );
