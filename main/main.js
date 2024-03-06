@@ -89,37 +89,37 @@ app.on("ready", () => {
         // appPath = `C:\\ProgramData\Microsoft\Windows\Start Menu\Programs
         
         
-          appPath = path.join(
-          programFiles,
-          "Microsoft Office",
-          "root",
-          "Office16",
-          "WINWORD.EXE"
+        appPath = path.join(
+        programFiles,
+        "Microsoft Office",
+        "root",
+        "Office16",
+        "WINWORD.EXE"
         );
         break;
       
       case "teams":
           //Microsoft  teams : C:\Users\m.robaston\AppData\Local\Microsoft\Teams\current\Teams.exe
-         // appPath = path.join(
-         //  os.homedir(),
-         //  "AppData",
-         //  "Local",
-         //  "Microsoft",
-         //  "Teams",
-         // "current",
-         //  "Teams.exe",
-         // );
+          appPath = path.join(
+           os.homedir(),
+           "AppData",
+           "Local",
+           "Microsoft",
+           "Teams",
+           "current",
+           "Teams.exe",
+         );
          
  //C:\Users\m.robaston\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Teams.exe
-        appPath = path.join(
-          os.homedir(),
-          "AppData",
-          "Roaming",
-          "Microsoft",
-          "Start Menu",
-          "Programs",
-          "Teams.exe",
-        );
+       // appPath = path.join(
+        //  os.homedir(),
+        //  "AppData",
+        //  "Roaming",
+       //   "Microsoft",
+       //   "Start Menu",
+        //  "Programs",
+       //   "Teams.exe",
+       // );
 
 
 
