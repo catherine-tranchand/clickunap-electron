@@ -17,7 +17,7 @@ export default function ClickunapSideBar({ managerLinkHidden }) {
 
         {/* Services Link */}
         <li>
-          <Link href="/services" className="NavLink">
+          <Link href="/territories" className="NavLink">
             <span className="NavIcon material-symbols-outlined">corporate_fare</span>
             <span className="NavName">Annuaire établissement</span>
           </Link>

@@ -138,7 +138,7 @@ export default function ClickunapAuthLogin() {
     try {
 
 
-      const response = await fetch('https://clickunap-nextjs-api.vercel.app/auth/login', {
+      const response = await fetch('https://clickunap-api.vercel.app/auth/login', {
         method: 'POST',
         body: formData
       });
@@ -148,25 +148,19 @@ export default function ClickunapAuthLogin() {
       
       if (error) {
         setHasError(true);
-        console.log(`[handleLoginFormSubmit]: error ==>> `, error);
+        console.log(`[ handleLoginFormSubmit ]: error ==>> `, error);
         return;
       }
 
-      
-      // setUserToken(data.token);
       const userToken = data.token;
-      
-      // wait for 2 seconds
-      // await new Promise(resolve => setTimeout(resolve, 2000));
-      // set error to FALSE ;)
-      // setHasError(false);
-      
-      // Now redirect to the home page
-      // router.push('/');
 
-      // Now, let's authorize this user, using the `userToken`
-      // router.push('/authorize?user_token=' + userToken);
+      // Save the `userToken` in our local storage
       saveUserToken(userToken);
+
+            
+      // Now redirect to the manager page
+      router.push('/manager');
+
 
     } catch (error) {
       setHasError(true);

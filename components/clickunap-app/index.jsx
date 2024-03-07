@@ -9,7 +9,7 @@ export default function ClickunapApp({ logo, name, color, link, onClick }) {
       <div className="AppContainer rounded-lg flex grow w-full justify-center items-center cursor-pointer" style={{ backgroundColor: color}} onClick={onClick}>
         {link && <Link 
           href={link}
-          className="w-full h-full flex justify-center items-center p-4" target="blank">
+          className="w-full h-full flex justify-center items-center p-4" target="_blank">
 
           {/* Logo */}
           <Image

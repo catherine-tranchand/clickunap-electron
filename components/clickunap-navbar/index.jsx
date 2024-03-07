@@ -26,7 +26,7 @@ export default function ClickunapNavBar({ managerLinkHidden }) {
 
       {/* Services Link */}
       <li>
-        <Link href="/services" className="NavLink !flex-col">
+        <Link href="/territories" className="NavLink !flex-col">
           <span className="NavIcon material-symbols-outlined">
             corporate_fare
           </span>
@@ -37,14 +37,17 @@ export default function ClickunapNavBar({ managerLinkHidden }) {
       </li>
 
       {/* Contacts Link */}
-      <li>
-        <Link href="/numbers" className="NavLink !flex-col">
-          <span className="NavIcon material-symbols-outlined">call</span>
-          <span className="NavName !text-xs truncate !w-12">
-            Contacts siège
-          </span>
-        </Link>
-      </li>
+      {/* 
+        <li>
+          <Link href="/numbers" className="NavLink !flex-col">
+            <span className="NavIcon material-symbols-outlined">call</span>
+            <span className="NavName !text-xs truncate !w-12">
+              Contacts siège
+            </span>
+          </Link>
+        </li>
+      */}
+      
 
       {/* Badge Link */}
       <li>

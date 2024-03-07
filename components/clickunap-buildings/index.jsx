@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import ClickunapAppBar from "../clickunap-appbar";
 
 
-export default function ClickButton({name, color, text}){
+export default function ClickButton({name, text, color}){
     
     const [isOpen, setIsOpen] = useState(false);
 
@@ -11,9 +11,9 @@ export default function ClickButton({name, color, text}){
         setIsOpen((isOpen) => !isOpen);
     }
 return(
-    <Button variant="contained">Contained
+  <div className="app">
     
-    </Button>
+  </div>
 )
 
 }

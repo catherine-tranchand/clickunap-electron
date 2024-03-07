@@ -1,0 +1,101 @@
+{
+    "hq": {
+        "name": "SIÈGE",
+        "data": [
+            {
+                "name": "SIÈGE SOCIAL",
+                "director": "Jean-Yves LEFRANC",
+                "contacts": [
+                    { 
+                        "name": "", 
+                        "address": "26, Rue Elzéard Rougier - 13004 Marseille", 
+                        "phonenumbers": [ 
+                            "04 91 10 76 00"
+                        ],
+                        "emails": [ 
+                            "contact@unapei-ap.fr"
+                        ]
+                    }
+                ]
+
+            }
+        ]
+    },
+
+    "territory04": {
+        "name": "TERRITOIRE 04",
+        "data": [
+            {
+                "name": "COMPLEXE NORD 04",
+                "director": "Odile DAVIN",
+                "contacts": [
+                    { 
+                        "name": "IME LES OLIVIERS (CHÂTEAU ARNOUX)", 
+                        "address": "Route de Saint Jean - BP 38 - 04160 Château Arnoux", 
+                        "phonenumbers": [ 
+                            "04 92 64 06 67"
+                        ],
+                        "emails": [ 
+                            "ime.oliviers@unapei-ap.fr"
+                        ]
+                    }
+                ]
+
+            }
+       ]
+    },
+    "territory05": {
+        "name": "TERRITOIRE 05",
+        "data": [
+            {
+                "name": "COMPLEXE SUD 05",
+                "director": "Cécile LAPARLIERE",
+                "contacts": [
+                    { 
+                        "name": "FAM SOLEIL LEVANT EANM LES ECUREUILS", 
+                        "address": "340, Chemin du Riou - 05130 Tallard", 
+                        "phonenumbers": [ 
+                            "04 92 54 08 60"
+                        ],
+                        "emails": [ 
+                            "tallard05@unapei-ap.fr"
+                        ]
+                    }
+                ]
+
+            }
+        ]
+    },
+    "territory13": {
+        "name": "TERRITOIRE 13",
+        "data": [
+            {
+                "name": "COMPLEXE TAMARIS/AMANDIERS",
+                "director": "Carole LAZZERI",
+                "contacts": [
+                    { 
+                        "name": "IME LES AMANDIERS (SIPFP et section TSA Les Jasmins)",                       
+                        "address": "203 avenue de La Panouse – 13009 Marseille", 
+                        "phonenumbers": [ 
+                            "04 91 41 99 25"
+                        ],
+                        "emails": [ 
+                            "amandiers@unapei-ap.fr"
+                        ]
+                    },
+                    { 
+                        "name": "IME LES TAMARIS (SEES et section TSA Les Jasmins) EEAP LES TAMARIS SESSAD LES TAMARIS",                       
+                        "address": "62 avenue de Hambourg – 13008 Marseille", 
+                        "phonenumbers": [ 
+                            "04 91 73 47 03"
+                        ],
+                        "emails": [ 
+                            "tamaris@unapei-ap.fr"
+                        ]
+                    }
+                ]
+
+            }
+        ]
+    }    
+}
