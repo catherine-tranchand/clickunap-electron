@@ -183,6 +183,19 @@ app.on("ready", () => {
    
   });
 
+  ipcMain.on("open-link", (event, url) => {
+    console.log(
+      `open-link command received!!!!!!!! Url to open is ${url}`
+    );
+
+    if (process.platform === "win32") {
+      exec("start " + url);
+    } else {
+      exec("open " + url);
+    }
+  });
+
+
 
 
 

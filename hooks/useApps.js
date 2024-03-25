@@ -46,6 +46,17 @@ export default function useApps() {
 
   }
 
+  const openLink = (url) => {
+    if(window.electronAPI) {
+      window.electronAPI.send("open-link", url);
+
+    }else{
+
+      alert(`Please download the clickunap software on your computer, to open this app: \n\n ${CLICKUNAP_DOWNLOAD_LINK}`)
+
+    }
+  }
+
 
   
 
@@ -53,5 +64,6 @@ export default function useApps() {
   return {
     openFolder, 
     openApp,
+    openLink,
   }
 }

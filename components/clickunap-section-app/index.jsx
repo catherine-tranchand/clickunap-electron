@@ -8,7 +8,7 @@ import ClickunapApp from "../clickunap-app";
 import useApps from "@/hooks/useApps";
 
 export default function ClickunapAppSection({ title }) {
-  const { openApp } = useApps();
+  const { openApp, openLink } = useApps();
 
   return (
     <div className="ClickunapAppSection w-full h-fit flex flex-col p-4 justify-start items-center space-y-4">
@@ -26,7 +26,8 @@ export default function ClickunapAppSection({ title }) {
           color="#C7D8D6"
           logo="/airmes.png"
           name="Airmes"
-          link="https://www.airmes-application.eu/"
+          //link="https://www.airmes-application.eu/"
+          onClick={() => openLink("https://www.airmes-application.eu/")}
         />
 
         {/* Imago DU - App 2 */}
@@ -34,7 +35,8 @@ export default function ClickunapAppSection({ title }) {
           color="white"
           logo="/imagodu.png"
           name="Imago DU"
-          link="https://imago.unapei-ap.fr/login"
+          //link="https://imago.unapei-ap.fr/login"
+          onClick={() => openLink("https://imago.unapei-ap.fr/login")}
         />
 
         {/* Ageval App 3 */}
@@ -42,7 +44,8 @@ export default function ClickunapAppSection({ title }) {
           color="white"
           logo="/ageval.jpeg"
           name="Ageval"
-          link="https://unapei-ap.ageval.fr/"
+         // link="https://unapei-ap.ageval.fr/"
+          onClick={() => openLink("https://unapei-ap.ageval.fr/")}
         />
 
         {/* Octime - App 4 */}
@@ -50,7 +53,8 @@ export default function ClickunapAppSection({ title }) {
           color="white"
           logo="/octime.png"
           name="Mon Octime"
-          link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/weoctime100?ini=unapei-ap"
+         // link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/weoctime100?ini=unapei-ap"
+          onClick={() => openLink("https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/weoctime100?ini=unapei-ap")}
         />
 
         {/* DirectActu - App 5 */}
@@ -58,7 +62,8 @@ export default function ClickunapAppSection({ title }) {
           color="white"
           logo="/directActu.png"
           name="Direct Actu"
-          link="https://padlet.com/unapeialpesprovence/direct-actu-jlwim6wvptipb2xm"
+         //link="https://padlet.com/unapeialpesprovence/direct-actu-jlwim6wvptipb2xm"
+          onClick={() => openLink("https://padlet.com/unapeialpesprovence/direct-actu-jlwim6wvptipb2xm")}
         />
 
         {/* Microsoft Teams - App 6 */}

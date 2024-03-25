@@ -7,7 +7,7 @@
         "director": "Jean-Yves LEFRANC",
         "contacts": [
           {
-            "name": "",
+            "names": [""],
             "address": "26, Rue Elzéard Rougier - 13004 Marseille",
             "phonenumbers": ["04 91 10 76 00"],
             "emails": ["contact@unapei-ap.fr"]
@@ -25,13 +25,13 @@
         "director": "Odile DAVIN",
         "contacts": [
           {
-            "name": "IME LES OLIVIERS (CHÂTEAU ARNOUX)",
+            "names": ["IME LES OLIVIERS (CHÂTEAU ARNOUX)"],
             "address": "Route de Saint Jean - BP 38 - 04160 Château Arnoux",
             "phonenumbers": ["04 92 64 06 67"],
             "emails": ["ime.oliviers@unapei-ap.fr"]
           },
           {
-            "name": "IME LES OLIVIERS (MANOSQUE) SESSAD LES PETITS OLIVIERS (MANOSQUE) SAMSAH LES CAMÉLIAS (MANOSQUE)",
+            "names": ["IME LES OLIVIERS (MANOSQUE)", "SESSAD LES PETITS OLIVIERS (MANOSQUE)", "SAMSAH LES CAMÉLIAS (MANOSQUE)"],
             "address": "Espace Orange Bleue - ZAC de Chanteprunier Rue du Docteur Foussier - 04100 Manosque",
             "phonenumbers": ["04 92 71 71 00"],
             "emails": [
@@ -41,28 +41,28 @@
             ]
           },
           {
-            "name": "SESSAD LES PETITS OLIVIERS (SAINT AUBAN)",
+            "names": ["SESSAD LES PETITS OLIVIERS (SAINT AUBAN)"],
             "address": "1, Route Nationale 96, Giratoire Alsace Lorraine - 04600 Saint Auban ",
             "phonenumbers": ["04 92 64 44 08"],
             "emails": ["sessad04@unapei-ap.fr"]
           },
 
           {
-            "name": "UEMA LES PAPILLONS",
+            "names": ["UEMA LES PAPILLONS"],
             "address": "Ecole Maternelle de la Ponsonne Allée de la Ponsonne - 04100 Manosque",
             "phonenumbers": ["04 92 71 71 00"],
             "emails": ["uema.papillons@unapei-ap.fr"]
           },
 
           {
-            "name": "UEMA DE DIGNE-LES-BAINS",
+            "names": ["UEMA DE DIGNE-LES-BAINS"],
             "address": "Ecole des Férréols 2, Av du Maréchal Juin - 04000 Digne-les-Bains",
             "phonenumbers": ["04 92 64 44 08"],
             "emails": ["uema-digne@unapei-ap.fr"]
           },
 
           {
-            "name": "FAM LES FONTAINES SAMSAH LES CAMÉLIAS (PEYRUIS)",
+            "names": ["FAM LES FONTAINES SAMSAH LES CAMÉLIAS (PEYRUIS)"],
             "address": "3, chemin Saint Marcellin - 04310 Peyruis",
             "phonenumbers": ["04 92 30 53 05"],
             "emails": ["fam.fontaines@unapei-ap.fr", "samsah04@unapei-ap.fr"]
@@ -74,31 +74,31 @@
         "director": "Myriam BOYER",
         "contacts": [
           {
-            "name": "FV LES AMANDIERS, AJ LES CYPRÈS",
+            "names": ["FV LES AMANDIERS", "AJ LES CYPRÈS"],
             "address": "Quartier des Eyrauds - Chemin du Thuve Route Départementale 4 - 04700 Oraison",
             "phonenumbers": ["04 92 70 30 00"],
             "emails": ["fv.amandiers@unapei-ap.fr", "saj.cypres@unapei-ap.fr"]
           },
           {
-            "name": "FH LES TOURELLES",
+            "names": ["FH LES TOURELLES"],
             "address": "Rue des Tourelles - 04100 Manosque",
             "phonenumbers": ["04 92 72 19 73"],
             "emails": ["fh.tourelles@unapei-ap.fr"]
           },
           {
-            "name": "ESAT LES ATELIERS DU FOURNAS (MANOSQUE) SACAT LES POMMIERS (MANOSQUE)",
+            "names": ["ESAT LES ATELIERS DU FOURNAS (MANOSQUE)", "SACAT LES POMMIERS (MANOSQUE)"],
             "address": "Technoparc des Grandes Terres 25, rue de l’Origan - 04100 Manosque",
             "phonenumbers": ["04 92 70 48 48"],
             "emails": ["sat.fournas.m@unapei-ap.fr"]
           },
           {
-            "name": "FH LA SIMONNETE",
+            "names": ["FH LA SIMONNETE"],
             "address": "Rue de l’Observatoire - 04300 Forcalquier",
             "phonenumbers": ["04 23 36 07 37"],
             "emails": ["fh.simonette@unapei-ap.fr"]
           },
           {
-            "name": "SAVS LES CHÊNES (MANOSQUE)",
+            "names": ["SAVS LES CHÊNES (MANOSQUE)"],
             "address": "Espace Orange Bleue - ZAC de Chanteprunier Rue du Docteur Foussier - 04100 Manosque",
             "phonenumbers": ["04 92 71 71 00"],
             "emails": ["savs.m@unapei-ap.fr"]
@@ -115,14 +115,14 @@
         "director": "Cécile LAPARLIERE",
         "contacts": [
           {
-            "name": ["FAM SOLEIL LEVANT", "EANM LES ECUREUILS"],
+            "names": ["FAM SOLEIL LEVANT", "EANM LES ECUREUILS"],
 
             "address": "340, Chemin du Riou - 05130 Tallard",
             "phonenumbers": ["04 92 54 08 60"],
             "emails": ["tallard05@unapei-ap.fr"]
           },
           {
-            "name": [
+            "names": [
               "EANM CHAILLOL",
               "FAM CHARANCE AJ",
               "LES ÉCRINS PCPE C360"
@@ -144,13 +144,13 @@
         "director": "Nicolas STRAUSS",
         "contacts": [
           {
-            "name": ["ESAT PLEIN SOLEIL", "SAVS CLAIR SOLEIL"],
+            "names": ["ESAT PLEIN SOLEIL", "SAVS CLAIR SOLEIL"],
             "address": "340, Chemin du Riou - 05130 Tallard",
             "phonenumbers": ["04 92 54 08 60"],
             "emails": ["tallard05@unapei-ap.fr"]
           },
           {
-            "name": ["SAVS LE MORGON", "ESAT CEÜSE"],
+            "names": ["SAVS LE MORGON", "ESAT CEÜSE"],
             "address": "Quartier Villarobert - Route de Romette BP 62 - 05000 Gap",
             "phonenumbers": ["04 92 40 23 00"],
             "emails": [
@@ -160,19 +160,19 @@
             ]
           },
           {
-            "name": ["FOYER DU CH TELARD"],
+            "names": ["FOYER DU CH TELARD"],
             "address": "HLM le Plan du Chatelard - Bât A - 05000 Gap",
             "phonenumbers": ["04 92 40 23 00"],
             "emails": ["chatelard@unapei-ap.fr"]
           },
           {
-            "name": ["SAVS MONT VISO"],
+            "names": ["SAVS MONT VISO"],
             "address": "Altipolis Quarter Berwick 2, avenue du Général Barbot - 05100 Briançon",
             "phonenumbers": ["04 92 24 59 58"],
             "emails": ["montviso@unapei-ap.fr"]
           },
           {
-            "name": ["ESAT LES OVIERS"],
+            "names": ["ESAT LES OVIERS"],
             "address": "12, route des Espagnols 05100 Villar Saint-Pancrace",
             "phonenumbers": ["04 92 21 07 19"],
             "emails": ["oviers@unapei-ap.fr"]
@@ -190,13 +190,13 @@
         "director": "Carole LAZZERI",
         "contacts": [
           {
-            "name": "IME LES AMANDIERS (SIPFP et section TSA Les Jasmins)",
+            "names": ["IME LES AMANDIERS (SIPFP et section TSA Les Jasmins)"],
             "address": "203 avenue de La Panouse – 13009 Marseille",
             "phonenumbers": ["04 91 41 99 25"],
             "emails": ["amandiers@unapei-ap.fr"]
           },
           {
-            "name": [
+            "names": [
               "TAMARIS (SEES et section TSA Les Jasmins)",
               "EEAP LES TAMARIS",
               "SESSAD LES TAMARIS"
@@ -206,7 +206,7 @@
             "emails": ["tamaris@unapei-ap.fr"]
           },
           {
-            "name": [
+            "names": [
               "SESSAD LES TAMARIS ANTENNE CANEBIERE",
               "LES TAMARIS ANTENNE SESSAD CANEBIÈRE"
             ],
@@ -215,7 +215,7 @@
             "emails": ["tamaris@unapei-ap.fr"]
           },
           {
-            "name": ["UEMA FIOLLE FALQUE"],
+            "names": ["UEMA FIOLLE FALQUE"],
             "address": ["69 Bis Rue du Docteur Jean Fiolle - 13006 Marseille"],
             "phonenumbers": ["04 91 73 47 03"],
             "emails": ["tamaris@unapei-ap.fr"]
@@ -227,13 +227,13 @@
         "director": "Vincent TURQUET",
         "contacts": [
           {
-            "name": ["EANM LES LILAS", "FAM LES HORTENSIAS"],
+            "names": ["EANM LES LILAS", "FAM LES HORTENSIAS"],
             "address": "55 Route des Camoins - 13011 Marseille",
             "phonenumbers": ["04 91 09 14 17"],
             "emails": ["valentine@unapei-ap.fr"]
           },
           {
-            "name": [
+            "names": [
               "ESAT HORS LES MURS LES MERISIERS",
               "ESAT LES GLYCINES",
               "DEA"
@@ -243,7 +243,7 @@
             "emails": ["merisiers@unapei-ap.fr", "glycines@unapei-ap.fr"]
           },
           {
-            "name": "IME LES FIGUIERS",
+            "names": ["IME LES FIGUIERS"],
             "address": "78, Chemin de St Menet aux Accates Traverse de La Buzine - 13011 Marseille",
             "phonenumbers": ["04 91 87 51 10"],
             "emails": ["figuiers@unapei-ap.fr"]
@@ -255,13 +255,13 @@
         "director": "Sonja MATOHANCA",
         "contacts": [
           {
-            "name": "FH LES GENÊTS À LA CLAIRIÈRE",
+            "names": ["FH LES GENÊTS À LA CLAIRIÈRE"],
             "address": "23, Chemin de La Colline St Joseph - 13009 Marseille",
             "phonenumbers": ["04 91 18 09 60"],
             "emails": ["panouse@unapei-ap.fr"]
           },
           {
-            "name": [
+            "names": [
               "FH LES GENÊTS, FAM LES EGLANTINES",
               "MAS LES SOPHORAS",
               "FV LES TOURNESOLS",
@@ -272,7 +272,7 @@
             "emails": ["panouse@unapei-ap.fr"]
           },
           {
-            "name": "ESAT LES PINS",
+            "names": ["ESAT LES PINS"],
             "address": "2, Imp. du Pistou - Zac de La Soude - 13009 Marseille",
             "phonenumbers": ["04 91 16 52 20"],
             "emails": ["pins@unapei-ap.fr"]
@@ -284,31 +284,31 @@
         "director": "Catherine CONDÉ",
         "contacts": [
           {
-            "name": ["FAM LES TILLEULS", "FV LOU MISTRAOU"],
+            "names": ["FAM LES TILLEULS", "FV LOU MISTRAOU"],
             "address": "43 Rue des Pruniers Sauvages - 13320 Bouc-Bel-Air",
             "phonenumbers": ["04 42 22 84 44"],
-            "emails": "boucbelair@unapei-ap.fr"
+            "emails": ["boucbelair@unapei-ap.fr"]
           },
           {
-            "name": ["FH LES ACACIAS"],
+            "names": ["FH LES ACACIAS"],
             "address": "1 Bis Avenue de Nice - 13120 Gardanne",
             "phonenumbers": ["04 42 50 36 47"],
             "emails": ["boucbelair@unapei-ap.fr"]
           },
           {
-            "name": "ESAT LES ORMEAUX",
+            "names": ["ESAT LES ORMEAUX"],
             "address": "43 Rue des Pruniers Sauvages - 13320 Bouc-Bel-Air",
             "phonenumbers": ["04 42 94 91 20"],
             "emails": ["ormeaux@unapei-ap.fr"]
           },
           {
-            "name": "MAS LE PIGEONNIER",
+            "names": ["MAS LE PIGEONNIER"],
             "address": "Ch Dép 56 - Quartier Le Ribas - 13790 Rousset",
             "phonenumbers": ["04 42 29 00 24"],
             "emails": ["pigeonnier@unapei-ap.fr"]
           },
           {
-            "name": "FV EXISTER",
+            "names": ["FV EXISTER"],
             "address": "Domaine Bedelin - Chemin Puits Armand - 13124 Peypin",
             "phonenumbers": ["04 42 04 11 27"],
             "emails": ["exister@unapei-ap.fr"]
@@ -320,7 +320,7 @@
         "director": "Clément ALLAIN",
         "contacts": [
           {
-            "name": [
+            "names": [
               "FH LES MURIERS",
               "SAVS LES OLIVIERS",
               "SAMSAH LES MIMOSAS",
@@ -332,7 +332,7 @@
             "emails": ["montolivet@unapei-ap.fr"]
           },
           {
-            "name": "ESAT LES LIERRES",
+            "names": ["ESAT LES LIERRES"],
             "address": "ZI La Delorme - 42, Av de Boisbaudran - 13015 Marseille",
             "phonenumbers": ["04 91 09 56 60"],
             "emails": ["lierres@unapei-ap.fr"]
@@ -344,7 +344,7 @@
         "director": "Patrick VOLONNINO",
         "contacts": [
           {
-            "name": [
+            "names": [
                 "MAS LES KIWIS",
                 "MAS LES PALMIERS",
                 "FV LES ORANGERS",
@@ -359,7 +359,7 @@
             ]
           },
           {
-            "name": "ESAT LES CITRONNIERS",
+            "names": ["ESAT LES CITRONNIERS"],
             "address": "38, Rue Gaston de Flotte ZI St Jean du Désert - 13012 Marseille",
             "phonenumbers": [
                 "04 91 93 88 88"
@@ -376,7 +376,7 @@
         "director": "Philippe CLOT",
         "contacts":[
             {
-                "name": "EA BLÉONE DURANCE (MANOSQUE)",
+                "names": ["EA BLÉONE DURANCE (MANOSQUE)"],
                 "address": "Technoparc des Grandes Terres 25, rue de l’Origan - 04100 Manosque",
                 "phonenumbers": [
                     "04 92 70 48 48"
@@ -386,7 +386,7 @@
                 ]
             },
             {
-                "name": "EA BLÉONE DURANCE (SAINT AUBAN)",
+                "names": ["EA BLÉONE DURANCE (SAINT AUBAN)"],
                 "address": "Quartier la Casse - 04600 Saint Auban",
                 "phonenumbers": [
                     "04 92 64 13 83"
@@ -396,7 +396,7 @@
                 ]
             },
             {
-                "name": "EA LES BAMBOUS",
+                "names": ["EA LES BAMBOUS"],
                 "address": "ZI Saint-Mitre -50 Av. Braye de Cau - 13400",
                 "phonenumbers": [
                     "04 42 70 59 40"
@@ -406,7 +406,7 @@
                 ]
             },
             {
-                "name": "EA LES BONSAÏS",
+                "names": ["EA LES BONSAÏS"],
                 "address": "43 Rue des Pruniers Sauvages - 13320 Bouc-Bel-Air",
                 "phonenumbers":[
                     "04 42 94 91 20"

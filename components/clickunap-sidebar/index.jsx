@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import useApps from "@/hooks/useApps";
+
 
 export default function ClickunapSideBar({ managerLinkHidden }) {
+
+  const { openLink } = useApps();
+
+
+
   return (
     <div className="ClickunapSideBar hidden lg:flex w-80 h-full flex-col justify-between items-center bg-secondary text-black overflow-auto">
       
@@ -33,13 +40,13 @@ export default function ClickunapSideBar({ managerLinkHidden }) {
 
 
         {/* Numbers Link */}
-        <li>
-          <Link href="https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap" target="__blanc" className="NavLink">
-            <span className="NavIcon material-symbols-outlined">check_circle</span>
-            <span className="NavName">Badgeuse</span>
-
-          </Link>
-        </li>
+        <li 
+          className="NavLink" 
+          onClick={() => openLink("https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap")}>
+        
+          <span className="NavIcon material-symbols-outlined">check_circle</span>
+          <span className="NavName">Badgeuse</span>
+      </li>
 
         {/* Numbers Link */}
         {managerLinkHidden === false && (

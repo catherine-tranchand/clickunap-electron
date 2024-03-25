@@ -5,10 +5,23 @@ import ClickunapApp from "../clickunap-app";
 
 
 
-const openLinkInNewWindow = (e, url) =>{
-  e.preventDefault();
-  window.open(url, "__blanc")
-}
+
+
+
+
+
+
+
+
+//const openLinkInNewWindow = (e, url) =>{
+//  e.preventDefault();
+ // shell.openExernal(url)
+ // window.open(url, "__blanc");
+//}
+
+
+
+
 
 
 
@@ -22,7 +35,8 @@ const openLinkInNewWindow = (e, url) =>{
 export default function ClickunapAppSectionManager({ title }) {
 
 
-  const { openApp } = useApps();
+  const { openApp, openLink } = useApps();
+  
 
 
 
@@ -40,8 +54,7 @@ export default function ClickunapAppSectionManager({ title }) {
           color="#C7D8D6"
           logo="/airmes.png"
           name="Airmes"
-          link="https://www.airmes-application.eu/"
-          onClick={(e) => openLinkInNewWindow(e, "https://www.airmes-application.eu/")}
+          onClick={() => openLink("https://www.airmes-application.eu/")}
         />
 
         {/* Imago DU - App 2 */}
@@ -49,8 +62,8 @@ export default function ClickunapAppSectionManager({ title }) {
           color="white"
           logo="/imagodu.png"
           name="Imago DU"
-          link="https://imago.unapei-ap.fr/login"
-          onClick={(e) => openLinkInNewWindow(e, "https://imago.unapei-ap.fr/login")}
+          
+          onClick={() => openLink("https://imago.unapei-ap.fr/login")}
         />
 
         {/* One drive App 3 */}
@@ -58,7 +71,7 @@ export default function ClickunapAppSectionManager({ title }) {
           color="white"
           logo="/onedrive.png"
           name="One drive"
-          //link="C:\Users\"
+         
            onClick={() => openApp("onedrive")}
         />
 
@@ -68,7 +81,7 @@ export default function ClickunapAppSectionManager({ title }) {
           logo="/octime.png"
           name="Octime Manager"
           link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/wmoctime100?ini=unapei-ap"
-          onClick={(e) => openLinkInNewWindow(e, "https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/wmoctime100?ini=unapei-ap")}
+          onClick={() => openLink("https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/wmoctime100?ini=unapei-ap")}
         />
 
         {/* DirectActu - App 5 */}
@@ -84,7 +97,8 @@ export default function ClickunapAppSectionManager({ title }) {
         color="#E3A710" 
         logo="/powerbi.svg" 
         name="Power BI" 
-        link="https://app.powerbi.com/"
+        //link="https://app.powerbi.com/"
+        onClick={() => openLink("https://app.powerbi.com/")}
          />
 
         {/* Gessi App 7 */}

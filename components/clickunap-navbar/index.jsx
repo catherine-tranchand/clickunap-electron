@@ -1,3 +1,4 @@
+import useApps from "@/hooks/useApps";
 import Link from "next/link";
 
 const openLinkInNewWindow = (e, url) => {
@@ -9,6 +10,18 @@ const openLinkInNewWindow = (e, url) => {
 };
 
 export default function ClickunapNavBar({ managerLinkHidden }) {
+
+  const { openLink } = useApps();
+
+
+
+
+
+
+
+
+
+
   return (
     <nav className="ClickunapNavBar lg:hidden flex absolute bottom-0 w-full h-20 justify-between items-center bg-secondary text-black list-none">
       {/* Home Link */}
@@ -50,17 +63,15 @@ export default function ClickunapNavBar({ managerLinkHidden }) {
       
 
       {/* Badge Link */}
-      <li>
-        <Link
-          href="https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap&SOCIETE=1&SSO=N&NUMINTER=0"
-          target="_blank"
-          className="NavLink !flex-col"
-        >
+      <li 
+        className="NavLink !flex-col" 
+        onClick={() => openLink("https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap&SOCIETE=1&SSO=N&NUMINTER=0")}>
+        
           <span className="NavIcon material-symbols-outlined">
             check_circle
           </span>
           <span className="NavName !text-xs truncate !w-12">Badgeuse</span>
-        </Link>
+        
       </li>
 
       {/* Manager Link */}
