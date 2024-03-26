@@ -4,6 +4,10 @@ const path = require("path");
 const os = require("os");
 const { exec } = require("child_process");
 
+// import our checkForUpdates() function from `updater.js`
+const { checkForUpdates } = require("./updater");
+
+
 const appServe = app.isPackaged
   ? serve({
       directory: path.join(__dirname, "../out"),
@@ -33,7 +37,11 @@ const createWindow = () => {
 };
 
 app.on("ready", () => {
+  // create the window
   createWindow();
+
+  // check for updates, whenever the app is ready
+  checkForUpdates();
 
   /**
    * Listens to the `message` event
