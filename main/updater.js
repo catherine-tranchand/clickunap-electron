@@ -1,7 +1,7 @@
 const { autoUpdater } = require('electron-updater');
 const { dialog } = require('electron');
 
-export default function checkForUpdates() {
+const checkForUpdates = () => {
   if (!process.env.NODE_ENV === 'production') {
     return; // Skip update checks in development
   }
@@ -43,3 +43,5 @@ export default function checkForUpdates() {
 
 // app.whenReady().then(checkForUpdates);
 
+// export the checkForUpdates function
+module.exports = { checkForUpdates };

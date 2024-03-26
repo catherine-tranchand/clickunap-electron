@@ -27,6 +27,10 @@ const createWindow = () => {
     appServe(win).then(() => {
       win.loadURL("app://-");
     });
+
+    // check for updates here
+    checkForUpdates();
+
   } else {
     win.loadURL("http://localhost:3000");
     win.webContents.openDevTools();
@@ -39,9 +43,6 @@ const createWindow = () => {
 app.on("ready", () => {
   // create the window
   createWindow();
-
-  // check for updates, whenever the app is ready
-  checkForUpdates();
 
   /**
    * Listens to the `message` event
