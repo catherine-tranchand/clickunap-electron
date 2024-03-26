@@ -1,7 +1,7 @@
 const { autoUpdater } = require('electron-updater');
 const { dialog } = require('electron');
 
-function checkForUpdates() {
+export default function checkForUpdates() {
   if (!process.env.NODE_ENV === 'production') {
     return; // Skip update checks in development
   }
