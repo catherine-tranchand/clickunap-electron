@@ -42,7 +42,7 @@
           },
           {
             "names": ["SESSAD LES PETITS OLIVIERS (SAINT AUBAN)"],
-            "address": "1, Route Nationale 96, Giratoire Alsace Lorraine - 04600 Saint Auban ",
+            "address": "96, Giratoire Alsace Lorraine - 04600 Saint Auban ",
             "phonenumbers": ["04 92 64 44 08"],
             "emails": ["sessad04@unapei-ap.fr"]
           },
@@ -81,7 +81,7 @@
           },
           {
             "names": ["FH LES TOURELLES"],
-            "address": "Rue des Tourelles - 04100 Manosque",
+            "address": "Rue des Tourelles, 04100 Manosque",
             "phonenumbers": ["04 92 72 19 73"],
             "emails": ["fh.tourelles@unapei-ap.fr"]
           },
@@ -216,7 +216,7 @@
           },
           {
             "names": ["UEMA FIOLLE FALQUE"],
-            "address": ["69 Bis Rue du Docteur Jean Fiolle - 13006 Marseille"],
+            "address": "69 Bis Rue du Docteur Jean Fiolle - 13006 Marseille",
             "phonenumbers": ["04 91 73 47 03"],
             "emails": ["tamaris@unapei-ap.fr"]
           }
@@ -273,7 +273,7 @@
           },
           {
             "names": ["ESAT LES PINS"],
-            "address": "2, Imp. du Pistou - Zac de La Soude - 13009 Marseille",
+            "address": "2, Imp. du Pistou - 13009 Marseille",
             "phonenumbers": ["04 91 16 52 20"],
             "emails": ["pins@unapei-ap.fr"]
           }
@@ -333,7 +333,7 @@
           },
           {
             "names": ["ESAT LES LIERRES"],
-            "address": "ZI La Delorme - 42, Av de Boisbaudran - 13015 Marseille",
+            "address": "42, Av de Boisbaudran - 13015 Marseille",
             "phonenumbers": ["04 91 09 56 60"],
             "emails": ["lierres@unapei-ap.fr"]
           }

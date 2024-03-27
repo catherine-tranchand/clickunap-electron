@@ -39,7 +39,7 @@ export default function ClickunapSideBar({ managerLinkHidden }) {
   </li>*/}
 
 
-        {/* Numbers Link */}
+        {/* Badgeuse */}
         <li 
           className="NavLink" 
           onClick={() => openLink("https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap")}>

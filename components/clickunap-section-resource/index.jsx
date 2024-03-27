@@ -7,7 +7,7 @@ import ClickunapResource from "../clickunap-resource";
 
 export default function ClickunapResourceSection({ title }) {
   return (
-    <div className="ClickunapResourceSection w-full h-full flex flex-col p-4 justify-start items-center space-y-4 transition-all hover:scale-105">
+    <div className="ClickunapResourceSection w-full h-full flex flex-col p-4 justify-start items-center space-y-4 transition-all hover:scale-105 2xl:scale-75 2xl:origin-top 2xl:hover:scale-[80%]">
       
       {/* Title */}
       <h2 className="ResourceSectionTitle uppercase font-extrabold opacity-50">{title}</h2>

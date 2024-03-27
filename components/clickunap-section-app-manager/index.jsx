@@ -41,7 +41,7 @@ export default function ClickunapAppSectionManager({ title }) {
 
 
   return (
-    <div className="ClickunapAppSection w-full h-full flex flex-col p-4 justify-start items-center space-y-4">
+    <div className="ClickunapAppSection w-full h-full flex flex-col p-4 justify-start items-center space-y-4 2xl:scale-75 2xl:origin-top">
       {/* Title */}
       <h2 className="AppSectionTitle uppercase font-extrabold opacity-50">
         {title}
@@ -80,7 +80,7 @@ export default function ClickunapAppSectionManager({ title }) {
           color="white"
           logo="/octime.png"
           name="Octime Manager"
-          link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/wmoctime100?ini=unapei-ap"
+          //link="https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/wmoctime100?ini=unapei-ap"
           onClick={() => openLink("https://saas-unapei-ap.octime.net/wd240awp/wd240awp.exe/connect/wmoctime100?ini=unapei-ap")}
         />
 
