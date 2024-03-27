@@ -4,6 +4,10 @@ const path = require("path");
 const os = require("os");
 const { exec } = require("child_process");
 
+// import our checkForUpdates() function from `updater.js`
+const { checkForUpdates } = require("./updater");
+
+
 const appServe = app.isPackaged
   ? serve({
       directory: path.join(__dirname, "../out"),
@@ -23,6 +27,10 @@ const createWindow = () => {
     appServe(win).then(() => {
       win.loadURL("app://-");
     });
+
+    // check for updates here
+    checkForUpdates();
+
   } else {
     win.loadURL("http://localhost:3000");
     win.webContents.openDevTools();
@@ -33,6 +41,7 @@ const createWindow = () => {
 };
 
 app.on("ready", () => {
+  // create the window
   createWindow();
 
   /**
