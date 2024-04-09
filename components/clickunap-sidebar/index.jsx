@@ -3,7 +3,7 @@ import Link from "next/link";
 import useApps from "@/hooks/useApps";
 
 
-export default function ClickunapSideBar({ managerLinkHidden }) {
+export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
 
   const { openLink } = useApps();
 
@@ -16,7 +16,7 @@ export default function ClickunapSideBar({ managerLinkHidden }) {
       <nav className="flex flex-col w-full h-full py-4 px-0 list-none">
         {/* Home Link */}
         <li>
-          <Link className="NavLink" href="/" data-active="true">
+          <Link className="NavLink" href="/" data-active={(page === "home") ? "true": "false"}>
             <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1"}}>home</span>
             <span className="NavName">Accueil</span>
           </Link>
@@ -24,7 +24,7 @@ export default function ClickunapSideBar({ managerLinkHidden }) {
 
         {/* Services Link */}
         <li>
-          <Link href="/territories" className="NavLink">
+          <Link href="/territories" className="NavLink" data-active={(page === "territories") ? "true": "false"}>
             <span className="NavIcon material-symbols-outlined">corporate_fare</span>
             <span className="NavName">Annuaire établissement</span>
           </Link>
