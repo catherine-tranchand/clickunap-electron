@@ -1,11 +1,17 @@
-const { app, BrowserWindow, ipcMain, shell } = require("electron");
+const { app, BrowserWindow, dialog, ipcMain } = require("electron");
 const serve = require("electron-serve");
 const path = require("path");
 const os = require("os");
 const { exec } = require("child_process");
-
 // import our checkForUpdates() function from `updater.js`
 const { checkForUpdates } = require("./updater");
+
+
+
+
+
+
+
 
 
 const appServe = app.isPackaged
@@ -29,7 +35,7 @@ const createWindow = () => {
     });
 
     // check for updates here
-    checkForUpdates();
+    // checkForUpdates();
 
   } else {
     win.loadURL("http://localhost:3000");
@@ -43,6 +49,11 @@ const createWindow = () => {
 app.on("ready", () => {
   // create the window
   createWindow();
+
+  // check for updates
+  checkForUpdates(); 
+
+
 
   /**
    * Listens to the `message` event
