@@ -39,7 +39,7 @@ export default function TerritoryPage() {
       {/* Content */}
       <div className="Content flex flex-col lg:flex-row w-full h-full pb-20 lg:pb-0 overflow-auto lg:overflow-hidden">
         {/* SideBar - Clickunap */}
-        <ClickunapSideBar managerLinkHidden={false} />
+        <ClickunapSideBar page="territories" managerLinkHidden={false} />
 
         {/* Container */}
         <div className="Container flex grow flex-col lg:flex-row overflow-auto">

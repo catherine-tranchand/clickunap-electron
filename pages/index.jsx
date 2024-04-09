@@ -19,6 +19,7 @@ export default function Home() {
       <div className="Content flex flex-col lg:flex-row w-full h-full pb-20 lg:pb-0 overflow-auto lg:overflow-hidden">
         {/* SideBar - Clickunap */}
         <ClickunapSideBar 
+          page="home"
           managerLinkHidden={false}
         />
 
