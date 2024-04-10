@@ -1,14 +1,21 @@
-const { app, BrowserWindow, ipcMain, shell } = require("electron");
+const { app, BrowserWindow, ipcMain, Menu } = require("electron");
 const serve = require("electron-serve");
 const path = require("path");
 const os = require("os");
 const { exec } = require("child_process");
-
 // import our checkForUpdates() function from `updater.js`
 const { checkForUpdates } = require("./updater");
+const { createMenu } = require("./menu");
 
 
-const appServe = app.isPackaged
+
+
+
+
+
+
+
+const appServe = app.isPackaged 
   ? serve({
       directory: path.join(__dirname, "../out"),
     })
@@ -20,6 +27,8 @@ const createWindow = () => {
     height: 1000,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
+      contextIsolation: true,
     },
   });
 
@@ -28,21 +37,43 @@ const createWindow = () => {
       win.loadURL("app://-");
     });
 
-    // check for updates here
-    checkForUpdates();
-
   } else {
     win.loadURL("http://localhost:3000");
     win.webContents.openDevTools();
     win.webContents.on("did-fail-load", (e, code, desc) => {
-    win.webContents.reloadIgnoringCache();
+      win.webContents.reloadIgnoringCache();
+    });
+
+    win.webContents.on("message", (event, message) => {
+      console.log(
+        `\x1b[38;5;208m(win.webContents)\x1b[0m: Received message 4rm main process: => \x1b[1;37m${message}\x1b[0m`
+      );
     });
   }
+
+  // return the `win`
+  return win;
+
 };
 
 app.on("ready", () => {
+
   // create the window
-  createWindow();
+  const win = createWindow();
+
+  // create the main menu
+  const mainMenu = createMenu(win);
+
+  // set the main menu of our app
+  Menu.setApplicationMenu(mainMenu);
+  
+
+  // if the app is packaged...
+  if (app.isPackaged) {
+    // ...check for updates here ;)
+    checkForUpdates(win);
+  }
+
 
   /**
    * Listens to the `message` event

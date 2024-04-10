@@ -3,11 +3,21 @@ productName: "Clickunap"
 copyright: "Copyright (c) 2024 Unapei. All rights reserved."
 
 win:
-  target: ["dir", "portable", "zip"]
+  target: ["dir", "portable", "zip", "nsis"]
   icon: "resources/icon.ico"
+  publish:
+    - provider: github
+      owner: catherine-tranchand
+      repo: clickunap-electron
 linux:
   target: ["dir", "appimage", "zip"]
   icon: "resources/icon.png"
 mac:
   target: ["dir", "dmg", "zip"]
   icon: "resources/icon.icns"
+  publish:
+    - provider: github
+      owner: catherine-tranchand
+      repo: clickunap-electron
+
+
