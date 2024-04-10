@@ -50,12 +50,81 @@ const checkForUpdates = (win = null) => {
   autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = false;
   
+
+  
+  
+  
+  /**
+   * Shows the update downloaded dialog.
+   */
+  const showUpdateDownloadedDialog = () => {
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Update Downloaded',
+      message: 'The update has been downloaded. The application will now restart to install it.',
+      buttons: ['OK']
+    }).then(() => {
+      autoUpdater.quitAndInstall();
+    });
+  };
+
+
+
+  /**
+   * Shows the update available dialog.
+   */
+  const showUpdateAvaiableDialog = (updateInfo, /* downloadedDialogHidden = false */) => {
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Update Available',
+      message: `A new version ${updateInfo.version} is available. Do you want to update?`,
+      buttons: ['Yes', 'No']
+    }).then(result => {
+      if (result.response === 0) {
+        autoUpdater.downloadUpdate();
+
+        // .then(() => {
+          // do nothin if downloadedDialogHidden is TRUE
+          // if (downloadedDialogHidden) return;
+
+          // if not, show the update downloaded dialog
+          // showUpdateDownloadedDialog();
+
+        // }).catch(error => {
+          // sendStatusToWindow('Update download failed:', error);
+          // dialog.showErrorBox('Update Error 001', 'Failed to download update.');
+        // });
+      }
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+   
+  try { // <- try to check for updates and notify
+    autoUpdater.checkForUpdatesAndNotify();
+
+  } catch (error) {
+    sendStatusToWindow('Error checking for updates: ' + error);
+    dialog.showErrorBox('Update Error 001', 'Failed to check for updates...: ' + error);
+  }
+
   
   // check for updates every 10 minutes
+  /*
   const updateInterval = setInterval(() => {
     autoUpdater.checkForUpdates();
     sendStatusToWindow('[updateInterval]: check for updates every 60 seconds');
   }, 1000 * 60); // <- every 60 sconds | 10 minutes = 1000 * 60 * 10
+  */
   
 
   // >> Checking for update
@@ -67,16 +136,8 @@ const checkForUpdates = (win = null) => {
   autoUpdater.on('update-available', (info) => {
     sendStatusToWindow('Update available', info);
 
-    dialog.showMessageBox({
-      type: 'info',
-      title: 'Clickunap Update Available',
-      message: `A new version ${info.version} is available. Do you want to update?`,
-      buttons: ['Yes', 'No']
-    }).then(result => {
-      if (result.response === 0) {
-        autoUpdater.downloadUpdate();
-      }
-    });
+    // show the update available dialog
+    showUpdateAvaiableDialog(info);
   });
   
   // >> Update not available
@@ -87,6 +148,7 @@ const checkForUpdates = (win = null) => {
   // >> Error
   autoUpdater.on('error', (error) => {
     sendStatusToWindow('Error in auto-updater: ' + error);
+    dialog.showErrorBox('Update Error 002', 'Failed to check for updates: ' + error);
   });
   
   // >> Download progress
@@ -102,16 +164,11 @@ const checkForUpdates = (win = null) => {
   // >> Update downloaded
   autoUpdater.on('update-downloaded', (info) => {
     sendStatusToWindow('Update downloaded', info);
-    clearInterval(updateInterval);
+    // clearInterval(updateInterval);
+    
+    // show the update downloaded dialog
+    showUpdateDownloadedDialog(info);
 
-    dialog.showMessageBox({
-      type: 'info',
-      title: 'Clickunap Update',
-      message: 'A new version has been downloaded. The application will now restart to install it.',
-      buttons: ['OK']
-    }).then(() => {
-      autoUpdater.quitAndInstall();
-    });
   });
 
 }
