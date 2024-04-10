@@ -38,7 +38,7 @@ const createMenu = (win = null) => {
     dialog.showMessageBox({
       type: 'info',
       title: 'Contact the Team',
-      message: 'Catherine Tranchand <catherine-tranchand@laplateforme.io> (Lead Developer)',
+      message: 'Catherine Tranchand <ekaterina.tranchand@gmail.com> (Lead Developer)',
       buttons: ['Send Email', 'Cancel'],
 
     }).then(result => {
@@ -73,7 +73,7 @@ const createMenu = (win = null) => {
     {
       label: 'Help',
       submenu: [
-        { label: 'Contact the Team', click: () => handleContact() },
+        { label: "Contacter l'équipe", click: () => handleContact() },
       ],
     },
   ];

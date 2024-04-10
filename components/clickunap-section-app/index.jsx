@@ -20,7 +20,51 @@ export default function ClickunapAppSection({ title }) {
 
       {/* Box */}
 
-      <div className="AppSectionBox grid grid-cols-3 gap-4 lg:gap-6">
+      <div className="AppSectionBox grid grid-cols-4 gap-4 lg:gap-6">
+          {/* Outlook - App 6 */}
+      <ClickunapApp
+          color="#c8e4eb"
+          logo="/outlook.png"
+          name="Mail"
+          onClick={() => openApp("outlook")}
+        />
+
+          {/* Microsoft Teams - App 6 */}
+          <ClickunapApp
+          color="white"
+          logo="/mic-teams.svg"
+          name="Teams"
+          // link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
+          onClick={() => openApp("teams")}
+        />
+
+          {/* Airmes - App 1 */}
+          <ClickunapApp
+          color="#C7D8D6"
+          logo="/sharepoint.png"
+          name="Sharepoint"
+          //link="https://www.airmes-application.eu/"
+          onClick={() => openLink("https://www.airmes-application.eu/")}
+
+        />
+
+           {/* Support Nephyla - App 7 */}
+       <ClickunapApp 
+          color="#fc4236" 
+          logo="/nephyla.png" 
+          name="Support Nephyla"
+          //link="C:\Users\m.robaston\Desktop\AnyDesk.exe" 
+          onClick={() => openApp("nephyla")}
+          />
+
+               {/* Gessi = App 6 */}
+        <ClickunapApp
+          color="#d24726"
+          logo="/gessi.png"
+          name="Gessi"
+          onClick={() => openApp("gessi")}
+        /> 
+       
         {/* Airmes - App 1 */}
         <ClickunapApp
           color="#C7D8D6"
@@ -66,31 +110,19 @@ export default function ClickunapAppSection({ title }) {
           onClick={() => openLink("https://padlet.com/unapeialpesprovence/direct-actu-jlwim6wvptipb2xm")}
         />
 
-        {/* Microsoft Teams - App 6 */}
-        <ClickunapApp
-          color="white"
-          logo="/mic-teams.svg"
-          name="Teams"
-          // link="https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software/"
-          onClick={() => openApp("teams")}
+      
+
+   
+
+      
+          {/* Excel - App 1 */}
+          <ClickunapApp
+          color="#C7D8D6"
+          logo="/excel.png"
+          name="Excel"
+          //link="https://www.airmes-application.eu/"
+          onClick={() => openApp("excel")}
         />
-
-        {/* Gessi = App 6 */}
-        {/* <ClickunapApp
-          color="#d24726"
-          logo="/gessi.png"
-          name="Gessi"
-          onClick={() => openApp("gessi")}
-        /> */}
-
-        {/* Support Nephyla - App 7 */}
-       <ClickunapApp 
-          color="#fc4236" 
-          logo="/nephyla.png" 
-          name="Support Nephyla"
-          //link="C:\Users\m.robaston\Desktop\AnyDesk.exe" 
-          onClick={() => openApp("nephyla")}
-          />
 
         {/* Word - App 8*/}
         <ClickunapApp
@@ -102,13 +134,7 @@ export default function ClickunapAppSection({ title }) {
 
         
 
-        {/* Outlook - App 6 */}
-      <ClickunapApp
-          color="white"
-          logo="/outlook.png"
-          name="Outlook"
-          onClick={() => openApp("outlook")}
-        />
+     
       </div>
     </div>
   );
