@@ -31,7 +31,9 @@
             "emails": ["ime.oliviers@unapei-ap.fr"]
           },
           {
-            "names": ["IME LES OLIVIERS (MANOSQUE)", "SESSAD LES PETITS OLIVIERS (MANOSQUE)", "SAMSAH LES CAMÉLIAS (MANOSQUE)"],
+            "names": ["IME LES OLIVIERS (MANOSQUE)",
+                      "SESSAD LES PETITS OLIVIERS (MANOSQUE)",
+                      "SAMSAH LES CAMÉLIAS (MANOSQUE)"],
             "address": "Espace Orange Bleue - ZAC de Chanteprunier Rue du Docteur Foussier - 04100 Manosque",
             "phonenumbers": ["04 92 71 71 00"],
             "emails": [
@@ -62,7 +64,7 @@
           },
 
           {
-            "names": ["FAM LES FONTAINES SAMSAH LES CAMÉLIAS (PEYRUIS)"],
+            "names": ["FAM LES FONTAINES", "SAMSAH LES CAMÉLIAS (PEYRUIS)"],
             "address": "3, chemin Saint Marcellin - 04310 Peyruis",
             "phonenumbers": ["04 92 30 53 05"],
             "emails": ["fam.fontaines@unapei-ap.fr", "samsah04@unapei-ap.fr"]
