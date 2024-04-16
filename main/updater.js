@@ -101,8 +101,8 @@ const checkForUpdates = (win = null) => {
       buttons: ['Yes', 'No']
     }).then(result => {
       // do nothing if the user does not want to update (i.e. `result.response === 1`),
-      // and the `isUpdateDownloading` boolean is `false`
-      if ((result.response === 1) && (isUpdateDownloading === false)) return;
+      // or if the user wants to update but the `isUpdateDownloading` boolean is `TRUE` (aka already downloading)...
+      if ((result.response === 1) || isUpdateDownloading) return;
 
       // start downloading the update
       autoUpdater.downloadUpdate();
