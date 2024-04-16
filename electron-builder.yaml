@@ -2,12 +2,9 @@ appId: "com.unapei.clickunap"
 productName: "Clickunap"
 copyright: "Copyright (c) 2024 Unapei. All rights reserved."
 
+
 win:
   target: ["portable", "nsis"] # target: ["dir", "portable", "zip", "nsis"]
-  nsis:
-    oneClick: true
-    allowToChangeInstallationDirectory: true
-    # updaterCacheDir: "<%= appDataDir %>/Local/Programs/clickunap-electron/updater"
   icon: "resources/icon.ico"
   publish:
     - provider: github
