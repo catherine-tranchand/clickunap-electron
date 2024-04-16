@@ -35,6 +35,8 @@ const checkForUpdates = (win = null) => {
   // autoUpdater.autoDownload = false;
   // autoUpdater.autoInstallOnAppQuit = false;
   
+  // initialize the `isUpdateDownloading` boolean to `false`
+  let isUpdateDownloading = false;
 
   
   const showConsoleDialog = (message) => {
@@ -75,11 +77,11 @@ const checkForUpdates = (win = null) => {
   /**
    * Shows the update downloaded dialog.
    */
-  const showUpdateDownloadedDialog = () => {
+  const showUpdateDownloadedDialog = (downloadInfo) => {
     dialog.showMessageBox({
       type: 'info',
       title: 'Update Downloaded',
-      message: 'The update has been downloaded. The application will now restart to install it.',
+      message: 'The update has been downloaded. The application will now restart to install it. ' + downloadInfo.path,
       buttons: ['OK']
     }).then(() => {
       autoUpdater.quitAndInstall();
@@ -95,24 +97,19 @@ const checkForUpdates = (win = null) => {
     dialog.showMessageBox({
       type: 'info',
       title: 'Update Available',
-      message: `A new version ${updateInfo.version} is available. Do you want to update?`,
+      message: `A new version ${updateInfo.version} is available. Do you want to update? ${updateInfo.path}`,
       buttons: ['Yes', 'No']
     }).then(result => {
-      if (result.response === 0) {
-        autoUpdater.downloadUpdate();
+      // do nothing if the user does not want to update (i.e. `result.response === 1`),
+      // and the `isUpdateDownloading` boolean is `false`
+      if ((result.response === 1) && (isUpdateDownloading === false)) return;
 
-        // .then(() => {
-          // do nothin if downloadedDialogHidden is TRUE
-          // if (downloadedDialogHidden) return;
+      // start downloading the update
+      autoUpdater.downloadUpdate();
 
-          // if not, show the update downloaded dialog
-          // showUpdateDownloadedDialog();
+      // set the `isUpdateDownloading` boolean to `true`
+      isUpdateDownloading = true;
 
-        // }).catch(error => {
-          // sendStatusToWindow('Update download failed:', error);
-          // dialog.showErrorBox('Update Error 001', 'Failed to download update.');
-        // });
-      }
     });
   };
 
@@ -131,7 +128,10 @@ const checkForUpdates = (win = null) => {
     autoUpdater.checkForUpdatesAndNotify();
 
   } catch (error) {
-    sendStatusToWindow('Error checking for updates: ' + error, true);
+    // set `isUpdateDownloading` to `false`
+    isUpdateDownloading = false;
+
+    sendStatusToWindow('Error checking for updates: ' + error);
     dialog.showErrorBox('Update Error 001', 'Failed to check for updates...: ' + error);
   }
 
@@ -165,24 +165,31 @@ const checkForUpdates = (win = null) => {
   
   // >> Error
   autoUpdater.on('error', (error) => {
-    sendStatusToWindow('Error in auto-updater: ' + error, true);
+    // set `isUpdateDownloading` to `false`
+    isUpdateDownloading = false;
+    
+    sendStatusToWindow('Error in auto-updater: ' + error);
     dialog.showErrorBox('Update Error 002', 'Failed to check for updates: ' + error);
   });
   
   // >> Download progress
   autoUpdater.on('download-progress', (progressObj) => {
+    /*
     let log_message = "Download speed: " + progressObj.bytesPerSecond;
     log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
     log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
 
     sendStatusToWindow(log_message);
+    */
   });
   
   
   // >> Update downloaded
   autoUpdater.on('update-downloaded', (info) => {
-    sendStatusToWindow('Update downloaded: url => ' + info.downloadURL, true);
-    // clearInterval(updateInterval);
+    // set `isUpdateDownloading` to `false`
+    isUpdateDownloading = false;
+
+    sendStatusToWindow('Update downloaded: url/path => ' + info.path);
     
     // show the update downloaded dialog
     showUpdateDownloadedDialog(info);
