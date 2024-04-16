@@ -44,12 +44,12 @@ const createWindow = () => {
       win.webContents.reloadIgnoringCache();
     });
 
-    win.webContents.on("message", (event, message) => {
-      console.log(
-        `\x1b[38;5;208m(win.webContents)\x1b[0m: Received message 4rm main process: => \x1b[1;37m${message}\x1b[0m`
-      );
-    });
   }
+
+  // listen to "message" commands
+  win.webContents.on("message", (event, message) => {
+    console.log(`\x1b[38;5;208m(win.webContents): Message received: => \x1b[0m`, message);
+  });
 
   // return the `win`
   return win;
@@ -88,6 +88,7 @@ app.on("ready", () => {
       `\x1b[38;5;208m(message)\x1b[0m: message => \x1b[1;37m${message}\x1b[0m`
     );
   });
+
 
   ipcMain.on("open-folder", (event, folderPath) => {
     console.log(

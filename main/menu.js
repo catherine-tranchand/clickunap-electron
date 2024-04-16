@@ -38,7 +38,7 @@ const createMenu = (win = null) => {
     dialog.showMessageBox({
       type: 'info',
       title: 'Contact the Team',
-      message: 'Catherine Tranchand <catherine-tranchand@laplateforme.io> (Lead Developer)',
+      message: 'Catherine Tranchand <ekaterina.tranchand@gmail.com> (Lead Developer)',
       buttons: ['Send Email', 'Cancel'],
 
     }).then(result => {
@@ -59,6 +59,7 @@ const createMenu = (win = null) => {
         { role: 'about', label: 'About ' + appName },
         { type: 'separator' },
         { label: 'Check For Updates...', click: () => handleUpdates() },
+        // { label: 'Open Inspector', click: () => win.webContents.openDevTools() },
         { type: 'separator' },
         { role: 'quit', label: 'Quit ' + appName, click: () => app.quit() },
       ],
@@ -73,7 +74,7 @@ const createMenu = (win = null) => {
     {
       label: 'Help',
       submenu: [
-        { label: 'Contact the Team', click: () => handleContact() },
+        { label: "Contacter l'équipe", click: () => handleContact() },
       ],
     },
   ];
@@ -88,6 +89,7 @@ const createMenu = (win = null) => {
         { label: '&Contact the Team', click: () => handleContact() },
         { type: 'separator' },
         { label: 'Check For &Updates...', click: () => handleUpdates() },
+        // { label: 'Open Inspector', click: () => win.webContents.openDevTools() },
         { type: 'separator' },
         { role: 'quit', label: '&Quit ' + appName, click: () => app.quit() },
       ],
@@ -113,6 +115,16 @@ const createMenu = (win = null) => {
 
     // Help menu
     ...(isMac ? macHelpMenuTemplate : winHelpMenuTemplate),
+
+    // Dev menu
+    {
+      label: 'Dev',
+      submenu: [
+        { role: 'reload' },
+        { role: 'forcereload' },
+        { role: 'toggledevtools' },
+      ],
+    },
 
   ]
 

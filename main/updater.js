@@ -27,21 +27,6 @@ const checkForUpdates = (win = null) => {
   // ================================================
 
 
-  /**
-   * Function used to send the given `text` status to the window (i.e. `win`)
-   *
-   * @param { String } text
-   *
-   * @returns { void } - nothing ;)
-   */
-  const sendStatusToWindow = (text) => {
-    // do nothing if there's no `win`
-    if (!win) return;
-
-    log.info(text);
-    win.webContents.send('message', text);
-  };
-  
 
 
   // const updateUrl = 'https://github.com/catherine-tranchand/clickunap-electron/releases/latest';
@@ -52,6 +37,39 @@ const checkForUpdates = (win = null) => {
   
 
   
+  const showConsoleDialog = (message) => {
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Console',
+      message,
+      buttons: ['CLOSE']
+    });
+  };
+  
+  
+
+  /**
+   * Function used to send the given `message` status to the window (i.e. `win`)
+   *
+   * @param { text } message
+   *
+   * @returns { void } - nothing ;)
+   */
+  const sendStatusToWindow = (message, showDialog = false) => {
+    // do nothing if there's no `win`
+    if (!win) return;
+    
+    try {
+      log.info(message);
+      win.webContents.send('message', message);
+        
+      if (showDialog) showConsoleDialog(message);
+
+    } catch (error) {
+      log.error(error);
+    }
+
+  };
   
   
   /**
@@ -113,7 +131,7 @@ const checkForUpdates = (win = null) => {
     autoUpdater.checkForUpdatesAndNotify();
 
   } catch (error) {
-    sendStatusToWindow('Error checking for updates: ' + error);
+    sendStatusToWindow('Error checking for updates: ' + error, true);
     dialog.showErrorBox('Update Error 001', 'Failed to check for updates...: ' + error);
   }
 
@@ -134,7 +152,7 @@ const checkForUpdates = (win = null) => {
   
   // >> Update available 
   autoUpdater.on('update-available', (info) => {
-    sendStatusToWindow('Update available', info);
+    sendStatusToWindow('Update available: version => ' + info.version);
 
     // show the update available dialog
     showUpdateAvaiableDialog(info);
@@ -147,7 +165,7 @@ const checkForUpdates = (win = null) => {
   
   // >> Error
   autoUpdater.on('error', (error) => {
-    sendStatusToWindow('Error in auto-updater: ' + error);
+    sendStatusToWindow('Error in auto-updater: ' + error, true);
     dialog.showErrorBox('Update Error 002', 'Failed to check for updates: ' + error);
   });
   
@@ -163,7 +181,7 @@ const checkForUpdates = (win = null) => {
   
   // >> Update downloaded
   autoUpdater.on('update-downloaded', (info) => {
-    sendStatusToWindow('Update downloaded', info);
+    sendStatusToWindow('Update downloaded: url => ' + info.downloadURL, true);
     // clearInterval(updateInterval);
     
     // show the update downloaded dialog
