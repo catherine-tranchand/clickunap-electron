@@ -35,11 +35,11 @@ const checkForUpdates = (win = null) => {
   
 
 
-  const updateUrl = 'https://github.com/catherine-tranchand/clickunap-electron/releases/latest';
+  // const updateUrl = 'https://github.com/catherine-tranchand/clickunap-electron/releases/latest';
 
-  autoUpdater.setFeedURL(updateUrl);
-  autoUpdater.autoDownload = false;
-  autoUpdater.autoInstallOnAppQuit = false;
+  // autoUpdater.setFeedURL(updateUrl);
+  // autoUpdater.autoDownload = false;
+  // autoUpdater.autoInstallOnAppQuit = false;
   
 
   
