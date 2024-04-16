@@ -11,9 +11,9 @@ import ClickunapIcon from "../clickunap-icon";
 
 
 
-export default function ClickunapResource({ icon, name, color, iconColor, link }) {
+export default function ClickunapResource({ icon, name, color, iconColor, link, onClick }) {
   return (
-    <Link href={link} className="ClickunapResource flex px-2 py-2 items-center space-x-2">
+    <div onClick={onClick} className="ClickunapResource flex px-2 py-2 items-center space-x-2 cursor-pointer">
 
       {/* Icon */}
       <ClickunapIcon 
@@ -28,6 +28,6 @@ export default function ClickunapResource({ icon, name, color, iconColor, link }
       {/* Name */}
       <span className="truncate hover:text-green-500">{name}</span>
 
-    </Link>
+    </div>
   );
 }

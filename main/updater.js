@@ -4,11 +4,6 @@ const path = require('path');
 const { autoUpdater } = require('electron-updater');
 
 
-
-
-
-
-
 const checkForUpdates = (win = null) => {
   /*
   if (!process.env.NODE_ENV === 'production') {
@@ -16,11 +11,7 @@ const checkForUpdates = (win = null) => {
   }
   */
 
-
-
-
-
-  // =================  Logging =====================
+   // =================  Logging =====================
   autoUpdater.logger = log;
   autoUpdater.logger.transports.file.level = 'info';
   log.info('Clickunap Updater is starting...');

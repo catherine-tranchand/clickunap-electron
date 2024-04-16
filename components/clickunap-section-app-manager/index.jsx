@@ -72,7 +72,7 @@ export default function ClickunapAppSectionManager({ title }) {
           logo="/onedrive.png"
           name="One drive"
          
-           onClick={() => openApp("onedrive")}
+          onClick={() => openApp("onedrive")}
         />
 
         {/* Octime - App 4 */}

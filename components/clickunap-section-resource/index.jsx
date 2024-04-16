@@ -1,26 +1,26 @@
 import Link from "next/link";
-
 import ClickunapResource from "../clickunap-resource";
-
-
-
+import useApps from "@/hooks/useApps";
 
 export default function ClickunapResourceSection({ title }) {
+ const { openApp, openLink } = useApps();
+
   return (
     <div className="ClickunapResourceSection w-full h-full flex flex-col p-4 justify-start items-center space-y-4 transition-all hover:scale-105 2xl:scale-75 2xl:origin-top 2xl:hover:scale-[80%]">
-      
       {/* Title */}
-      <h2 className="ResourceSectionTitle uppercase font-extrabold opacity-50">{title}</h2>
+      <h2 className="ResourceSectionTitle uppercase font-extrabold opacity-50">
+        {title}
+      </h2>
 
       {/* Box */}
       <div className="ResourceSectionBox grid grid-cols-1 lg:grid-cols-2 gap-4 overflow-auto lg:gap-6 w-full h-[512px] p-6 rounded-3xl bg-zinc-100 shadow-md dark:bg-black/50">
-
         {/* Qualité - Resource 1 */}
         <ClickunapResource
           color="#0A380F"
           icon="new_releases"
           name="Qualité"
           link="/"
+       
         />
 
         {/* RH - Resource 2 */}
@@ -45,6 +45,9 @@ export default function ClickunapResourceSection({ title }) {
           icon="laptop_chromebook"
           name="Informatique"
           link="/"
+          onClick={() => openLink("https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&FormId=iHFfFh3jD0qv70bl_texC078vRd7lU5IlpW7sbTslZdUQk5VMlVaVFBQSlA5Rk9JMVhMU0FZNlEzSC4u&Token=27e4e35af7214450a48a84b09cd164ff")}
+         // link="https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&FormId=iHFfFh3jD0qv70bl_texC078vRd7lU5IlpW7sbTslZdUQk5VMlVaVFBQSlA5Rk9JMVhMU0FZNlEzSC4u&Token=27e4e35af7214450a48a84b09cd164ff"
+          
         />
 
         {/* Communication - Resource 5 */}
@@ -64,12 +67,7 @@ export default function ClickunapResourceSection({ title }) {
         />
 
         {/* Compta - Resource 7 */}
-        <ClickunapResource
-          color="#0A380F"
-          icon="euro"
-          name="Compta"
-          link="/"
-        />
+        <ClickunapResource color="#0A380F" icon="euro" name="Compta" link="/" />
 
         {/* DG - Resource 8 */}
         <ClickunapResource
@@ -78,7 +76,6 @@ export default function ClickunapResourceSection({ title }) {
           name="DG"
           link="/"
         />
-
       </div>
     </div>
   );

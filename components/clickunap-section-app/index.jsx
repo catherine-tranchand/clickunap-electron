@@ -44,7 +44,7 @@ export default function ClickunapAppSection({ title }) {
           logo="/sharepoint.png"
           name="Sharepoint"
           //link="https://www.airmes-application.eu/"
-          onClick={() => openLink("https://www.airmes-application.eu/")}
+          onClick={() => openApp("sharepoint")}
 
         />
 

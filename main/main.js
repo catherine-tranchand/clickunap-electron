@@ -227,6 +227,20 @@ app.on("ready", () => {
 
         break;
 
+        case "sharepoint":
+    
+        //C:\Users\m.robaston\UNAPEI ALPES PROVENCE\$chemin accès
+        
+        appPath = path.join(
+          os.homedir(),
+          "UNAPEI ALPES PROVENCE",
+          "Datas_SIEGE - Données Siège"
+
+        );
+
+
+        break;
+
     }
 
     if (process.platform === "win32") {

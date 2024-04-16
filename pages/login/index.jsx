@@ -20,7 +20,7 @@ export default function LoginPage() {
           <Button variant='text' className="text-black !lowercase !m-4">
             Voir la page manager
           </Button>
-        </Link>
+  </Link> 
 
       </div>
 
