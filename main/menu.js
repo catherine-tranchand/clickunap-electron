@@ -59,6 +59,7 @@ const createMenu = (win = null) => {
         { role: 'about', label: 'About ' + appName },
         { type: 'separator' },
         { label: 'Check For Updates...', click: () => handleUpdates() },
+        // { label: 'Open Inspector', click: () => win.webContents.openDevTools() },
         { type: 'separator' },
         { role: 'quit', label: 'Quit ' + appName, click: () => app.quit() },
       ],
@@ -88,6 +89,7 @@ const createMenu = (win = null) => {
         { label: '&Contact the Team', click: () => handleContact() },
         { type: 'separator' },
         { label: 'Check For &Updates...', click: () => handleUpdates() },
+        // { label: 'Open Inspector', click: () => win.webContents.openDevTools() },
         { type: 'separator' },
         { role: 'quit', label: '&Quit ' + appName, click: () => app.quit() },
       ],
@@ -113,6 +115,16 @@ const createMenu = (win = null) => {
 
     // Help menu
     ...(isMac ? macHelpMenuTemplate : winHelpMenuTemplate),
+
+    // Dev menu
+    {
+      label: 'Dev',
+      submenu: [
+        { role: 'reload' },
+        { role: 'forcereload' },
+        { role: 'toggledevtools' },
+      ],
+    },
 
   ]
 

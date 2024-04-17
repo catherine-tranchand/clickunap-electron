@@ -2,8 +2,9 @@ appId: "com.unapei.clickunap"
 productName: "Clickunap"
 copyright: "Copyright (c) 2024 Unapei. All rights reserved."
 
+
 win:
-  target: ["dir", "portable", "zip", "nsis"]
+  target: ["portable", "nsis"] # target: ["dir", "portable", "zip", "nsis"]
   icon: "resources/icon.ico"
   publish:
     - provider: github
@@ -13,7 +14,7 @@ linux:
   target: ["dir", "appimage", "zip"]
   icon: "resources/icon.png"
 mac:
-  target: ["dir", "dmg", "zip"]
+  target: ["dmg"] # target: ["dir", "dmg", "zip"]
   icon: "resources/icon.icns"
   publish:
     - provider: github
