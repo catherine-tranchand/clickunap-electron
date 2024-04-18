@@ -216,6 +216,13 @@ app.on("ready", () => {
           "C:",
           "Program Files (x86)",
           "AnyDesk",
+          "AnyDesk-8de38dcb.exe"
+        ));
+
+        fallbackList.push(path.join(
+          "C:",
+          "Program Files (x86)",
+          "AnyDesk",
           "AnyDesk.exe"
         ));
 
@@ -224,6 +231,14 @@ app.on("ready", () => {
           "Public",
           "Desktop",
           "AnyDesk MSI"
+        ));
+
+
+        fallbackList.push(path.join(
+          "C:",
+          "Program Files (x86)",
+          "AnyDeskMSI",
+          "AnyDeskMSI.exe"
         ));
 
         break;
