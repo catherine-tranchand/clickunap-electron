@@ -29,11 +29,8 @@ const checkForUpdates = (win = null) => {
 
 
 
-  // const updateUrl = 'https://github.com/catherine-tranchand/clickunap-electron/releases/latest';
-
-  // autoUpdater.setFeedURL(updateUrl);
-  // autoUpdater.autoDownload = false;
-  // autoUpdater.autoInstallOnAppQuit = false;
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
   
   // initialize the `isUpdateDownloading` boolean to `false`
   let isUpdateDownloading = false;
@@ -155,7 +152,7 @@ const checkForUpdates = (win = null) => {
     sendStatusToWindow('Update available: version => ' + info.version);
 
     // show the update available dialog
-    showUpdateAvaiableDialog(info);
+    // showUpdateAvaiableDialog(info);
   });
   
   // >> Update not available
