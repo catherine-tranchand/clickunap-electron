@@ -115,6 +115,15 @@ app.on("ready", () => {
           "Remote Desktop",
           "msrdcw.exe"
         );
+
+        fallbackList.push(path.join(
+          os.homedir(), 
+          "OneDrive - UNAPEI ALPES PROVENCE",
+          "Bureau",
+          "Remote Desktop"
+
+        ));
+        
         break;
       case "msword":
         //appPath = `C:\\Program Files\Microsoft Office\root\Office16\WINWORD.EXE`
