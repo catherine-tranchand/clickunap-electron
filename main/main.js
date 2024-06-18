@@ -9,12 +9,6 @@ const { createMenu } = require("./menu");
 
 
 
-
-
-
-
-
-
 const appServe = app.isPackaged 
   ? serve({
       directory: path.join(__dirname, "../out"),
@@ -110,37 +104,61 @@ app.on("ready", () => {
     
     let appPath = "";
     // "gessi", "msword", "anydesk"
+   
 
     switch (appName) {
-      case "gessi":
-        //appPath = `C:\\Users\\m.robaston\\AppData\\Local\\Apps\\Remote Desktop\\msrdcw.exe`;
-        //AppPath = C:\Users\..\OneDrive - UNAPEI ALPES PROVENCE\Bureau\Remote Desktop GESSI.Ink;
-        appPath = path.join(
-          os.homedir(),
-          "AppData",
-          "Local",
-          "Apps",
-          "Remote Desktop",
-          "msrdcw.exe"
-        );
+      
+     case "gessi":
+
+      const gessiPotentialPaths = [
+        appPath.join(os.homedir(), "AppData", "Local", "Apps", "Remote Desktop", "msrdw.exe"),
+        appPath.join(os.homedir(), "Program Files", "Remote Desktop", "msrdcw.exe"),
+       
+      ];
+
+      // Find the first valid path
+
+      for (const p of gessiPotentialPaths){
+        if (fs.exitsSync(p)) {
+          appPath = p;
+          break;
+        }
+      }
+        //appPath = `C:\\Users\\m.robaston\\App Data\\Local\\Apps\\Remote Desktop\\msrdcw.exe`;
+        
+        //appPath = path.join(
+          //os.homedir(),
+          //"AppData",
+          //"Local",
+          //"Apps",
+          //"Remote Desktop",
+          //"msrdcw.exe"
+        
         break;
       case "msword":
         //appPath = `C:\\Program Files\Microsoft Office\root\Office16\WINWORD.EXE`
         // appPath = `C:\\ProgramData\Microsoft\Windows\Start Menu\Programs
         
-        
-        appPath = path.join(
-        programFiles,
-        "Microsoft Office",
-        "root",
-        "Office16",
-        "WINWORD.EXE"
-        );
+       const mswordPotentialPaths = [
+         path.join("C:", "Program Files", "Microsoft Office", "root", "Office16", "WINWORD.EXE"),
+         path.join("C:", "Program Files (x86)", "Microsoft Office", "root", "Office16", "WINWORD.EXE"),
+         path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Word.Ink"),
+
+      ];
+
+      for (const p of mswordPotentialPaths) {
+        if (fs.exitsSync(p)) {
+          appPath = p;
+          break;
+        }
+      }
+
+       
         break;
       
       case "teams":
           //Microsoft  teams : C:\Users\m.robaston\AppData\Local\Microsoft\Teams\current\Teams.exe
-          appPath = path.join(
+           appPath = path.join(
            os.homedir(),
            "AppData",
            "Local",
@@ -168,29 +186,42 @@ app.on("ready", () => {
       case "outlook":
        // C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Outlook.exe
        //C:\Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE
-       appPath = path.join(
-        "C:", 
-        "Program Files (x86)",
-        "Microsoft Office",
-        "root",
-        "Office16",
-        "OUTLOOK.EXE"
-      );
+       const outlookPotentialPaths = [
+         
+        path.join("C:", "Program Files (x86)", "Microsoft Office", "root", "Office16", "OUTLOOK.EXE"),
+        path.join("C:", "Program Files", "Microsoft Office", "root", "Office16", "OUTLOOK.EXE"),
+        path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Outlook.Ink"),
+        
+        ];
+         
+        for (const p of outlookPotentialPaths){
+          if (fs.exitsSync(p)){
+            appPath = p;
+            break;
+          }
+        }
+
+      
 
       break;
 
       case "excel":
+
         // C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Outlook.exe
         //C:\Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE
-        appPath = path.join(
-         "C:", 
-         "Program Files (x86)",
-         "Microsoft Office",
-         "root",
-         "Office16",
-         "EXCEL.EXE"
-       );
+       const excelPotentialPaths = [
+       path.join("C:", "Program Files (x86)", "Microsoft Office", "root", "Office16", "EXCEL.EXE"),
+       path.join("C:", "Program Files", "Microsoft Office", "root", "Office16", "OUTLOOK.EXE"),
+       path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Outlook.Ink"),
  
+       ];
+
+       for (const p of excelPotentialPaths){
+        if(fs.exitsSync(p)){
+          appPath = p;
+          break;
+        }
+       }
        break;
 
       
@@ -217,26 +248,39 @@ app.on("ready", () => {
       case "anydesk":
         // Nephyla : C:\Program Files (x86)\AnyDesk-8de38dcb.exe
         // C:\Users\Public\Desktop Support_Nephyla.Ink
-        appPath = path.join(
-          "C:", 
-          "Program Files (x86)",
-          "AnyDesk-8de38dcb",
-          "AnyDesk-8de38dcb.exe",
+        const nephylaPotentialPaths = [
 
-        );
+        path.join("C:", "Program Files (x86)", "AnyDesk-8de38dcb", "AnyDesk-8de38dcb.exe"),
+        path.join("C:", "Program Files (x86)", "AnyDeskMSI", "AnyDeskMSI.exe"),
 
-        break;
+        ];
+        
+        for (const p of nephylaPotentialPaths){
+          if (fs.exitsSync(p)){
+            appPath = p;
+            break;
+          }
+        }
+
+
+      break;
 
         case "sharepoint":
     
         //C:\Users\m.robaston\UNAPEI ALPES PROVENCE\$chemin accès
-        
-        appPath = path.join(
-          os.homedir(),
-          "UNAPEI ALPES PROVENCE",
-          "Datas_SIEGE - Données Siège"
+        const sharepointPotentialPaths = [
+          path.join(os.homedir(), "UNAPEI ALPES PROVENCE", "Datas_SIEGE - Données Siège"),
+          path.join(os.homedir(), "UNAPEI ALPES PROVENCE", "DATAS_CPX_MONTOLIVET - Partage"),
+          path.join(os.homedir(), "UNAPEI ALPES PROVENCE", "DATAS_CPX_04NORD - Partage"),
+        ]; 
 
-        );
+        for (const p of sharepointPotentialPaths){
+          if (fs.exitsSync(p)){
+            appPath = p;
+            break;
+          }
+        }
+        
 
 
         break;
