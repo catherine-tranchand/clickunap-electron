@@ -111,8 +111,8 @@ app.on("ready", () => {
      case "gessi":
 
       const gessiPotentialPaths = [
-        appPath.join(os.homedir(), "AppData", "Local", "Apps", "Remote Desktop", "msrdw.exe"),
-        appPath.join(os.homedir(), "Program Files", "Remote Desktop", "msrdcw.exe"),
+        appPath.join(os.homedir(),"AppData", "Local", "Apps", "Remote Desktop", "msrdw.exe"),
+        appPath.join("C:", "Program Files", "Remote Desktop", "msrdcw.exe"),
        
       ];
 
@@ -249,6 +249,7 @@ app.on("ready", () => {
 
         path.join("C:", "Program Files (x86)", "AnyDesk-8de38dcb", "AnyDesk-8de38dcb.exe"),
         path.join("C:", "Program Files (x86)", "AnyDeskMSI", "AnyDeskMSI.exe"),
+        path.join("C:", "Program Files (x86)", "Anydesk", "AnyDesk-8de38dcb.exe"),
 
         ];
         
