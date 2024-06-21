@@ -29,7 +29,7 @@ export default function ClickunapResourceSection({ title }) {
           icon="diversity_1"
           name="RH"
           link="/"
-          onClick={() => openLink("https://forms.office.com/Pages/ResponsePage.aspx?id=iHFfFh3jD0qv70bl_texC078vRd7lU5IlpW7sbTslZdUQk5VMlVaVFBQSlA5Rk9JMVhMU0FZNlEzSC4u")}
+          onClick={() => openLink("https://forms.office.com/pages/responsepage.aspx?id=iHFfFh3jD0qv70bl_texC078vRd7lU5IlpW7sbTslZdUNEdOOU1KVDBVOFc0TTE4V1dFMkhWRjlUNC4u")}
         />
 
         {/* Accompagnement - Resource 3 */}

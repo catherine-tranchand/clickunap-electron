@@ -41,7 +41,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
 
         {/* Badgeuse */}
         <li 
-          className="NavLink" 
+          className="NavLink cursor-pointer" 
           onClick={() => openLink("https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap")}>
         
           <span className="NavIcon material-symbols-outlined">check_circle</span>
