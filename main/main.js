@@ -3,7 +3,6 @@ const serve = require("electron-serve");
 const path = require("path");
 const os = require("os");
 const fs = require("fs");
-const fs = require("fs");
 const { exec } = require("child_process");
 // import our checkForUpdates() function from `updater.js`
 const { checkForUpdates } = require("./updater");
