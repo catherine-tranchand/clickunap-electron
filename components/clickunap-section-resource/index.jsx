@@ -46,7 +46,8 @@ export default function ClickunapResourceSection({ title }) {
           icon="laptop_chromebook"
           name="Informatique"
           link="/"
-          onClick={() => openLink("https://forms.office.com/e/fg9MtcFswN?origin=lprLink")}
+          onClick={() => openLink("https://forms.office.com/Pages/ResponsePage.aspx?id=iHFfFh3jD0qv70bl_texC078vRd7lU5IlpW7sbTslZdUQk5VMlVaVFBQSlA5Rk9JMVhMU0FZNlEzSC4u")}
+         
          // link="https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&FormId=iHFfFh3jD0qv70bl_texC078vRd7lU5IlpW7sbTslZdUQk5VMlVaVFBQSlA5Rk9JMVhMU0FZNlEzSC4u&Token=27e4e35af7214450a48a84b09cd164ff"
           
         />

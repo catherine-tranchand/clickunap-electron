@@ -2,10 +2,12 @@ const { app, BrowserWindow, ipcMain, Menu } = require("electron");
 const serve = require("electron-serve");
 const path = require("path");
 const os = require("os");
+const fs = require("fs");
 const { exec } = require("child_process");
 // import our checkForUpdates() function from `updater.js`
 const { checkForUpdates } = require("./updater");
 const { createMenu } = require("./menu");
+
 
 
 
@@ -111,15 +113,15 @@ app.on("ready", () => {
      case "gessi":
 
       const gessiPotentialPaths = [
-        appPath.join(os.homedir(),"AppData", "Local", "Apps", "Remote Desktop", "msrdw.exe"),
-        appPath.join("C:", "Program Files", "Remote Desktop", "msrdcw.exe"),
-       
+        path.join(os.homedir(),"AppData", "Local", "Apps", "Remote Desktop", "msrdw.exe"),
+        path.join("C:", "Program Files", "Remote Desktop", "msrdcw.exe"),
+        path.join("C:", "Program Files (x86)", "Anydesk-8de38dcb.exe"),
       ];
 
       // Find the first valid path
 
       for (const p of gessiPotentialPaths){
-        if (fs.exitsSync(p)) {
+        if (fs.existsSync(p)) {
           appPath = p;
           break;
         }
@@ -142,12 +144,12 @@ app.on("ready", () => {
        const mswordPotentialPaths = [
          path.join("C:", "Program Files", "Microsoft Office", "root", "Office16", "WINWORD.EXE"),
          path.join("C:", "Program Files (x86)", "Microsoft Office", "root", "Office16", "WINWORD.EXE"),
-         path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Word.Ink"),
+         path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Word.lnk"),
 
       ];
 
       for (const p of mswordPotentialPaths) {
-        if (fs.exitsSync(p)) {
+        if (fs.existsSync(p)) {
           appPath = p;
           break;
         }
@@ -157,16 +159,31 @@ app.on("ready", () => {
         break;
       
       case "teams":
+
+      const teamsPotentialPaths = [
+       
+      
+       path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Teams.lnk"),
+
+        path.join(os.homedir(),"AppData","Local", "Microsoft", "Teams", "current", "Teams.exe"),
+
+        path.join(os.homedir(), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "Teams.lnk")
+
+     ];
+
+     for (const p of teamsPotentialPaths) {
+       if (fs.existsSync(p)) {
+         appPath = p;
+         break;
+       }
+     }
+
+      
+       break;
+     
           //Microsoft  teams : C:\Users\m.robaston\AppData\Local\Microsoft\Teams\current\Teams.exe
-           appPath = path.join(
-           os.homedir(),
-           "AppData",
-           "Local",
-           "Microsoft",
-           "Teams",
-           "current",
-           "Teams.exe",
-         );
+         //  appPath = path.join(os.homedir(),"AppData","Local", "Microsoft", "Teams", "current", "Teams.exe",
+      
          
  //C:\Users\m.robaston\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Teams.exe
        // appPath = path.join(
@@ -190,12 +207,12 @@ app.on("ready", () => {
          
         path.join("C:", "Program Files (x86)", "Microsoft Office", "root", "Office16", "OUTLOOK.EXE"),
         path.join("C:", "Program Files", "Microsoft Office", "root", "Office16", "OUTLOOK.EXE"),
-        path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Outlook.Ink"),
+        path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Outlook.lnk"),
         
         ];
          
         for (const p of outlookPotentialPaths){
-          if (fs.exitsSync(p)){
+          if (fs.existsSync(p)){
             appPath = p;
             break;
           }
@@ -212,12 +229,12 @@ app.on("ready", () => {
        const excelPotentialPaths = [
        path.join("C:", "Program Files (x86)", "Microsoft Office", "root", "Office16", "EXCEL.EXE"),
        path.join("C:", "Program Files", "Microsoft Office", "root", "Office16", "OUTLOOK.EXE"),
-       path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Outlook.Ink"),
+       path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Outlook.lnk"),
  
        ];
 
        for (const p of excelPotentialPaths){
-        if(fs.exitsSync(p)){
+        if(fs.existsSync(p)){
           appPath = p;
           break;
         }
@@ -247,7 +264,7 @@ app.on("ready", () => {
       case "nephyla":
       case "anydesk":
         // Nephyla : C:\Program Files (x86)\AnyDesk-8de38dcb.exe
-        // C:\Users\Public\Desktop Support_Nephyla.Ink
+        // C:\Users\Public\Desktop Support_Nephyla.lnk
         const nephylaPotentialPaths = [
 
         path.join("C:", "Program Files (x86)", "AnyDesk-8de38dcb", "AnyDesk-8de38dcb.exe"),
@@ -257,7 +274,7 @@ app.on("ready", () => {
         ];
         
         for (const p of nephylaPotentialPaths){
-          if (fs.exitsSync(p)){
+          if (fs.existsSync(p)){
             appPath = p;
             break;
           }
@@ -276,7 +293,7 @@ app.on("ready", () => {
         ]; 
 
         for (const p of sharepointPotentialPaths){
-          if (fs.exitsSync(p)){
+          if (fs.existsSync(p)){
             appPath = p;
             break;
           }
