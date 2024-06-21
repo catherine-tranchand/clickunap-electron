@@ -227,8 +227,8 @@ app.on("ready", () => {
         //C:\Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE
        const excelPotentialPaths = [
        path.join("C:", "Program Files (x86)", "Microsoft Office", "root", "Office16", "EXCEL.EXE"),
-       path.join("C:", "Program Files", "Microsoft Office", "root", "Office16", "OUTLOOK.EXE"),
-       path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Outlook.lnk"),
+       path.join("C:", "Program Files", "Microsoft Office", "root", "Office16", "EXCEL.EXE"),
+       path.join("C:", "ProgramData", "Microsoft", "Windows", "Start Menu", "Programs", "Excel.lnk"),
  
        ];
 
