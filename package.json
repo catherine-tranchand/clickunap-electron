@@ -1,6 +1,6 @@
 {
   "name": "clickunap-electron",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "main": "main/main.js",
   "author": "Catherine Tranchand <catherine.tranchand@laplateforme.io>",
   "description": "A Clickunap built with Next.js & Electron",
@@ -10,7 +10,6 @@
     "dev": "concurrently -n \"NEXT,ELECTRON\" -c \"yellow,blue\" --kill-others \"next dev\" \"electron .\"",
     "build": "next build && electron-builder",
     "build:mac": "next build && electron-builder --mac",
-    
     "build:win": "next build && electron-builder --win --ia32",
     "publish": "next build && electron-builder --publish always",
     "publish:win": "next build && electron-builder --win --ia32 --publish always",
