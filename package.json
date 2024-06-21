@@ -1,6 +1,6 @@
 {
   "name": "clickunap-electron",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "main/main.js",
   "author": "Catherine Tranchand <catherine.tranchand@laplateforme.io>",
   "description": "A Clickunap built with Next.js & Electron",
