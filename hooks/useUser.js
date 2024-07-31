@@ -1,38 +1,16 @@
 "use client";
 
-import { createContext, useContext, useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '@/providers/UserProvider';
 
 
 
-export const UserContext = createContext(null);
 
-
+// TODO: Create a `getUser` function
+// example: export const getUser = async () => {}
 
 export default function useUser() {
-
-  
-  const [ username, setUsername ] = useState('c.tranchand');
-  const [ firstname, setFirstname ] = useState('Catherine');
-  const [ lastname, setLastname ] = useState('Tranchand');
-  const [ email, setEmail ] = useState('catherine.tranchand@laplateforme.io');
-  const [ avatarId, setAvatarId ] = useState('farmer');
-
-  const [ isUserConnected, setIsUserConnected ] = useState(false);
-
- 
-  
-  
-  return {
-    username,
-    firstname,
-    lastname, 
-    email,
-    avatarId,
-    isUserConnected,
-
-    setUsername,
-    setEmail,
-    setIsUserConnected,
-  }
-
+  return useContext(UserContext);
 }
+
+
