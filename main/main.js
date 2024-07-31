@@ -113,9 +113,10 @@ app.on("ready", () => {
      case "gessi":
 
       const gessiPotentialPaths = [
-        path.join(os.homedir(),"AppData", "Local", "Apps", "Remote Desktop", "msrdw.exe"),
+        path.join(os.homedir(), "AppData", "Local", "Apps", "Remote Desktop", "msrdcw.exe"),
         path.join("C:", "Program Files", "Remote Desktop", "msrdcw.exe"),
         path.join("C:", "Program Files (x86)", "Anydesk-8de38dcb.exe"),
+        
       ];
 
       // Find the first valid path

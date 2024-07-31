@@ -1,10 +1,11 @@
 import clsx from 'clsx'
 
-export default function ClickunapIcon({ name, color, size, backgroundColor, className, light, style }) {
+export default function ClickunapIcon({ name, color, size, backgroundColor, className, light, style, onClick }) {
   return (
     <div 
-      className={clsx(['ClickunapIcon', 'flex justify-center items-center p-2', className])} 
+      className={clsx(['ClickunapIcon', 'flex justify-center items-center p-2 select-none', className])} 
       style={{...style, color, backgroundColor}}
+      onClick={onClick}
     >
 
     <span 
