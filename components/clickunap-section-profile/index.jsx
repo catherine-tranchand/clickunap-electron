@@ -39,7 +39,7 @@ export default function ClickunapProfileSection({
 
       </div>
 
-      <p className="text-base text-primary opacity-35">{username}</p>
+      <p className="text-base text-primary dark:text-white opacity-35 select-none">{username}</p>
 
 
       {/* Form / Box */}
@@ -55,6 +55,7 @@ export default function ClickunapProfileSection({
         <TextField
           // error
           id="fullname"
+          className="!text-rose-600"
           label="Fullname"
           defaultValue={fullname}
           InputProps={{
