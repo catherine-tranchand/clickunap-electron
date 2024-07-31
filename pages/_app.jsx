@@ -1,7 +1,8 @@
 import RootLayout from "@/layout";
 import "@/styles/globals.css";
 
-import { UserContext } from "@/hooks/useUser";
+// import { createTheme, alpha, getContrastRatio } from '@mui/material/styles';
+import UserProvider from "@/providers/UserProvider";
 
 
 
@@ -10,11 +11,11 @@ export default function App({ Component, pageProps }) {
   
 
   return (
-    <UserContext.Provider value="love">
+    <UserProvider initialData={{avatarId: 'chicken'}}>
       <RootLayout>
         <Component {...pageProps} />
       </RootLayout>
-    </UserContext.Provider>
+    </UserProvider>
   )
 }
 
