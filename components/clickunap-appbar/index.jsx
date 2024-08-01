@@ -13,6 +13,7 @@ export default function ClickunapAppBar() {
           height={40}
           alt="Clickunap logo"
           priority={true}
+          as="image"
         />
       </Link>
 
@@ -23,7 +24,8 @@ export default function ClickunapAppBar() {
         width={200}
         height={64}
         alt="Clickunap People"
-        priority={false}
+        priority={true}
+        as="image"
       />
     </div>
   );

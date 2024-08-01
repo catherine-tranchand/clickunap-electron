@@ -8,17 +8,38 @@ import ClickunapNavBar from "@/components/clickunap-navbar";
 import ClickunapProfileSection from "@/components/clickunap-section-profile";
 import ClickunapSideBar from "@/components/clickunap-sidebar";
 import ClickunapIcon from '@/components/clickunap-icon';
+import ClickunapAvatar from '@/components/clickunap-avatar';
 
 import useUser from '@/hooks/useUser';
 
 import clsx from "clsx";
 
 
+export const avatarIds = [
+ "chicken",
+ "woman",
+ "farmer",
+ "florist",
+ "gentleman",
+ "hipster",
+ "mechanic",
+ "musician",
+ "musician2",
+ "nerd",
+ "ninja",
+ "photographer",
+];
+
+
+
+
 export default function Profile() {
 
-  const { username, firstname, lastname, email, avatarId } = useUser();
+  const { username, firstname, lastname, email, avatarId: currentAvatarId, setAvatarId } = useUser();
 
   const [ isAvatarPickerOpened, setAvatarPickerOpened ] = useState(false);
+
+
 
   return (
     <main className="flex flex-col w-full h-full">
@@ -27,7 +48,7 @@ export default function Profile() {
         {/* AppBar - Clickunap */}
         <ClickunapAppBar />
       </header>
-
+      
       {/* Content */}
       <div className="Content flex flex-col lg:flex-row w-full h-full pb-20 lg:pb-0 overflow-auto lg:overflow-hidden">
         {/* SideBar - Clickunap */}
@@ -40,7 +61,7 @@ export default function Profile() {
         <div className="Container flex grow flex-col lg:flex-row overflow-auto">
           {/* Apps - Section - Clickunap */}
           <ClickunapProfileSection
-            avatarId={avatarId}
+            avatarId={currentAvatarId}
             username={username}
             fullname={firstname + ' ' + lastname}
             email={email}
@@ -58,17 +79,35 @@ export default function Profile() {
       </div>
 
       {/* Avatar Picker */}
-      {isAvatarPickerOpened && <div className={clsx([ "AvatarPicker", "fixed z-50 size-full p-6" ])}>
+      {/* TODO: Create a `AvatarPicker` component */}
+      {isAvatarPickerOpened && <div className={clsx([ "AvatarPicker", "fixed z-50 size-full p-6 flex flex-col items-center justify-end" ])}>
 
-        <div className='bg-white rounded-lg overflow-scroll size-full flex'>
+        <span className="bg-black fixed inset-0 z-10 opacity-20 dark:opacity-80"></span>
 
-        <ClickunapIcon 
-          className="rounded-full absolute top-0 right-0 m-8 transition-all hover:scale-105 cursor-pointer"
-          name="close" 
-          backgroundColor="white"
-          color="black"
-          onClick={() => setAvatarPickerOpened(false)}
-        />
+        <div className="bg-white dark:bg-[#0b080b] rounded-lg overflow-scroll w-full h-fit lg:w-fit flex flex-col z-20 relative items-center justify-start mx-auto">
+          
+          {/* Clickunap Icon */}
+          <ClickunapIcon 
+            className="rounded-full absolute top-0 right-0 m-6 lg:m-8 z-10 transition-all hover:scale-105 cursor-pointer"
+            name="close" 
+            backgroundColor="white"
+            color="black"
+            onClick={() => setAvatarPickerOpened(false)}
+          />
+          
+          {/* Avatars Grid */}
+          <div className={clsx(["Avatars", "size-fit grid grid-cols-3 gap-2 lg:grid-cols-4 lg:gap-4 lg:px-2 mx-auto my-16"])}>
+            
+            {avatarIds.map((avatarId) => (
+              <ClickunapAvatar
+                key={avatarId}
+                id={avatarId}
+                className="!size-16 transition !bg-[#fcfcfc] hover:!bg-[#c5c5c5] hover:scale-110 cursor-pointer dark:!bg-black m-4 lg:!size-24 lg:m-6"
+                onClick={() => selectAvatarHandler(avatarId)}
+                selected={avatarId === currentAvatarId}
+              />
+            ))}
+          </div>
 
         </div>
 
@@ -80,4 +119,10 @@ export default function Profile() {
   function handleAvatarChange() {
     setAvatarPickerOpened(true);
   }
+
+  function selectAvatarHandler(avatarId) {
+    setAvatarId(avatarId);
+    setAvatarPickerOpened(false);
+  }
+
 }
