@@ -1,11 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import useApps from "@/hooks/useApps";
+import ClickunapAvatar from "../clickunap-avatar";
+import useUser from "@/hooks/useUser";
 
 
 export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
 
   const { openLink } = useApps();
+  const { firstname, lastname, avatarId } = useUser();
+
 
 
 
@@ -60,6 +64,16 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
         
 
       </nav>
+
+      <Link href="/profile" className="max-w-full px-2 relative">
+        <div className="flex px-3 items-center justify-center bg-[#d6bed7] hover:bg-[#ffffff] rounded-3xl">
+          {/* Clickunap - Avatar */}
+          <ClickunapAvatar id={avatarId} className="!size-10"/>
+
+          {/* Fullname */}
+          <span className="truncate text-base">{firstname + ' ' + lastname}</span>
+        </div>
+      </Link>
 
       {/* Logo Unapei */}
       <Image
