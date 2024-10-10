@@ -319,7 +319,7 @@
       },
       {
         "name": "COMPLEXE MONTOLIVET",
-        "director": "Clément ALLAIN",
+        "director": "Patrick VOLONNINO",
         "contacts": [
           {
             "names": [
@@ -342,13 +342,32 @@
         ]
       },
       {
-        "name": "COMPLEXE LA PLANTATION",
-        "director": "Patrick VOLONNINO",
+        "name": "LA PLANTATION SOIN",
+        "director": "Myriam KRADRAOUI",
         "contacts": [
           {
             "names": [
                 "MAS LES KIWIS",
-                "MAS LES PALMIERS",
+                "MAS LES PALMIERS"
+               ],
+            "address": "Trav. de La Seigneurie - Ch. de L’Escampoun 13009 Marseille",
+            "phonenumbers":[
+                "04 91 40 76 00"
+            ],
+            "emails": [
+                "plantation@unapei-ap.fr"
+            ]
+          }
+         ]
+      },
+      
+
+      {
+        "name": "LA PLANTATION HEBERGEMENT",
+        "director": "Clémént ALAIN",
+        "contacts": [
+          {
+            "names": [
                 "FV LES ORANGERS",
                 "FH LES CLÉMENTINES"
                 ],
@@ -360,6 +379,7 @@
                 "plantation@unapei-ap.fr"
             ]
           },
+          
           {
             "names": ["ESAT LES CITRONNIERS"],
             "address": "38, Rue Gaston de Flotte ZI St Jean du Désert - 13012 Marseille",
@@ -373,9 +393,10 @@
           }
         ]
       },
+
       {
         "name": "ENTREPRISES ADAPTÉES",
-        "director": "Philippe CLOT",
+        "director": "Myriam BOYER",
         "contacts":[
             {
                 "names": ["EA BLÉONE DURANCE (MANOSQUE)"],
@@ -398,6 +419,7 @@
                 ]
             },
             {
+                "director": "Philippe CLOT",
                 "names": ["EA LES BAMBOUS"],
                 "address": "ZI Saint-Mitre -50 Av. Braye de Cau - 13400",
                 "phonenumbers": [
