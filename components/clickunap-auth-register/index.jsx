@@ -241,7 +241,7 @@ export default function ClickunapAuthRegister() {
    
  try{
   
-  const response = await fetch ('https://clickunap-electron.vercel.app/register',{
+  const response = await fetch ('https://clickunap-api.vercel.app/users',{
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
