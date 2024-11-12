@@ -1,3 +1,10 @@
+<p align="center">
+   <img src= "/Users/ekaterinatranchand/Desktop/UNAPEI/unapei-app/clickunap-electron/public/newlogo.png" width="100" />
+</p>
+
+<p align="center">
+<h1 align="center">CLICKUNAP</h1>
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

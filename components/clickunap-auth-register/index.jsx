@@ -213,51 +213,84 @@ export default function ClickunapAuthRegister() {
   async function handleRegisterFormSubmit(event) {
     event.preventDefault();
 
-    const formData = new FormData();
+    
+   // const formData = new FormData();
     // formData.append('firstName', firstName);
     // formData.append('lastName', lastName);
-    formData.append('firstname', firstName);
-    formData.append('lastname', lastName);
-    formData.append('role', role);
-    formData.append('email', email);
-    formData.append('username', `test${(new Date()).getSeconds()}@clickunap.com`);
-    formData.append('password', password);
-    formData.append('confirmPassword', confirmPassword);
+   // formData.append('firstname', firstName);
+ //  formData.append('lastname', lastName);
+  //  formData.append('role', role);
+  //  formData.append('email', email);
+  //  formData.append('username', `test${(new Date()).getSeconds()}@clickunap.com`);
+  //  formData.append('password', password);
+  //  formData.append('confirmPassword', confirmPassword);
 
 
     if (password !== confirmPassword){
       return alert('Passwords do not match!!!');
     }
 
+    const formData = {
+      firstname: firstName,
+      lastname: lastName,
+      role: role,
+      email: email,
+      username: `test${new Date().getSeconds()}@clickunap.com`,
+      password: password,
+};
+   
+ try{
+  
+  const response = await fetch ('https://clickunap-electron.vercel.app/register',{
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(formData)
+
+ });
+ if (response.ok) {
+  const data= await response.json();
+  setHasError(false);
+  console.log('user created successfully:', data);
+ } else {
+  setHasError(true);
+  console.log('Failed to create a new user');
+ }
+
+} catch (error){
+  setHasError(true);
+  console.error('Error:', error);
+}
 
 
     // fetch('https://clickunap-api.vercel.app/users', {
-    fetch('https://clickunap-api.vercel.app/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: formData,
-    })
-    .then(response => {
-      console.log('response ==>> ', response);
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error('Failed to create a new user');
-      }
-    })
-    .then(({ data }) => {
-      setHasError(false);
-      console.log('data is ', data);
-    })
-    .catch(error => {    
-      setHasError(true);
-      console.error(error)
-    })
+   // fetch('https://clickunap-api.vercel.app/users', {
+   //   method: 'POST',
+    //  headers: {
+     //   'Content-Type': 'application/json',
+     //   'Accept': 'application/json',
+    //  },
+    //  body: formData,
+   // })
+   // .then(response => {
+  //    console.log('response ==>> ', response);
+   //   if (response.ok) {
+    //    return response.json();
+    //  } else {
+     //   throw new Error('Failed to create a new user');
+   //   }
+   // })
+ //   .then(({ data }) => {
+   //   setHasError(false);
+   //   console.log('data is ', data);
+  //  })
+  //  .catch(error => {    
+  //    setHasError(true);
+ //     console.error(error)
+  //  })
 
 
-    console.log(`[handleRegisterFormSubmit]: email => ${email} & password => ${password}`);
+ //   console.log(`[handleRegisterFormSubmit]: email => ${email} & password => ${password}`);
   }
 }
