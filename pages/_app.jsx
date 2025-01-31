@@ -27,6 +27,8 @@ export default function App({ Component, pageProps }) {
 
 
 
+  
+
   return (
     <UserProvider initialData={{avatarId: 'chicken'}}>
       <ThemeProvider theme={theme}>

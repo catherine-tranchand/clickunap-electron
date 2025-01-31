@@ -21,6 +21,8 @@ export default function UserProvider({ children, initialData }) {
   const [ avatarId, setAvatarId ] = useState(initialData?.avatarId ?? 'farmer');
 
   const [ isUserConnected, setIsUserConnected ] = useState(initialData?.isUserConnected ?? false);
+  const [ isUserAdmin, setIsUserAdmin ] = useState(initialData?.isUserAdmin ?? false);
+  
 
 
   
@@ -34,6 +36,7 @@ export default function UserProvider({ children, initialData }) {
         avatarId,
 
         isUserConnected,
+        isUserAdmin,
 
         setUsername,
         setFirstname,
@@ -42,6 +45,7 @@ export default function UserProvider({ children, initialData }) {
         setAvatarId,
 
         setIsUserConnected,
+        setIsUserAdmin,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/router";
 
 import Image from "next/image";
@@ -29,6 +29,8 @@ export default function ClickunapAuthLogin() {
 
   const { userToken, saveUserToken } = useStorage();
 
+  
+
 
 
 
@@ -47,6 +49,18 @@ export default function ClickunapAuthLogin() {
       </InputAdornment>
     ),
   };
+
+
+  useMemo(() => {
+    console.log("Our user token is ", userToken);
+
+    if (userToken.length > 0) {
+      router.push("/manager"); // <- HACK: This is a temp fix
+    }
+
+  }, [userToken]);
+
+
 
   return (
     <div className="ClickunapAuthLogin flex flex-col justify-center items-center rounded-xl shadow-md bg-white w-full h-auto max-w-[500px] p-4 lg:space-y-6">

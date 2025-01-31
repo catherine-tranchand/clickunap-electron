@@ -35,7 +35,7 @@ export const avatarIds = [
 
 export default function Profile() {
 
-  const { username, firstname, lastname, email, avatarId: currentAvatarId, setAvatarId } = useUser();
+  const { username, firstname, lastname, email, avatarId: currentAvatarId, setAvatarId, isUserAdmin } = useUser();
 
   const [ isAvatarPickerOpened, setAvatarPickerOpened ] = useState(false);
 
@@ -65,6 +65,7 @@ export default function Profile() {
             username={username}
             fullname={firstname + ' ' + lastname}
             email={email}
+            isAdmin={isUserAdmin}
             onAvatarChange={handleAvatarChange}
           />
 

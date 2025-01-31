@@ -15,11 +15,12 @@ export default function ClickunapProfileSection({
   fullname, 
   email, 
   avatarId,
+  isAdmin,
   onAvatarChange,
  }) {
 
   return (
-    <div className="ClickunapProfileSection w-full h-fit flex flex-col p-4 justify-start items-center space-y-4">
+    <div className="ClickunapProfileSection w-full h-fit flex flex-col p-4 justify-start items-center space-y-4 relative">
       
       {/* Avatar Container */}
       <div className="AvatarContainer flex justify-center items-center relative">
@@ -39,7 +40,11 @@ export default function ClickunapProfileSection({
 
       </div>
 
-      <p className="text-base text-primary dark:text-white opacity-35 select-none">{username}</p>
+
+      <div className="text-base text-primary dark:text-white select-none relative flex flex-col items-center w-full justify-center">
+        {isAdmin && <span className="bg-rose-600 text-white py-1 px-2 rounded-lg text-sm">admin</span>}
+        <p className="opacity-35">{username}</p>
+      </div>
 
 
       {/* Form / Box */}
