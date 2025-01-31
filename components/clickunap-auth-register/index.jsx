@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useRouter } from "next/router";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +14,9 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+
+import useStorage from '@/hooks/useStorage';
+
 
 
 
@@ -28,8 +32,12 @@ export default function ClickunapAuthRegister() {
   const [ role, setRole ] = useState('manager');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ confirmPassword, setConfirmPassword ] = useState('')
+  const [ confirmPassword, setConfirmPassword ] = useState('');
 
+  const { userToken } = useStorage();
+  
+
+  const router = useRouter();
 
 
   const firstNameInputProps = {
@@ -74,6 +82,20 @@ export default function ClickunapAuthRegister() {
     ),
   };
 
+
+
+    useMemo(() => {
+      console.log("Our user token is ", userToken);
+      
+      // TODO: Check if the current user is an admin before redirecting...
+
+      if (userToken.length > 0) {
+        router.push("/manager"); // <- HACK: This is a temp fix
+      }
+  
+    }, [userToken]);
+
+  
   return (
     <div className="ClickunapAuthRegister flex flex-col justify-center items-center rounded-xl shadow-md bg-white w-full h-auto max-w-[500px] p-4 lg:space-y-2">
       {/* Clickunap LogoName */}
