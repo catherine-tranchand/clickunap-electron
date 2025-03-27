@@ -1,36 +1,16 @@
 'use client';
-
-import { useEffect } from "react";
-
 /* Import your clickunap components here */
 import ClickunapAppBar from "@/components/clickunap-appbar";
 import ClickunapNavBar from "@/components/clickunap-navbar";
 import ClickunapAppSection from "@/components/clickunap-section-app";
 import ClickunapSideBar from "@/components/clickunap-sidebar";
 
-import useStorage from "@/hooks/useStorage";
 
-import { getUserData } from "@/hooks/useData";
+// import our hooks
+// import useUser from "@/hooks/useUser";
 
 
 export default function Home() {
-
-  const { userToken } = useStorage();
-
-  
-  useEffect(function() {
-
-    // do nothing if there's no userToken
-    if (userToken.length === 0) {
-      return;
-    }
-
-    getUserData(userToken).then((userData) => {
-      console.log("this code should run once!! The userData is => ", userData);
-    })
-
-  }, [userToken]);
-  
 
 
 
@@ -53,7 +33,6 @@ export default function Home() {
 
         {/* Container */}
         <div className="Container flex grow flex-col lg:flex-row overflow-auto">
-          {/* <b>{userToken}</b> */}
           {/* Apps - Section - Clickunap */}
           <ClickunapAppSection
           // title="Le Coin des Applis"
