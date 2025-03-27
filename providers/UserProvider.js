@@ -14,7 +14,7 @@ const UserContext = createContext(null);
 export default function UserProvider({ children, initialData }) {
   
   
-  const [ userId, setUserId ] = useState(initialData?.username ?? 0);
+  const [ userId, setUserId ] = useState(initialData?.userId ?? 0);
   const [ userToken, setUserToken ] = useState(initialData?.userToken ?? null);
   const [ firstname, setFirstname ] = useState(initialData?.firstname ?? 'Catherine');
   const [ lastname, setLastname ] = useState(initialData?.lastname ?? 'Tranchand');
