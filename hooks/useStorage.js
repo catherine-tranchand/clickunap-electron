@@ -13,7 +13,7 @@ export default function useStorage() {
   // const [ userToken, setUserToken ] = useSessionStorage('userToken', '');
   
   const [ userToken, setUserToken ] = useState('');
-
+  const [ avatarId, setAvatarId ] = useState('farmer');
   
  
 
@@ -21,8 +21,10 @@ export default function useStorage() {
   useEffect(() => {
     
     const userTokenFromStorage = localStorage.getItem('userToken') ?? '';
+    const avatarIdFromStorage = localStorage.getItem('avatarId') ?? 'farmer';
     
     setUserToken(userTokenFromStorage);
+    setAvatarId(avatarIdFromStorage);
 
   }, [ ]);
 
@@ -40,12 +42,31 @@ export default function useStorage() {
     
   }
 
+
+  /**
+   * Saves the avatar id in session storage
+   *
+   * @param { String } avatarId
+   */
+  const saveAvatarId = (avatarId) => {
+
+    // save the given `avatarId` to storage
+    localStorage.setItem('avatarId', avatarId);
+
+    // update the `avatarId`
+    setAvatarId(avatarId);
+
+  }
+
   
 
   
   return {
     userToken, 
+    avatarId,
+
     saveUserToken,
+    saveAvatarId,
   }
 
 }
