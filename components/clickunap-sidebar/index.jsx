@@ -5,10 +5,12 @@ import ClickunapAvatar from "../clickunap-avatar";
 import useUser from "@/hooks/useUser";
 
 
+
 export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
 
   const { openLink } = useApps();
-  const { firstname, lastname, avatarId } = useUser();
+
+  const { firstname, lastname, avatarId, isUserConnected, isUserManager } = useUser();
 
 
 
@@ -52,8 +54,8 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
           <span className="NavName">Badgeuse</span>
       </li>
 
-        {/* Numbers Link */}
-        {managerLinkHidden === false && (
+        {/* Login Link */}
+        {isUserConnected === false && (
           <li>
             <Link href="/login" className="NavLink">
               <span className="NavIcon material-symbols-outlined">manage_accounts</span>
@@ -62,18 +64,30 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
           </li>
         )}
         
+        {/* Manager/Dashboard Link */}
+        {managerLinkHidden === false && isUserManager && (
+          <li>
+            <Link href="/dashboard" className="NavLink">
+              <span className="NavIcon material-symbols-outlined">dashboard</span>
+              <span className="NavName">Dashboard</span>
+            </Link>
+          </li>
+        )}
 
       </nav>
+      
+      {isUserConnected && (
+        <Link href="/profile" className="max-w-full px-2 relative">
+          <div className="flex px-3 items-center justify-center bg-[#d6bed7] hover:bg-[#ffffff] rounded-3xl">
+            {/* Clickunap - Avatar */}
+            <ClickunapAvatar id={avatarId} className="!size-10"/>
 
-      <Link href="/profile" className="max-w-full px-2 relative">
-        <div className="flex px-3 items-center justify-center bg-[#d6bed7] hover:bg-[#ffffff] rounded-3xl">
-          {/* Clickunap - Avatar */}
-          <ClickunapAvatar id={avatarId} className="!size-10"/>
+            {/* Fullname */}
+            <span className="truncate text-base">{firstname + ' ' + lastname}</span>
+          </div>
+        </Link>
+      )}
 
-          {/* Fullname */}
-          <span className="truncate text-base">{firstname + ' ' + lastname}</span>
-        </div>
-      </Link>
 
       {/* Logo Unapei */}
       <Image

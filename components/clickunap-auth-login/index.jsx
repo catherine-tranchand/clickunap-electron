@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
+
+// import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -13,24 +16,25 @@ import ClickunapIcon from "@/components/clickunap-icon";
 // import { useSessionStorage } from "@uidotdev/usehooks";
 import useStorage from '@/hooks/useStorage';
 
+import useUser from "@/hooks/useUser"; 
 
 
 
 
 export default function ClickunapAuthLogin() {
   const [hasError, setHasError] = useState(false);
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [ emailInputValue, setEmailInputValue ] = useState('');
+  const [ passwordInputValue, setPasswordInputValue ] = useState('');
 
   // const [ userToken, setUserToken ] = useSessionStorage('userToken', '');
+  const { setUserId, setUserToken, setAvatarId, setFirstname, setLastname, setEmail, setUserAdmin, setUserManager, setUserConnected } = useUser();
 
 
   const router = useRouter();
 
-  const { userToken, saveUserToken } = useStorage();
+  const { userToken, avatarId, saveUserToken, saveAvatarId } = useStorage();
 
-  
-
+  //const userToken = Cookies.get('userToken')?.value;
 
 
 
@@ -49,18 +53,6 @@ export default function ClickunapAuthLogin() {
       </InputAdornment>
     ),
   };
-
-
-  useMemo(() => {
-    console.log("Our user token is ", userToken);
-
-    if (userToken.length > 0) {
-      router.push("/manager"); // <- HACK: This is a temp fix
-    }
-
-  }, [userToken]);
-
-
 
   return (
     <div className="ClickunapAuthLogin flex flex-col justify-center items-center rounded-xl shadow-md bg-white w-full h-auto max-w-[500px] p-4 lg:space-y-6">
@@ -106,7 +98,7 @@ export default function ClickunapAuthLogin() {
           placeholder="Votre email"
           defaultValue=""
           InputProps={emailInputProps}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => setEmailInputValue(event.target.value)}
           //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
         />
 
@@ -123,7 +115,7 @@ export default function ClickunapAuthLogin() {
           type="password"
           autoComplete="current-password"
           InputProps={passwordInputProps}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(event) => setPasswordInputValue(event.target.value)}
         />
 
         {/* Subbmit - Button */}
@@ -147,6 +139,10 @@ export default function ClickunapAuthLogin() {
 
     const email = formData.get('email');
     const password = formData.get('password');
+  
+    const cookiesUserToken = Cookies.get('userToken')?.value;
+
+    console.log(`[ handleLoginFormSubmit ]: cookiesUserToken ==>> `, cookiesUserToken);
 
 
     try {
@@ -166,12 +162,29 @@ export default function ClickunapAuthLogin() {
         return;
       }
 
-      const userToken = data.token;
+      // const userToken = data.token;
 
       // Save the `userToken` in our local storage
-      saveUserToken(userToken);
+      saveUserToken(data?.token);
+      // Save the `avatarId` in our local storage
+      // saveAvatarId(data?.avatar_id);
 
-            
+      // Save the `userToken` in our session storage
+      //Cookies.set('userToken', data?.token, { expires: 30 }); 
+      // ^^^^^ 30 days (use { secure: true } for HTTPS only and { sameSite: 'strict' } for CSRF protection)
+      // console.log("Token saved in cookies! data -> ", data);
+
+      // updating the user context accordingly
+      setUserId(data?.user_id);
+      setUserToken(data?.token);
+      setFirstname(data?.first_name);
+      setLastname(data?.last_name);
+      setEmail(data?.email);
+      setAvatarId(avatarId); // <- TODO: create avatar_id in the server rather than using from local storage
+      setUserAdmin(data?.is_admin);
+      setUserManager(data?.is_manager);
+      setUserConnected(true);
+ 
       // Now redirect to the manager page
       router.push('/manager');
 
@@ -185,6 +198,6 @@ export default function ClickunapAuthLogin() {
 
     // const res = await fetch("https://")
 
-    console.log(`[handleLoginFormSubmit]: email => ${email} & password => ${password}`);
+    console.log(`[handleLoginFormSubmit]: email => ${emailInputValue} & password => ${passwordInputValue}`);
   }
 }
