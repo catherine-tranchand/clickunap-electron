@@ -14,22 +14,25 @@ const UserContext = createContext(null);
 export default function UserProvider({ children, initialData }) {
   
   
-  const [ username, setUsername ] = useState(initialData?.username ?? 'c.tranchand');
+  const [ userId, setUserId ] = useState(initialData?.username ?? 0);
+  const [ userToken, setUserToken ] = useState(initialData?.userToken ?? null);
   const [ firstname, setFirstname ] = useState(initialData?.firstname ?? 'Catherine');
   const [ lastname, setLastname ] = useState(initialData?.lastname ?? 'Tranchand');
   const [ email, setEmail ] = useState(initialData?.email ?? 'catherine.tranchand@laplateforme.io');
-  const [ avatarId, setAvatarId ] = useState(initialData?.avatarId ?? 'farmer');
+  const [ avatarId, setAvatarId ] = useState(initialData?.avatarId ?? 'farmer'); // 'florist', 'farmer', 'chicken', 'gentlemen', 'hipster', 'mechanic', etc...
 
-  const [ isUserConnected, setIsUserConnected ] = useState(initialData?.isUserConnected ?? false);
-  const [ isUserAdmin, setIsUserAdmin ] = useState(initialData?.isUserAdmin ?? false);
-  
+  const [ isUserConnected, setUserConnected ] = useState(initialData?.isUserConnected ?? false);
+  const [ isUserAdmin, setUserAdmin ] = useState(initialData?.isUserAdmin ?? true); // by default all users are admins...
+  const [ isUserManager, setUserManager ] = useState(initialData?.isUserManager ?? false); // ...but few are managers ;)
+
 
 
   
   return (
     <UserContext.Provider
       value={{
-        username,
+        userId,
+        userToken,
         firstname,
         lastname, 
         email,
@@ -37,15 +40,18 @@ export default function UserProvider({ children, initialData }) {
 
         isUserConnected,
         isUserAdmin,
-
-        setUsername,
+        isUserManager,
+        
+        setUserId,
+        setUserToken,
         setFirstname,
         setLastname,
         setEmail,
         setAvatarId,
 
-        setIsUserConnected,
-        setIsUserAdmin,
+        setUserConnected,
+        setUserAdmin,
+        setUserManager,
       }}
     >
       {children}
