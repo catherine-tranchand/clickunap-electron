@@ -10,7 +10,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
 
   const { openLink } = useApps();
 
-  const { firstname, lastname, avatarId, isUserConnected, isUserManager } = useUser();
+  const { firstname, lastname, avatarId, isUserConnected, isUserAdmin } = useUser();
 
 
 
@@ -65,7 +65,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
         )}
         
         {/* Manager/Dashboard Link */}
-        {managerLinkHidden === false && isUserManager && (
+        {managerLinkHidden === false && isUserAdmin && (
           <li>
             <Link href="/dashboard" className="NavLink">
               <span className="NavIcon material-symbols-outlined">dashboard</span>
