@@ -11,6 +11,7 @@ import ClickunapIcon from '@/components/clickunap-icon';
 import ClickunapAvatar from '@/components/clickunap-avatar';
 
 import useUser from '@/hooks/useUser';
+import useRedirect from '@/hooks/useRedirect';
 
 import clsx from "clsx";
 
@@ -38,6 +39,10 @@ export default function Profile() {
   const { username, firstname, lastname, email, avatarId: currentAvatarId, setAvatarId, isUserAdmin } = useUser();
 
   const [ isAvatarPickerOpened, setAvatarPickerOpened ] = useState(false);
+  
+  const redirect = useRedirect();
+  redirect.from('profile');
+
 
 
 

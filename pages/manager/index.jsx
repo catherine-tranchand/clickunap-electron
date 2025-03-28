@@ -6,9 +6,16 @@ import ClickunapResourceSection from '@/components/clickunap-section-resource';
 
 import ClickunapSideBar from '@/components/clickunap-sidebar';
 
+import useRedirect from '@/hooks/useRedirect';
+
 
 
 export default function ManagerPage(){
+  const redirect = useRedirect();
+  redirect.from('manager');
+
+
+
     return (
       <main className="flex flex-col size-full overflow-auto">
             
@@ -22,9 +29,7 @@ export default function ManagerPage(){
         <div className="Content flex flex-col lg:flex-row w-full h-full pb-20 lg:pb-0 overflow-auto lg:overflow-hidden">
 
           {/* SideBar - Clickunap */}
-          <ClickunapSideBar 
-            managerLinkHidden={true}
-          />
+          <ClickunapSideBar page="manager"/>
 
           {/* Container */}
           <div className="Container flex grow flex-col lg:flex-row overflow-auto px-6 py-8 space-y-10 lg:space-y-0">

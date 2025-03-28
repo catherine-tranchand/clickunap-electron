@@ -8,9 +8,22 @@ import ClickunapSideBar from "@/components/clickunap-sidebar";
 
 // import our hooks
 // import useUser from "@/hooks/useUser";
+import useRedirect from "@/hooks/useRedirect";
+
+
+
+
 
 
 export default function Home() {
+  
+
+
+  const redirect = useRedirect();
+  redirect.from('home');
+
+
+
 
 
 

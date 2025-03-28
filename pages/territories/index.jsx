@@ -14,6 +14,8 @@ import ClickunapNavBar from "@/components/clickunap-navbar";
 import ClickunapAppSection from "@/components/clickunap-section-app";
 import ClickunapSideBar from "@/components/clickunap-sidebar";
 
+import useRedirect from "@/hooks/useRedirect";
+
 import TerritoriesData from "@/public/data/territories-data.json";
 
 import clsx from "clsx";
@@ -22,6 +24,9 @@ export default function TerritoryPage() {
   const [value, setValue] = useState(0);
   const [currentTerritoryKey, setCurrentTerritoryKey] = useState("hq");
   const [currentItem, setCurrentItem] = useState(TerritoriesData.hq.data[0]);
+
+  const redirect = useRedirect();
+  redirect.from('territories');
 
   const handleTabChange = (event, newValue, territoryKey) => {
     setValue(newValue);

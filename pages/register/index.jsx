@@ -1,12 +1,22 @@
+/* React */
+import { useEffect } from 'react';
+
 /* Import your clickunap components here */
 import { Button } from '@mui/material';
-import Link from 'next/link';
 import ClickunapAuthRegister from '@/components/clickunap-auth-register'
 import ClickunapAuthAside from '@/components/clickunap-auth-aside'
 
+import useRedirect from '@/hooks/useRedirect';
 
 
 export default function RegisterPage() {
+  
+
+  const redirect = useRedirect();
+  redirect.from('register');
+
+
+
   return (
     <main className="LoginPage flex w-full h-full overflow-auto p-6 bg-neutral-100">
 
@@ -15,12 +25,6 @@ export default function RegisterPage() {
 
         {/* Clickunap - Auth - Register */}
         <ClickunapAuthRegister />
-
-        <Link href="/manager">
-          <Button variant='text' className="text-black !lowercase !m-4">
-            Voir la page manager
-          </Button>
-        </Link>
 
       </div>
 

@@ -12,7 +12,7 @@ export default function ClickunapAuthAside() {
     <div className="ClickunapAuthAside hidden overflow-hidden sticky right-0 top-0 rounded-3xl lg:flex justify-center items-center flex-col w-3/5 h-full bg-primary">
 
       {/* Clickunap LogoName */}
-      <Link href='/' className="relative -top-32">
+      <Link href='/manager' className="relative -top-32">
         <Image
           src="/newlogo.png"
           width={500}

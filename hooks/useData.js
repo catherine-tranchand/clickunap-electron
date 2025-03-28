@@ -19,8 +19,8 @@ export const getUserData = async (userToken, delay = 0) => {
     lastname: 'Tranchand',
     email: 'catherine.tranchand@laplateforme.io',
     avatarId: 'farmer',
-    isUserAdmin: false,
-    isUserManager: true,
+    isUserAdmin: null,
+    isUserManager: null,
     isUserConnected: false,
   };
 

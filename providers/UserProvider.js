@@ -2,6 +2,7 @@
 
 import { createContext, useState, useEffect } from 'react';
 import { getUserData } from "@/hooks/useData";
+// import useRedirect from "@/hooks/useRedirect";
 
 
 // create a user context as `UserContext`
@@ -27,7 +28,9 @@ export default function UserProvider({ children, initUserToken }) {
   const [ isUserAdmin, setUserAdmin ] = useState(false); // ...but few are managers ;)
 
 
-
+  
+  // const redirect = useRedirect();
+  
   
   useEffect(() => {
 
@@ -59,6 +62,9 @@ export default function UserProvider({ children, initUserToken }) {
 
         // tell me about it in the console
         console.log(`\x1b[33m[fetchUserData]\x1b[0m (2): userData => `, userData);
+
+        // redirect the page accordingly
+        // redirect.me();
 
       } catch (error) {
         console.error(error);
