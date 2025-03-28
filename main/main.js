@@ -34,6 +34,20 @@ const createWindow = () => {
     });
   } else {
     win.loadURL("http://localhost:3000");
+
+    win.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+      callback({
+        // cancel: false,
+        responseHeaders: {
+          ...details.responseHeaders,
+          "Access-Control-Allow-Origin": ["*"],
+          "Content-Security-Policy": [
+            "default-src 'self'; style-src 'self' 'unsafe-inline'"
+          ],
+        },
+      }); 
+    });
+
     win.webContents.openDevTools();
     win.webContents.on("did-fail-load", (e, code, desc) => {
       win.webContents.reloadIgnoringCache();

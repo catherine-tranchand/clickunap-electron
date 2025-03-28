@@ -8,6 +8,8 @@ import Cookies from 'js-cookie';
 
 import Image from "next/image";
 import Link from "next/link";
+
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -80,15 +82,16 @@ export default function ClickunapAuthLogin() {
           Saisissez-le à nouveau!
         </p>
       )}
-
-      <form
-        noValidate={false}
-        className="flex flex-col justify-center w-full h-auto space-y-4 p-4"
+      
+      <Box
+        component="form"
+        sx={{ '& .MuiTextField-root': { my: 1.5, mx: 0, width: '100%' } }}
+        className="w-full h-auto p-4"
         onSubmit={handleLoginFormSubmit}
       >
         {/* Email - Input */}
         <TextField
-          className=""
+          className="!w-full"
           id="email-input"
           name="email"
           required={true}
@@ -105,7 +108,7 @@ export default function ClickunapAuthLogin() {
         {/* Password - Input */}
 
         <TextField
-          className=""
+          className="!w-full"
           id="password-input"
           name="password"
           required={true}
@@ -127,7 +130,8 @@ export default function ClickunapAuthLogin() {
         >
           login
         </Button>
-      </form>
+
+      </Box>
     </div>
   );
 

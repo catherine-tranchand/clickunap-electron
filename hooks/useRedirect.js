@@ -26,14 +26,15 @@ export const pages = [
 
 // Method used to get the page name of the given `path`
 export const getPageName = (path = '/') => {
-  // split the path
+  // split the path 
+  // NOTE: this is the same as the path's name
   let splitPath = path.split('?')[0].split('/').pop();
 
   if (splitPath === '') {
-    splitPath = '/';
+    splitPath = 'home';
   }
 
-  return pages.find(p => p.path === splitPath).name;
+  return pages.find(p => p.name === splitPath).name;
 };
 
 

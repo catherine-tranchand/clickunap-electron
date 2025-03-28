@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -108,15 +109,18 @@ export default function ClickunapAuthRegister() {
         </p>
       )}
 
-      <form
-        noValidate={false}
-        className="flex flex-col justify-center w-full h-auto space-y-4 p-4 !mt-8"
+
+      <Box 
+        component="form"
+        sx={{ '& .MuiTextField-root': { my: 1.5, mx: 0, width: '100%' } }}
+        className="!p-4 !mt-8"
         onSubmit={handleRegisterFormSubmit}
       >
+    
 
         {/* First Name - Input */}
         <TextField
-          className=""
+          className="!w-full"
           id="firstname-input"
           required={true}
           type="text"
@@ -130,7 +134,7 @@ export default function ClickunapAuthRegister() {
 
         {/* Last Name - Input */}
         <TextField
-          className=""
+          className="!w-full"
           id="lastname-input"
           required={true}
           type="text"
@@ -162,7 +166,7 @@ export default function ClickunapAuthRegister() {
 
         {/* Email - Input */}
         <TextField
-          className=""
+          className="!w-full"
           id="email-input"
           required={true}
           type="email"
@@ -177,7 +181,7 @@ export default function ClickunapAuthRegister() {
 
         {/* Password - Input */}
         <TextField
-          className=""
+          className="!w-full"
           id="password-input"
           required={true}
           label="Password"
@@ -192,7 +196,7 @@ export default function ClickunapAuthRegister() {
 
         {/* Confirm Password - Input */}
         <TextField
-          className=""
+          className="!w-full"
           id="confirm-password-input"
           required={true}
           label="Confirm Password"
@@ -214,7 +218,8 @@ export default function ClickunapAuthRegister() {
         >
           Register
         </Button>
-      </form>
+
+      </Box>
     </div>
   );
 

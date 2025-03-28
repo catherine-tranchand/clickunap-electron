@@ -11,14 +11,14 @@
  * @params { String } userToken
  * @params { Number } delay (milliseconds)
  */
-export const getUserData = async (userToken, delay = 0) => {
+export const getUserData = async (userToken, initAvatarId, delay = 0) => {
   // create an initial user data as `intialUserData`
   const initialUserData = {
     userId: 0,
     firstname: 'Catherine',
     lastname: 'Tranchand',
     email: 'catherine.tranchand@laplateforme.io',
-    avatarId: 'farmer',
+    avatarId: initAvatarId ?? 'farmer',
     isUserAdmin: null,
     isUserManager: null,
     isUserConnected: false,

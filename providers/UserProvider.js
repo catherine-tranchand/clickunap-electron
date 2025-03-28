@@ -20,7 +20,7 @@ export default function UserProvider({ children, initUserToken }) {
   const [ firstname, setFirstname ] = useState('');
   const [ lastname, setLastname ] = useState('');
   const [ email, setEmail ] = useState('');
-  const [ avatarId, setAvatarId ] = useState('farmer'); // 'florist', 'farmer', 'chicken', 'gentlemen', 'hipster', 'mechanic', etc...
+  // const [ avatarId, setAvatarId ] = useState('farmer'); // 'florist', 'farmer', 'chicken', 'gentlemen', 'hipster', 'mechanic', etc...
 
   const [ isUserConnected, setUserConnected ] = useState(false);
   const [ isUserManager, setUserManager ] = useState(true); // by default all users are managers...
@@ -29,6 +29,9 @@ export default function UserProvider({ children, initUserToken }) {
   //const [ isSidebarOpened, setSidebarOpened ] = useState(true);
 
   const { sidebarOpened:isSidebarOpened, saveSidebarOpened: setSidebarOpened } = useStorage();
+
+  const { avatarId, saveAvatarId: setAvatarId } = useStorage(); // 'florist', 'farmer', 'chicken', 'gentlemen', 'hipster', 'mechanic', etc...
+
 
 
   
@@ -58,7 +61,7 @@ export default function UserProvider({ children, initUserToken }) {
       
       // Trying to fetch user data...
       try {
-        const userData = await getUserData(initUserToken);
+        const userData = await getUserData(initUserToken, avatarId);
 
         // update the props with `userData`
         updateProps(userData);

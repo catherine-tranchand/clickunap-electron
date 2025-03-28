@@ -7,7 +7,8 @@ import ClickunapAppBar from "@/components/clickunap-appbar";
 import ClickunapNavBar from "@/components/clickunap-navbar";
 import ClickunapProfileSection from "@/components/clickunap-section-profile";
 import ClickunapSideBar from "@/components/clickunap-sidebar";
-import ClickunapIcon from '@/components/clickunap-icon';
+import ClickunapDialog from "@/components/clickunap-dialog";
+// import ClickunapIcon from '@/components/clickunap-icon';
 import ClickunapAvatar from '@/components/clickunap-avatar';
 
 import useUser from '@/hooks/useUser';
@@ -38,7 +39,7 @@ export default function Profile() {
 
   const { username, firstname, lastname, email, avatarId: currentAvatarId, setAvatarId, isUserAdmin } = useUser();
 
-  const [ isAvatarPickerOpened, setAvatarPickerOpened ] = useState(false);
+  const [ isAvatarPickerOpened, setAvatarPickerOpened ] = useState(null);
   
   const redirect = useRedirect();
   redirect.from('profile');
@@ -85,39 +86,28 @@ export default function Profile() {
       </div>
 
       {/* Avatar Picker */}
-      {/* TODO: Create a `AvatarPicker` component */}
-      {isAvatarPickerOpened && <div className={clsx([ "AvatarPicker", "fixed z-50 size-full p-6 flex flex-col items-center justify-end" ])}>
+      <ClickunapDialog 
+        name="AvatarPicker" 
+        opened={isAvatarPickerOpened} onCloseButtonClick={() => setAvatarPickerOpened(false)}
+        onClose={() => console.log('\x1b[32mAvatarPicker is closed !!!\x1b[0m')}
+        onOpen={() => console.log('\x1b[33mAvatarPicker is opened !!!\x1b[0m')}>
 
-        <span className="bg-black fixed inset-0 z-10 opacity-20 dark:opacity-80"></span>
-
-        <div className="bg-white dark:bg-[#0b080b] rounded-lg overflow-scroll w-full h-fit lg:w-fit flex flex-col z-20 relative items-center justify-start mx-auto">
+        {/* Avatars Grid */}
+        <div className={clsx(["Avatars", "size-fit grid grid-cols-3 gap-2 lg:grid-cols-4 lg:gap-4 lg:px-2 mx-auto my-16"])}>
           
-          {/* Clickunap Icon */}
-          <ClickunapIcon 
-            className="rounded-full absolute top-0 right-0 m-6 lg:m-8 z-10 transition-all hover:scale-105 cursor-pointer"
-            name="close" 
-            backgroundColor="white"
-            color="black"
-            onClick={() => setAvatarPickerOpened(false)}
-          />
-          
-          {/* Avatars Grid */}
-          <div className={clsx(["Avatars", "size-fit grid grid-cols-3 gap-2 lg:grid-cols-4 lg:gap-4 lg:px-2 mx-auto my-16"])}>
-            
-            {avatarIds.map((avatarId) => (
-              <ClickunapAvatar
-                key={avatarId}
-                id={avatarId}
-                className="!size-16 transition !bg-[#fcfcfc] hover:!bg-[#c5c5c5] hover:scale-110 cursor-pointer dark:!bg-black m-4 lg:!size-24 lg:m-6"
-                onClick={() => selectAvatarHandler(avatarId)}
-                selected={avatarId === currentAvatarId}
-              />
-            ))}
-          </div>
-
+          {avatarIds.map((avatarId) => (
+            <ClickunapAvatar
+              key={avatarId}
+              id={avatarId}
+              className="!size-16 transition !bg-[#fcfcfc] hover:!bg-[#c5c5c5] hover:scale-110 cursor-pointer dark:!bg-black m-4 lg:!size-24 lg:m-6"
+              onClick={() => selectAvatarHandler(avatarId)}
+              selected={avatarId === currentAvatarId}
+            />
+          ))}
         </div>
 
-      </div>}
+      </ClickunapDialog>
+
       
     </main>
   );
