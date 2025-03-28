@@ -93,7 +93,7 @@ export default function App({ Component, pageProps }) {
               alt="Clickunap logo GIF"
               width={256}
               height={256}
-              
+              priority 
             />
           </div>
         )}
