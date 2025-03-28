@@ -1,6 +1,5 @@
 /* Import your clickunap components here */
 import { Button } from '@mui/material';
-import Link from 'next/link';
 import ClickunapAuthLogin from '@/components/clickunap-auth-login';
 import ClickunapAuthAside from '@/components/clickunap-auth-aside';
 
@@ -22,12 +21,11 @@ export default function LoginPage() {
 
         {/* Clickunap - Auth - Login */}
         <ClickunapAuthLogin />
-
-        <Link href="/manager">
-          <Button variant='text' className="text-black !lowercase !m-4">
-            Voir la page manager
-          </Button>
-  </Link> 
+        
+        
+        <Button variant='text' className="text-black !lowercase !m-4" onClick={() => redirect.to('/')}>
+          Retourner a l'accueil 
+        </Button>
 
       </div>
 

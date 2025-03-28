@@ -26,6 +26,12 @@ export default function RegisterPage() {
         {/* Clickunap - Auth - Register */}
         <ClickunapAuthRegister />
 
+
+        <Button variant='text' className="text-black !lowercase !m-4" onClick={() => redirect.to('/manager')}>
+          Retourner a l'accueil 
+        </Button>
+
+
       </div>
 
       {/* Clickunap - Auth - Aside */}
