@@ -1,9 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @import 'material-symbols';
 /* @import 'material-symbols/outlined.css'; */
+
+
+/* Tailwind CSS Theme */
+
+@theme {
+  --color-primary: #312532;
+  --color-primary-light: #6C4870;
+  --color-secondary: #F5DAF7;
+  --color-tertiary: #508561; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 :root {
   width: 100%;
