@@ -6,6 +6,7 @@ import useUser from "@/hooks/useUser";
 
 
 
+
 export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
 
   const { openLink } = useApps();
@@ -22,11 +23,22 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
       <nav className="flex flex-col w-full h-full py-4 px-0 list-none">
         {/* Home Link */}
         <li>
-          <Link className="NavLink" href="/" data-active={(page === "home") ? "true": "false"}>
+          <Link className="NavLink" href={isUserConnected ? "/manager" : "/"} data-active={(["home", "manager"].includes(page)) ? "true": "false"}>
             <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1"}}>home</span>
             <span className="NavName">Accueil</span>
           </Link>
         </li>
+
+
+        {/* Manager/Dashboard Link */}
+        {isUserConnected && isUserAdmin && (
+          <li>
+            <Link href="/dashboard" className="NavLink">
+              <span className="NavIcon material-symbols-outlined">dashboard</span>
+              <span className="NavName">Dashboard</span>
+            </Link>
+          </li>
+        )}
 
         {/* Services Link */}
         <li>
@@ -64,15 +76,17 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
           </li>
         )}
         
-        {/* Manager/Dashboard Link */}
-        {managerLinkHidden === false && isUserAdmin && (
+      
+        {/* Register Link */}
+        {isUserConnected && isUserAdmin && (
           <li>
-            <Link href="/dashboard" className="NavLink">
-              <span className="NavIcon material-symbols-outlined">dashboard</span>
-              <span className="NavName">Dashboard</span>
+            <Link href="/register" className="NavLink">
+              <span className="NavIcon material-symbols-outlined">person_add</span>
+              <span className="NavName">Inscription</span>
             </Link>
           </li>
         )}
+      
 
       </nav>
       
