@@ -2,8 +2,7 @@
 
 import { createContext, useState, useEffect } from 'react';
 import { getUserData } from "@/hooks/useData";
-// import useRedirect from "@/hooks/useRedirect";
-
+import useStorage from "@/hooks/useStorage";
 
 // create a user context as `UserContext`
 const UserContext = createContext(null);
@@ -26,6 +25,10 @@ export default function UserProvider({ children, initUserToken }) {
   const [ isUserConnected, setUserConnected ] = useState(false);
   const [ isUserManager, setUserManager ] = useState(true); // by default all users are managers...
   const [ isUserAdmin, setUserAdmin ] = useState(false); // ...but few are managers ;)
+  
+  //const [ isSidebarOpened, setSidebarOpened ] = useState(true);
+
+  const { sidebarOpened:isSidebarOpened, saveSidebarOpened: setSidebarOpened } = useStorage();
 
 
   
@@ -72,6 +75,20 @@ export default function UserProvider({ children, initUserToken }) {
     };
 
 
+
+
+    // use effect to save the `sidebarOpened` in session storage
+    /*
+    useEffect(() => {
+      if (sidebarOpened) {
+        saveSidebarOpened(true);
+      } else {
+        saveSidebarOpened(false);
+      }
+    }, [ sidebarOpened, saveSidebarOpened ]);
+    */
+
+
     /**
      * Updates the props with the given `userData` 
      *
@@ -110,6 +127,7 @@ export default function UserProvider({ children, initUserToken }) {
         isUserConnected,
         isUserAdmin,
         isUserManager,
+        isSidebarOpened,
         
         setUserId,
         setUserToken,
@@ -121,6 +139,7 @@ export default function UserProvider({ children, initUserToken }) {
         setUserConnected,
         setUserAdmin,
         setUserManager,
+        setSidebarOpened,
       }}
     >
       {children}

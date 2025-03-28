@@ -3,29 +3,38 @@ import Link from "next/link";
 import useApps from "@/hooks/useApps";
 import ClickunapAvatar from "../clickunap-avatar";
 import useUser from "@/hooks/useUser";
+// import useStorage from "@/hooks/useStorage";
+import Button from "@mui/material/Button";
+
+import clsx from "clsx";
 
 
 
 
 export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
-
   const { openLink } = useApps();
 
-  const { firstname, lastname, avatarId, isUserConnected, isUserAdmin } = useUser();
+  const { firstname, lastname, avatarId, isUserConnected, isUserAdmin, isSidebarOpened, setSidebarOpened } = useUser();
+
+  // const { isSidebarOpened, setSidebarOpened } = useStorage();
 
 
 
 
   return (
-    <div className="ClickunapSideBar hidden lg:flex w-80 h-full flex-col justify-between items-center bg-secondary text-black overflow-auto">
+    <div className={clsx("ClickunapSideBar hidden lg:flex h-full flex-col items-center bg-secondary text-black transition-all", 
+      {"w-80": isSidebarOpened}, {"w-24": !isSidebarOpened})}>
+
       
       {/* NavLinks */}
-      <nav className="flex flex-col w-full h-full py-4 px-0 list-none">
+      <nav className="flex flex-col w-full h-full py-4 px-0 list-none overflow-auto">
         {/* Home Link */}
         <li>
-          <Link className="NavLink" href={isUserConnected ? "/manager" : "/"} data-active={(["home", "manager"].includes(page)) ? "true": "false"}>
+          <Link title="Accueil" 
+            className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}
+            href={isUserConnected ? "/manager" : "/"} data-active={(["home", "manager"].includes(page)) ? "true": "false"}>
             <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1"}}>home</span>
-            <span className="NavName">Accueil</span>
+            {isSidebarOpened && <span className="NavName">Accueil</span>}
           </Link>
         </li>
 
@@ -33,18 +42,27 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
         {/* Manager/Dashboard Link */}
         {isUserConnected && isUserAdmin && (
           <li>
-            <Link href="/dashboard" className="NavLink">
+            <Link 
+              title="Dashboard" 
+              href="/dashboard" 
+              className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}>
               <span className="NavIcon material-symbols-outlined">dashboard</span>
-              <span className="NavName">Dashboard</span>
+              {isSidebarOpened && <span className="NavName">Dashboard</span>}
             </Link>
           </li>
         )}
 
         {/* Services Link */}
         <li>
-          <Link href="/territories" className="NavLink" data-active={(page === "territories") ? "true": "false"}>
+          <Link 
+            title="Annuaire établissement" 
+            href="/territories" 
+            className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}
+            data-active={(page === "territories") ? "true": "false"}>
+
             <span className="NavIcon material-symbols-outlined">corporate_fare</span>
-            <span className="NavName">Annuaire établissement</span>
+            {isSidebarOpened && <span className="NavName">Annuaire établissement</span>}
+
           </Link>
         </li>
 
@@ -59,19 +77,23 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
 
         {/* Badgeuse */}
         <li 
-          className="NavLink cursor-pointer" 
+          title="Badgeuse"
+          className={clsx("NavLink cursor-pointer", {"flex justify-center": !isSidebarOpened})}
           onClick={() => openLink("https://saas-unapei-ap.octime.net/module/webbadgeuse100/badgeuse.asp?INI=unapei-ap")}>
         
           <span className="NavIcon material-symbols-outlined">check_circle</span>
-          <span className="NavName">Badgeuse</span>
+          {isSidebarOpened && <span className="NavName">Badgeuse</span>}
       </li>
 
         {/* Login Link */}
         {isUserConnected === false && (
           <li>
-            <Link href="/login" className="NavLink">
+            <Link 
+              href="/login" 
+              title="Mon espace"
+              className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}>
               <span className="NavIcon material-symbols-outlined">manage_accounts</span>
-              <span className="NavName">Mon espace</span>
+              {isSidebarOpened && <span className="NavName">Mon espace</span>}
             </Link>
           </li>
         )}
@@ -80,9 +102,12 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
         {/* Register Link */}
         {isUserConnected && isUserAdmin && (
           <li>
-            <Link href="/register" className="NavLink">
+            <Link 
+              href="/register" 
+              title="Inscription"
+              className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}>
               <span className="NavIcon material-symbols-outlined">person_add</span>
-              <span className="NavName">Inscription</span>
+              {isSidebarOpened && <span className="NavName">Inscription</span>}
             </Link>
           </li>
         )}
@@ -91,25 +116,39 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
       </nav>
       
       {isUserConnected && (
-        <Link href="/profile" className="max-w-full px-2 relative">
+        <Link 
+          href="/profile" 
+          title={firstname + ' ' + lastname}
+          className="max-w-full px-2 relative">
+
           <div className="flex px-3 items-center justify-center bg-[#d6bed7] hover:bg-[#ffffff] rounded-3xl">
             {/* Clickunap - Avatar */}
             <ClickunapAvatar id={avatarId} className="!size-10"/>
 
             {/* Fullname */}
-            <span className="truncate text-base">{firstname + ' ' + lastname}</span>
+            {isSidebarOpened && <span className="truncate text-base">{firstname + ' ' + lastname}</span>}
           </div>
         </Link>
       )}
 
 
       {/* Logo Unapei */}
-      <Image
+      {isSidebarOpened && (<Image
         src="/unapei.svg"
         width={270}
         height={40}
         alt="Logo Unapei"
-      />
+      />)}
+
+      <Button 
+        variant="text" 
+        className="w-full h-auto" 
+        onClick={() => isSidebarOpened ? setSidebarOpened(false) : setSidebarOpened(true)}>
+
+        <span className="material-symbols-outlined">
+          {isSidebarOpened ? "keyboard_double_arrow_left" : "keyboard_double_arrow_right"}
+        </span>
+      </Button>
 
     </div>
   );
