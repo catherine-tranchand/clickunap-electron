@@ -14,6 +14,7 @@ export default function useStorage() {
   
   const [ userToken, setUserToken ] = useState('');
   const [ avatarId, setAvatarId ] = useState('farmer');
+  const [ sidebarOpened, setSidebarOpened ] = useState(false);
   
  
 
@@ -22,9 +23,11 @@ export default function useStorage() {
     
     const userTokenFromStorage = localStorage.getItem('userToken') ?? '';
     const avatarIdFromStorage = localStorage.getItem('avatarId') ?? 'farmer';
+    const sidebarOpenedFromStorage = localStorage.getItem('sidebarOpened') ?? true;
     
     setUserToken(userTokenFromStorage);
     setAvatarId(avatarIdFromStorage);
+    setSidebarOpened(sidebarOpenedFromStorage);
 
   }, [ ]);
 
@@ -58,15 +61,30 @@ export default function useStorage() {
 
   }
 
+
+  /**
+   * Saves the sidebar state in session storage
+   *
+   * @param { Boolean } sidebarOpened
+   */
+  const saveSidebarOpened = (sidebarOpened) => {
+    // save the given `sidebarOpened` to storage
+    localStorage.setItem('sidebarOpened', sidebarOpened);
+    // update the `sidebarOpened`
+    setSidebarOpened(sidebarOpened);
+  }
+
   
 
   
   return {
     userToken, 
     avatarId,
+    sidebarOpened,
 
     saveUserToken,
     saveAvatarId,
+    saveSidebarOpened,
   }
 
 }
