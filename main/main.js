@@ -1,8 +1,8 @@
-const { app, BrowserWindow, ipcMain, Menu, shell } = require("electron");
-const serve = require("electron-serve");
-const path = require("path");
-const os = require("os");
-const fs = require("fs");
+const { app, BrowserWindow, ipcMain, Menu, shell, protocol } = require("electron/main");
+// const serve = require("electron-serve");
+const path = require("node:path");
+const os = require("node:os");
+const fs = require("node:fs");
 const { exec } = require("child_process");
 // import our checkForUpdates() function from `updater.js`
 const { checkForUpdates } = require("./updater");
@@ -11,11 +11,13 @@ const { createMenu } = require("./menu");
 
 
 
+/*
 const appServe = app.isPackaged
   ? serve({
       directory: path.join(__dirname, "../out"),
     })
   : null;
+*/
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -23,15 +25,26 @@ const createWindow = () => {
     height: 1000,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      nodeIntegration: true,
-      contextIsolation: true,
+      // nodeIntegration: true,
+      // contextIsolation: true,
+      // allowFileAccessFromFiles: true,
     },
   });
 
   if (app.isPackaged) {
-    appServe(win).then(() => {
-      win.loadURL("app://-");
-    });
+    win.loadURL("https://clickunap-electron.vercel.app");
+    /*
+    appServe(win)
+      .then(() => {
+        // win.loadURL("https://clickunap-electron.vercel.app");
+        // win.loadFile('index.html');
+        // win.loadURL("app://-");
+        // win.loadURL(`file://${__dirname}/out/index.html`)
+      })
+      .catch((err) => {
+        console.error(`App Serve Error: `, err);
+      });
+      */
   } else {
     win.loadURL("http://localhost:3000");
 
@@ -48,11 +61,11 @@ const createWindow = () => {
     });
 
     win.webContents.openDevTools();
-    win.webContents.on("did-fail-load", (e, code, desc) => {
+    win.webContents.on("did-fail-load", ({level, message, lineNumber, sourceId, frame}) => {
       win.webContents.reloadIgnoringCache();
     });
 
-    win.webContents.on("message", (event, message) => {
+    win.webContents.on("message", ({level, message, lineNumber, sourceId, frame}) => {
       console.log(
         `\x1b[38;5;208m(win.webContents)\x1b[0m: Received message 4rm main process: => \x1b[1;37m${message}\x1b[0m`
       );
@@ -63,7 +76,21 @@ const createWindow = () => {
   return win;
 };
 
-app.on("ready", () => {
+
+
+
+
+app.whenReady().then(() => {
+  
+  /*
+  protocol.registerFileProtocol("app", (request, callback) => {
+    const url = request.url.replace("app://", "");
+    callback({ path: path.join(__dirname, url) });
+  });
+  */
+
+  
+
   // create the window
   const win = createWindow();
 
