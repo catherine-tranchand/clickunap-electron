@@ -1,5 +1,11 @@
 import useApps from "@/hooks/useApps";
 import Link from "next/link";
+import useUser from "@/hooks/useUser";
+
+import clsx from "clsx";
+
+
+
 
 const openLinkInNewWindow = (e, url) => {
   e.preventDefault();
@@ -9,9 +15,11 @@ const openLinkInNewWindow = (e, url) => {
   }, 100);
 };
 
-export default function ClickunapNavBar({ managerLinkHidden }) {
+export default function ClickunapNavBar({ page = "home", managerLinkHidden }) {
 
   const { openLink } = useApps();
+
+  const { isUserConnected, isUserAdmin } = useUser();
 
 
 
@@ -26,10 +34,14 @@ export default function ClickunapNavBar({ managerLinkHidden }) {
     <nav className="ClickunapNavBar lg:hidden flex absolute bottom-0 w-full h-20 justify-between items-center bg-secondary text-black list-none">
       {/* Home Link */}
       <li>
-        <Link className="NavLink !flex-col" href="/" data-active="true">
+        <Link 
+            className={clsx("NavLink !flex-col")}
+            href={isUserConnected ? "/manager" : "/"}
+            data-active={(["home", "manager"].includes(page)) ? "true": "false"}
+        >
           <span
             className="NavIcon material-symbols-outlined"
-            style={{ fontVariationSettings: "'FILL' 1" }}
+            style={{ fontVariationSettings: ["home", "manager"].includes(page) ? "'FILL' 1": "'FILL' 0" }}
           >
             home
           </span>
@@ -37,11 +49,30 @@ export default function ClickunapNavBar({ managerLinkHidden }) {
         </Link>
       </li>
 
-      {/* Services Link */}
+
+    {/* Dashboad Link */}
+    {isUserConnected && isUserAdmin && (
       <li>
-        <Link href="/territories" className="NavLink !flex-col">
-          <span className="NavIcon material-symbols-outlined">
-            corporate_fare
+        <Link 
+          href="/dashboard" 
+          title="Dashboard"
+          data-active={(page === "dashboard") ? "true": "false"}
+          className={clsx("NavLink !flex-col")}>
+          <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: (page === "dashboard") ? "'FILL' 1": "'FILL' 0"}}>dashboard</span>
+          <span className="NavName !text-xs truncate !w-12">Dashboard</span>
+        </Link>
+      </li>
+    )}
+    
+
+      {/* Territories Link */}
+      <li>
+        <Link href="/territories" 
+              className={clsx("NavLink !flex-col")}
+              data-active={(page === "territories") ? "true": "false"}
+        >
+          <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: (page === "territories") ? "'FILL' 1": "'FILL' 0"}}>
+            business_center
           </span>
           <span className="NavName !text-xs truncate !w-12">
             Annuaire établissement
@@ -75,16 +106,32 @@ export default function ClickunapNavBar({ managerLinkHidden }) {
       </li>
 
       {/* Manager Link */}
-      {managerLinkHidden === false && (
+      {isUserConnected === false && (
         <li>
           <Link href="/login" className="NavLink !flex-col">
-            <span className="NavIcon material-symbols-outlined">
+            <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: (page === "login") ? "'FILL' 1": "'FILL' 0"}}>
               manage_accounts
             </span>
             <span className="NavName !text-xs truncate !w-12">Mon espace</span>
           </Link>
         </li>
       )}
+
+    {/* Register Link */}
+    {/*
+    {isUserConnected && isUserAdmin && (
+      <li>
+        <Link 
+          href="/register" 
+          title="Inscription"
+          className={clsx("NavLink !flex-col")}>
+          <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: (page === "register") ? "'FILL' 1": "'FILL' 0"}}>person_add</span>
+          <span className="NavName !text-xs truncate !w-12">Inscription</span>
+        </Link>
+      </li>
+    )}
+    */}
+
     </nav>
   );
 }

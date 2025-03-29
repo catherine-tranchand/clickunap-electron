@@ -40,9 +40,8 @@ const createWindow = () => {
         // cancel: false,
         responseHeaders: {
           ...details.responseHeaders,
-          "Access-Control-Allow-Origin": ["*"],
           "Content-Security-Policy": [
-            "default-src 'self'; style-src 'self' 'unsafe-inline'"
+            "connect-src 'self' https://clickunap-api.vercel.app; style-src 'self' 'unsafe-inline'; default-src 'self';"
           ],
         },
       }); 

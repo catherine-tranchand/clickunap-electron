@@ -33,7 +33,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
           <Link title="Accueil" 
             className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}
             href={isUserConnected ? "/manager" : "/"} data-active={(["home", "manager"].includes(page)) ? "true": "false"}>
-            <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1"}}>home</span>
+            <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: ["home", "manager"].includes(page) ? "'FILL' 1": "'FILL' 0"}}>home</span>
             {isSidebarOpened && <span className="NavName">Accueil</span>}
           </Link>
         </li>
@@ -44,9 +44,10 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
           <li>
             <Link 
               title="Dashboard" 
-              href="/dashboard" 
+              href="/dashboard"
+              data-active={(page === "dashboard") ? "true": "false"}
               className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}>
-              <span className="NavIcon material-symbols-outlined">dashboard</span>
+              <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: (page === "dashboard") ? "'FILL' 1": "'FILL' 0"}}>dashboard</span>
               {isSidebarOpened && <span className="NavName">Dashboard</span>}
             </Link>
           </li>
@@ -60,7 +61,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
             className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}
             data-active={(page === "territories") ? "true": "false"}>
 
-            <span className="NavIcon material-symbols-outlined">corporate_fare</span>
+            <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: (page === "territories") ? "'FILL' 1": "'FILL' 0"}}>business_center</span>
             {isSidebarOpened && <span className="NavName">Annuaire établissement</span>}
 
           </Link>
@@ -92,7 +93,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
               href="/login" 
               title="Mon espace"
               className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}>
-              <span className="NavIcon material-symbols-outlined">manage_accounts</span>
+              <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: (page === "login") ? "'FILL' 1": "'FILL' 0"}}>manage_accounts</span>
               {isSidebarOpened && <span className="NavName">Mon espace</span>}
             </Link>
           </li>
@@ -106,7 +107,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
               href="/register" 
               title="Inscription"
               className={clsx("NavLink", {"flex justify-center": !isSidebarOpened})}>
-              <span className="NavIcon material-symbols-outlined">person_add</span>
+              <span className="NavIcon material-symbols-outlined" style={{ fontVariationSettings: (page === "register") ? "'FILL' 1": "'FILL' 0"}}>person_add</span>
               {isSidebarOpened && <span className="NavName">Inscription</span>}
             </Link>
           </li>

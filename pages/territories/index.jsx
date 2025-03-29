@@ -177,7 +177,7 @@ export default function TerritoryPage() {
         {/* End of Container */}
 
         {/* NavBar - Clickunap */}
-        <ClickunapNavBar managerLinkHidden={false} />
+        <ClickunapNavBar page="territories" />
       </div>
     </main>
   );
