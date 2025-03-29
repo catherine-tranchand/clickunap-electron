@@ -50,9 +50,7 @@ export default function ManagerPage(){
           </div>
 
           {/* NavBar - Clickunap */}
-          <ClickunapNavBar 
-            managerLinkHidden={true}
-          />
+          <ClickunapNavBar page="manager"/>
 
         </div>
       </main>

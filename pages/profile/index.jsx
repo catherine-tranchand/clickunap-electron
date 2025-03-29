@@ -79,9 +79,7 @@ export default function Profile() {
         </div>
 
         {/* NavBar - Clickunap */}
-        <ClickunapNavBar 
-          managerLinkHidden={false}
-        />
+        <ClickunapNavBar page="profile"/>
 
       </div>
 
