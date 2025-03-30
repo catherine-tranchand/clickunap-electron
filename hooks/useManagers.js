@@ -17,7 +17,7 @@ export default function useManagers() {
         setTotal(resData.total);
       })
       .catch((error) => console.error(error));
-  }, [setManagers, setCount]);
+  }, [setData, setCount]);
   
 
 

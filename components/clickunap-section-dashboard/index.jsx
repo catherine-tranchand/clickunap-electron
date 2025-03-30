@@ -1,6 +1,10 @@
+import { useState } from "react";
 import ClickunapBox from "@/components/clickunap-box";
-import ClickunapDashboardOverviewList from "@/components/clickunap-dashboard-overview-list";
 
+import ClickunapDashboardOverviewList from "@/components/clickunap-dashboard-overview-list";
+import ClickunapDashboardManagersList from "@/components/clickunap-dashboard-managers-list";
+
+import useManagers from "@/hooks/useManagers";
 import clsx from "clsx";
 
 
@@ -8,6 +12,20 @@ import clsx from "clsx";
 export default function ClickunapDashboardSection({ 
   adminName, 
  }) {
+
+
+
+  const { data: managersData } = useManagers();
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="ClickunapDashboardSection flex flex-col size-full px-4 py-6 lg:px-0 relative">
@@ -17,6 +35,11 @@ export default function ClickunapDashboardSection({
       {/* Overview - Box */}
       <ClickunapBox title="Overview" searchHidden addHidden moreHidden>
         <ClickunapDashboardOverviewList />
+      </ClickunapBox>
+
+      {/* Managers - Box */}
+      <ClickunapBox title="Managers" moreHidden>
+        <ClickunapDashboardManagersList data={managersData} />
       </ClickunapBox>
 
     </div>
