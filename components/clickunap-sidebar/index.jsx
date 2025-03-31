@@ -23,7 +23,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
 
   return (
     <div className={clsx("ClickunapSideBar hidden lg:flex h-full flex-col items-center bg-secondary text-black transition-all", 
-      {"w-80": isSidebarOpened}, {"w-24": !isSidebarOpened})}>
+      {"w-80 min-w-80": isSidebarOpened}, {"w-24 min-w-24": !isSidebarOpened})}>
 
       
       {/* NavLinks */}

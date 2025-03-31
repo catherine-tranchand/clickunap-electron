@@ -9,12 +9,26 @@ export default function useManagers() {
 
 
   const getAll = useCallback((limit = -1, offset = 0) => {
-    return fetch(`https://clickunap-api.vercel.app/managers?limit=${limit}&offset=${offset}`)
+    // return fetch(`https://clickunap-api.vercel.app/users?limit=${limit}&offset=${offset}`)
+    return fetch(`https://clickunap-api.vercel.app/users?limit=${limit}&offset=${offset}`)
       .then((response) => response.json())
-      .then((resData) => {
-        setData(resData.managers);
+      .then(({data: resData}) => {
+
+        setData(resData.map((admin) => ({
+          userId: admin.user_id,
+          avatarId: 'farmer',
+          firstname: admin.first_name,
+          lastname: admin.last_name,
+          email: admin.email,
+        })));
+        
+        setCount(resData.length);
+        setTotal(resData.length);
+
+        /* setData(resData.managers);
         setCount(resData.count);
         setTotal(resData.total);
+        */
       })
       .catch((error) => console.error(error));
   }, [setData, setCount]);
