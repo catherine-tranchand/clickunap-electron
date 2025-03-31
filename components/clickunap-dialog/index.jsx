@@ -7,6 +7,7 @@ export default function ClickunapDialog({
   name, 
   closeIcon,
   opened, 
+  locked,
   backdropHidden, 
   className, 
   style, 
@@ -59,17 +60,20 @@ export default function ClickunapDialog({
     >
 
     {/* Backdrop */}
-    <div className={clsx(
+    <div className={clsx("Backdrop",
       "bg-black fixed inset-0 z-10 opacity-20 dark:opacity-80 transition-all duration-700", 
-      {"!opacity-0 dark:!opacity-0": !opened}
+      {"!opacity-0 dark:!opacity-0": !opened},
+      {"!pointer-events-auto": locked && opened},
     )}></div>
     
     {/* Content */}
     <div 
       className={clsx("Content", 
-        "bg-white dark:bg-[#0b080b] rounded-lg overflow-scroll w-full h-fit lg:w-fit flex flex-col z-20 relative items-center justify-start mx-auto translate-y-full transition-all duration-700", 
+        ["bg-white dark:bg-[#0b080b] rounded-lg overflow-scroll flex flex-col z-20 relative items-center justify-start mx-auto"],
+        ["w-full min-h-50 h-auto lg:w-fit lg:h-auto lg:min-w-lg lg:min-h-50 mx-auto translate-y-full transition-all duration-700"],
         {"!translate-y-0": opened},
-        {"!opacity-0 duration-900": !opened}
+        {"!opacity-0 duration-900": !opened},
+        {"!pointer-events-auto": opened},
       )}>
       {children}
  
