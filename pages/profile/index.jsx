@@ -37,7 +37,7 @@ export const avatarIds = [
 
 export default function Profile() {
 
-  const { username, firstname, lastname, email, avatarId: currentAvatarId, setAvatarId, isUserAdmin } = useUser();
+  const { firstname, lastname, email, avatarId: currentAvatarId, setAvatarId, isUserAdmin } = useUser();
 
   const [ isAvatarPickerOpened, setAvatarPickerOpened ] = useState(null);
   
@@ -68,8 +68,8 @@ export default function Profile() {
           {/* Apps - Section - Clickunap */}
           <ClickunapProfileSection
             avatarId={currentAvatarId}
-            username={username}
-            fullname={firstname + ' ' + lastname}
+            firstname={firstname}
+            lastname={lastname}
             email={email}
             isAdmin={isUserAdmin}
             onAvatarChange={handleAvatarChange}

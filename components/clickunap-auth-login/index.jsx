@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useTheme } from "@mui/material";
 
 import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -19,13 +20,38 @@ import ClickunapIcon from "@/components/clickunap-icon";
 // import { useSessionStorage } from "@uidotdev/usehooks";
 import useStorage from '@/hooks/useStorage';
 
-import useUser from "@/hooks/useUser"; 
+import useUser from "@/hooks/useUser";
+
+
+import clsx from "clsx";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 export default function ClickunapAuthLogin() {
-  const [hasError, setHasError] = useState(false);
+  const [ hasError, setHasError ] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(false);
   const [ emailInputValue, setEmailInputValue ] = useState('');
   const [ passwordInputValue, setPasswordInputValue ] = useState('');
 
@@ -61,7 +87,9 @@ export default function ClickunapAuthLogin() {
   };
 
   return (
-    <div className="ClickunapAuthLogin flex flex-col justify-center items-center rounded-xl shadow-md bg-white dark:bg-black w-full h-auto max-w-[500px] p-4 lg:space-y-6">
+    <div className="ClickunapAuthLogin flex flex-col justify-center items-center rounded-xl lg:rounded-2xl shadow-md bg-white dark:bg-black w-full h-auto max-w-[500px] p-4 pt-0 lg:space-y-6 overflow-hidden">
+      {isLoading && <LinearProgress color={"primary"} className="absolute top-0 left-0 w-[120%] h-2 lg:h-4 z-10 m-0" />}
+
       {/* Clickunap LogoName */}
       <Link href="/">
         <Image
@@ -76,10 +104,10 @@ export default function ClickunapAuthLogin() {
       {/*  Title */}
       <h2 className="text-on-background">Mon Espace</h2>
 
-      <p className="truncate w-full h-auto text-xs text-center text-slate-300">{userToken}</p>
+      {/* <p className="truncate w-full h-auto text-xs text-center text-slate-300">{userToken}</p> */}
 
       {/* Error message */}
-      {hasError && (
+      {hasError && !isLoading && (
         <p className="text-rose-600 text-xs lg:text-sm px-6 text-center py-4 lg:py-0">
           Votre email ou le mot de passe n'est pas correct.
           <br className="hidden lg:block" />
@@ -92,6 +120,7 @@ export default function ClickunapAuthLogin() {
         sx={{ '& .MuiTextField-root': { my: 1.5, mx: 0, width: '100%' } }}
         className="w-full h-auto p-4"
         onSubmit={handleLoginFormSubmit}
+        disabled={isLoading}
       >
         {/* Email - Input */}
         <TextField
@@ -127,15 +156,15 @@ export default function ClickunapAuthLogin() {
         />
 
         {/* Subbmit - Button */}
-
         <Button
           type="submit"
-          variant="contained"
-          className="bg-primaryLight hover:bg-primary w-full rounded-3xl p-2.5 !mt-10"
-        >
-          login
+          variant="contained" 
+          color="primary" 
+          disabled={isLoading}
+          className={clsx("w-full !rounded-full uppercase !text-md lg:!text-lg !py-2 !tracking-wider !mt-4 lg:!mt-6")}>
+          login 
         </Button>
-
+        
       </Box>
     </div>
   );
@@ -143,6 +172,7 @@ export default function ClickunapAuthLogin() {
   async function handleLoginFormSubmit(event) {
     event.preventDefault();
 
+    setIsLoading(true);
 
     const formData = new FormData(event.target);
 
@@ -167,6 +197,7 @@ export default function ClickunapAuthLogin() {
       
       if (error) {
         setHasError(true);
+        setIsLoading(false);
         console.log(`[ handleLoginFormSubmit ]: error ==>> `, error);
         return;
       }
@@ -200,6 +231,7 @@ export default function ClickunapAuthLogin() {
 
     } catch (error) {
       setHasError(true);
+      setIsLoading(false);
       console.log(`[handleLoginFormSubmit]: error ==>> `, error);
     }
 

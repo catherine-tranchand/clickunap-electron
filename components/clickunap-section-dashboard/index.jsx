@@ -54,6 +54,39 @@ export default function ClickunapDashboardSection({
         />
 
       </ClickunapBox>
+
+      {/* Offices - Box */}
+      <ClickunapBox 
+        title="Offices" 
+        moreHidden 
+        searchHidden 
+        addHidden >
+          
+
+        </ClickunapBox>
+        
+
+      {/* Posts - Box */}
+      <ClickunapBox 
+        title="Posts" 
+        moreHidden 
+        searchHidden 
+        addHidden >
+          
+
+        </ClickunapBox>
+
+
+      {/* Apps - Box */}
+      <ClickunapBox 
+        title="Apps" 
+        moreHidden 
+        searchHidden 
+        addHidden >
+          
+
+        </ClickunapBox>
+
       
 
       {/* Dialogs */}

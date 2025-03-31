@@ -74,6 +74,19 @@ export default function useStorage() {
     setSidebarOpened(sidebarOpened);
   }
 
+
+  
+  /**
+   * Resets the storage to its initial state
+   */
+  const reset = async () => {
+    return new Promise((resolve) => {
+      localStorage.clear();
+      // resolve after 100 milliseconds
+      setTimeout(() => resolve(true), 100);
+    })
+  }
+
   
 
   
@@ -85,6 +98,8 @@ export default function useStorage() {
     saveUserToken,
     saveAvatarId,
     saveSidebarOpened,
+
+    reset,
   }
 
 }
