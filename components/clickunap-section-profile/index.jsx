@@ -83,15 +83,25 @@ export default function ClickunapProfileSection({
         <Button
           type="submit"
           variant="contained"
-          className="bg-primaryLight hover:bg-primary w-full rounded-3xl p-2.5 !mt-10"
+          className="bg-primary w-full rounded-3xl p-2.5 !mt-10"
         >
-          logout
+          update
         </Button>
 
+        <Link href="/logout">
+          <Button
+              type="button"
+              variant="outlined"
+              className="bg-primary w-full rounded-3xl p-2.5 !mt-10"
+            >
+              logout
+            </Button>
+
+        </Link>
+
+         
 
       </Box>
-
-
 
     </div>
   );
