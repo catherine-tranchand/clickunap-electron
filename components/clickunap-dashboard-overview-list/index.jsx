@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 
 
-export default function ClickunapDashboardOverviewList({ managerCount, officeCount, postCount, className, onItemClick }) {
+export default function ClickunapDashboardOverviewList({ managerCount, officeCount, postCount, className, onItemClick, appCount }) {
 
 
 
@@ -51,6 +51,18 @@ export default function ClickunapDashboardOverviewList({ managerCount, officeCou
         <ClickunapIcon name="forum" filled className="absolute top-2 opacity-50 text-on-secondary-container" />
         <span className={clsx("Number text-4xl lg:text-6xl font-bold")}>{postCount}</span>
         <span className={clsx("Caption text-sm lg:text-lg absolute bottom-2 opacity-50")}>Posts</span>
+      </li>
+
+      {/* Apps - Item */}
+      <li onClick={() => onItemClick && onItemClick("apps")}
+        className={clsx(["AppsItem group relative flex flex-col select-none size-30 p-2 rounded-lg justify-center items-center cursor-default"],
+                        ["bg-katia-container hover:bg-katia transition-all"],
+                        ["lg:size-50"],
+                        ["text-on-background"])}>
+
+        <ClickunapIcon name="apps" filled className="absolute top-2 opacity-50 text-on-secondary-container" />
+        <span className={clsx("Number text-4xl lg:text-6xl font-bold")}>{appCount}</span>
+        <span className={clsx("Caption text-sm lg:text-lg absolute bottom-2 opacity-50")}>Apps</span>
       </li>
 
     </ul>
