@@ -14,13 +14,14 @@ export default function LoginPage() {
 
 
   return (
-    <main className="LoginPage flex w-full h-full overflow-auto p-6 bg-neutral-100">
+    <main className="LoginPage flex w-full h-full overflow-auto p-6 bg-surface">
 
       {/* CONTAINER */}
       <div className="Container flex flex-col justify-center items-center p-6 grow h-full">
 
         {/* Clickunap - Auth - Login */}
-        <ClickunapAuthLogin />
+        <ClickunapAuthLogin
+         />
         
         
         <Button variant='text' className="text-black !lowercase !m-4" onClick={() => redirect.to('/')}>

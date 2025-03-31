@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -33,6 +34,9 @@ export default function ClickunapAuthLogin() {
 
 
   const router = useRouter();
+  const theme = useTheme();
+
+  const isDarkMode = theme.palette.mode === "dark";
 
   const { userToken, avatarId, saveUserToken, saveAvatarId } = useStorage();
 
@@ -40,28 +44,28 @@ export default function ClickunapAuthLogin() {
 
 
 
-  const emailInputProps = {
+  const emailInputProps = { input: {
     startAdornment: (
       <InputAdornment position="start">
         <ClickunapIcon name="mail" />
       </InputAdornment>
-    ),
+    )},
   };
 
-  const passwordInputProps = {
+  const passwordInputProps = { input: {
     startAdornment: (
       <InputAdornment position="start">
         <ClickunapIcon name="lock" />
       </InputAdornment>
-    ),
+    )},
   };
 
   return (
-    <div className="ClickunapAuthLogin flex flex-col justify-center items-center rounded-xl shadow-md bg-white w-full h-auto max-w-[500px] p-4 lg:space-y-6">
+    <div className="ClickunapAuthLogin flex flex-col justify-center items-center rounded-xl shadow-md bg-white dark:bg-black w-full h-auto max-w-[500px] p-4 lg:space-y-6">
       {/* Clickunap LogoName */}
       <Link href="/">
         <Image
-          src="/newlogo-black.png"
+          src={isDarkMode ? "/newlogo.png" : "/newlogo-black.png"}
           width={224}
           height={48}
           alt="Clickunap logo"
@@ -70,7 +74,7 @@ export default function ClickunapAuthLogin() {
       </Link>
 
       {/*  Title */}
-      <h2 className="text-black">Mon Espace</h2>
+      <h2 className="text-on-background">Mon Espace</h2>
 
       <p className="truncate w-full h-auto text-xs text-center text-slate-300">{userToken}</p>
 
@@ -91,7 +95,7 @@ export default function ClickunapAuthLogin() {
       >
         {/* Email - Input */}
         <TextField
-          className="!w-full"
+          className="!w-full !text-black"
           id="email-input"
           name="email"
           required={true}
@@ -100,8 +104,9 @@ export default function ClickunapAuthLogin() {
           label="Email"
           placeholder="Votre email"
           defaultValue=""
-          InputProps={emailInputProps}
+          slotProps={emailInputProps}
           onChange={(event) => setEmailInputValue(event.target.value)}
+          color={"primary"}
           //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
         />
 
@@ -117,7 +122,7 @@ export default function ClickunapAuthLogin() {
           defaultValue=""
           type="password"
           autoComplete="current-password"
-          InputProps={passwordInputProps}
+          slotProps={passwordInputProps}
           onChange={(event) => setPasswordInputValue(event.target.value)}
         />
 

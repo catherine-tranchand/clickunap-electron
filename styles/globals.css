@@ -45,12 +45,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --katia: #5277b2;
+    --katia: #4a6fab;
 
     --primary-container: #31253224;
     --secondary-container: #F5DAF752;
     --tertiary-container: #50856124;
-    --katia-container: #ebeef3;
+    --katia-container: #101d31;
 
     --on-primary-container: #947796;
     --on-secondary-container: #e4d1e5 /* #f092f9; */
