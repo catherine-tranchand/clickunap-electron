@@ -122,7 +122,7 @@ export default function ClickunapSideBar({ page = "home", managerLinkHidden }) {
           title={firstname + ' ' + lastname}
           className="max-w-full px-2 relative">
 
-          <div className="flex px-3 items-center justify-center bg-[#d6bed7] hover:bg-[#ffffff] rounded-3xl">
+          <div className={clsx("flex px-3 items-center justify-center bg-[#d6bed7] hover:bg-[#ffffff] rounded-3xl", {"!bg-white": page === "profile"})}>
             {/* Clickunap - Avatar */}
             <ClickunapAvatar id={avatarId} className="!size-10"/>
 

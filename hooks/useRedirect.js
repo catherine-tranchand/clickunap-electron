@@ -80,7 +80,7 @@ const useRedirect = () => {
    *
    * @param { String } path - the path to redirect to
    */
-  const to = useCallback((path = '/') => {
+  const to = useCallback((path = '/', reload = false) => {
     // get the page from the given `path`
     const page = getPageName(path);
 
@@ -162,6 +162,9 @@ const useRedirect = () => {
         break;
 
     }
+
+
+    reload && router.reload();
 
 
 

@@ -114,7 +114,21 @@ export default function UserProvider({ children, initUserToken }) {
   }, [initUserToken]);
 
 
+  
 
+  // Resets the user data to the initial state/values
+  const reset = () => {
+    setUserId(0);
+    setUserToken('');
+    setFirstname('');
+    setLastname('');
+    setEmail('');
+    setAvatarId('farmer');
+    setUserManager(true);
+    setUserAdmin(false);
+    setUserConnected(false);
+    setSidebarOpened(true);
+  };
 
   
   return (
@@ -143,6 +157,8 @@ export default function UserProvider({ children, initUserToken }) {
         setUserAdmin,
         setUserManager,
         setSidebarOpened,
+
+        reset,
       }}
     >
       {children}
