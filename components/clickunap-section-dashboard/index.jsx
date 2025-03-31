@@ -40,7 +40,7 @@ export default function ClickunapDashboardSection({
       
       {/* Overview - Box */}
       <ClickunapBox title="Overview" searchHidden addHidden moreHidden>
-        <ClickunapDashboardOverviewList managerCount={managersTotal} officeCount={420} postCount={69} />
+        <ClickunapDashboardOverviewList managerCount={managersTotal} officeCount={420} postCount={69} appCount={19}/>
       </ClickunapBox>
 
       {/* Managers - Box */}
