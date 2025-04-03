@@ -24,16 +24,19 @@
   height: 100%;
 
   --katia: #80a6e3;
+  --resource: #06e2e2;
 
   
   --primary-container: #31253224;
   --secondary-container: #F5DAF752;
   --tertiary-container: #50856124;
   --katia-container: #dde7f4;
+  --resource-container: #d9f2f2;
 
   --on-primary-container: #413242;
   --on-secondary-container: #79637b;
   --on-tertiary-container: #205e34;
+  --on-resource-container: #045858;
 
 
   --surface: #f8f6f7;
@@ -46,15 +49,18 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --katia: #4a6fab;
+    --resource: #038f8f;
 
     --primary-container: #31253224;
     --secondary-container: #F5DAF752;
     --tertiary-container: #50856124;
     --katia-container: #101d31;
+    --resource-container: #002121;
 
     --on-primary-container: #947796;
     --on-secondary-container: #e4d1e5 /* #f092f9; */
     --on-tertiary-container: #26e162;
+    --on-resource-container: #08f2f2;
 
     --surface: #110d11;
     --on-surface: #cbcaca;
@@ -70,6 +76,7 @@
 
 @theme {
   --color-katia: var(--katia);
+  --color-resource: var(--resource);
   
   --color-primary: #312532;
   --color-primary-light: #6C4870;
@@ -118,10 +125,12 @@
   --color-secondary-container: var(--secondary-container);
   --color-tertiary-container: var(--tertiary-container);
   --color-katia-container: var(--katia-container);
+  --color-resource-container: var(--resource-container);
 
   --color-on-primary-container: var(--on-primary-container);
   --color-on-secondary-container: var(--on-secondary-container);
   --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-on-resource-container: var(--on-resource-container);
 
   --color-surface: var(--surface);
   --color-on-surface: var(--on-surface);

@@ -34,13 +34,13 @@ export default function ClickunapDashboardSection({
 
 
   return (
-    <div className="ClickunapDashboardSection flex flex-col size-full px-4 py-6 lg:px-0 relative">
+    <div className="ClickunapDashboardSection flex flex-col size-full px-4 py-6 lg:px-0 relative overflow-x-hidden">
       
       <h2 className="text-2xl lg:pl-7 lg:text-3xl lg:font-light lg:mb-4 lg:mt-2">Hello <span>{adminName}</span>🎖</h2>
       
       {/* Overview - Box */}
       <ClickunapBox title="Overview" searchHidden addHidden moreHidden>
-        <ClickunapDashboardOverviewList managerCount={managersTotal} officeCount={420} postCount={69} appCount={19}/>
+        <ClickunapDashboardOverviewList managerCount={managersTotal} officeCount={420} postCount={69} appCount={19} resourceCount={10}/>
       </ClickunapBox>
 
       {/* Managers - Box */}
@@ -55,37 +55,22 @@ export default function ClickunapDashboardSection({
 
       </ClickunapBox>
 
-      {/* Offices - Box */}
-      <ClickunapBox 
-        title="Offices" 
-        moreHidden 
-        searchHidden 
-        addHidden >
-          
 
-        </ClickunapBox>
+
+      {/* Offices - Box */}
+      <ClickunapBox title="Offices" moreHidden> </ClickunapBox>
         
 
       {/* Posts - Box */}
-      <ClickunapBox 
-        title="Posts" 
-        moreHidden 
-        searchHidden 
-        addHidden >
-          
-
-        </ClickunapBox>
+      <ClickunapBox title="Posts" moreHidden> </ClickunapBox>
 
 
       {/* Apps - Box */}
-      <ClickunapBox 
-        title="Apps" 
-        moreHidden 
-        searchHidden 
-        addHidden >
-          
+      <ClickunapBox title="Apps" moreHidden> </ClickunapBox>
 
-        </ClickunapBox>
+
+      {/* Resources - Box */}
+      <ClickunapBox title="Resources" moreHidden> </ClickunapBox>
 
       
 
