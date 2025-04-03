@@ -19,7 +19,7 @@ export default function ClickunapDashboardSection({
   const [ managersDialogCurrentId, setManagersDialogCurrentId ] = useState(null);
   const [ isManagersDialogOpened, setManagersDialogOpened ] = useState(false);
 
-
+  
   const { data: managersData, total: managersTotal } = useManagers();
 
 

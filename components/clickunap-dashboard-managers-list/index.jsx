@@ -82,7 +82,7 @@ export default function ClickunapDashboardManagersList({ data, className, onItem
             <ClickunapAvatar id={manager.avatarId} size={80} className="!size-12 !min-w-12 lg:!size-20 lg:!min-w-20" />
 
             <div className={clsx("flex flex-col truncate")}>
-              <span className={clsx("Name text-sm lg:text-lg font-bold")}>{manager.firstname} {manager.lastname}</span>
+              <span className={clsx("Name text-sm lg:text-lg font-bold capitalize")}>{manager.firstname} {manager.lastname}</span>
               <span className={clsx("Email text-xs lg:text-lg opacity-50")}>{manager.email}</span>
             </div>
           </li>

@@ -8,27 +8,25 @@ export default function useManagers() {
   const [ data, setData ] = useState([]); // the current list of managers
 
 
-  const getAll = useCallback((limit = -1, offset = 0) => {
+  const getAll = useCallback((offset = 0, limit = -1) => {
     // return fetch(`https://clickunap-api.vercel.app/users?limit=${limit}&offset=${offset}`)
-    return fetch(`https://clickunap-api.vercel.app/users?limit=${limit}&offset=${offset}`)
+    return fetch(`https://clickunap-api.vercel.app/managers?limit=${limit}&offset=${offset}`)
       .then((response) => response.json())
-      .then(({data: resData}) => {
+      .then(({data: resData, count: resCount, total: resTotal}) => {
 
         setData(resData.map((admin) => ({
           userId: admin.user_id,
-          avatarId: 'farmer',
+          avatarId: admin.avatar_id,
           firstname: admin.first_name,
           lastname: admin.last_name,
           email: admin.email,
+          createdAt: admin.created_at,
+          role: admin.is_admin ? "admin" : "manager",
         })));
         
-        setCount(resData.length);
-        setTotal(resData.length);
+        setCount(resCount);
+        setTotal(resTotal);
 
-        /* setData(resData.managers);
-        setCount(resData.count);
-        setTotal(resData.total);
-        */
       })
       .catch((error) => console.error(error));
   }, [setData, setCount]);
@@ -37,7 +35,7 @@ export default function useManagers() {
 
   useEffect(() => {
     getAll();
-  }, [getAll]);
+  }, []);
 
 
   return {
