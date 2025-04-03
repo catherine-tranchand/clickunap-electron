@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -91,7 +91,18 @@ export default function ClickunapDashboardManagersDialog({
   }, [ allManagers, currentId ]);
 
 
+  
 
+  const getRealDate = useCallback((locale = "fr") => {
+
+    if (currentManager?.createdAt) {
+      let date = new Date(currentManager.createdAt);
+      return date.toLocaleDateString(locale) + " @ " + date.toLocaleTimeString(locale);
+    }
+
+    return "--";
+
+  }, [ currentManager?.createdAt ]);
 
 
 
@@ -148,7 +159,7 @@ export default function ClickunapDashboardManagersDialog({
           <li className={clsx("flex flex-row space-x-2 justify-between group/item", 
             "lg:opacity-80 lg:dark:opacity-50 hover:opacity-100 transition-opacity")}>
             <span className={clsx("font-bold select-none")}>Role:</span>
-            <span className={clsx("opacity-50 group-hover/item:opacity-100 select-all")}>{"Manager"}🥉</span>
+            <span className={clsx("opacity-50 group-hover/item:opacity-100 select-all capitalize")}>{currentManager?.role}🥉</span>
           </li>
 
           {/* UserId */}
@@ -170,7 +181,8 @@ export default function ClickunapDashboardManagersDialog({
           <li className={clsx("flex flex-row space-x-2 justify-between group/item", 
             "lg:opacity-80 lg:dark:opacity-50 hover:opacity-100 transition-opacity")}>
             <span className={clsx("font-bold select-none")}>Created At:</span>
-            <span className={clsx("opacity-50 group-hover/item:opacity-100 select-all")}>{currentManager?.createdAt ?? "--"}</span>
+            {/* <span className={clsx("opacity-50 group-hover/item:opacity-100 select-all")}>{currentManager?.createdAt ?? "--"}</span> */}
+            <span className={clsx("opacity-50 group-hover/item:opacity-100 select-all")}>{getRealDate()}</span>
           </li>
         </ul>
         
