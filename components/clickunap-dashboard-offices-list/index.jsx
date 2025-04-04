@@ -74,7 +74,7 @@ export default function ClickunapDashboardOfficesList({ data, className, onItemC
       <ul ref={listRef} onScroll={handleScroll} className={clsx("ClickunapDashboardOfficesList relative flex w-full h-auto overflow-scroll py-2 space-x-3 lg:py-6 lg:space-x-6 scroll-smooth", className)}>
         
         {data.map((office) => (
-          <li key={office.userId} onClick={() => onItemClick && onItemClick(office.userId)}
+          <li key={office.id} onClick={() => onItemClick && onItemClick(office.id)}
             className={clsx(["OfficeItem group relative flex flex-col select-none size-50 min-w-50",
               "max-w-50 lg:size-70 lg:min-w-70 lg:max-w-70 h-auto p-2 rounded-lg cursor-pointer justify-start items-center"],
               ["bg-white dark:bg-black transition-all lg:hover:-translate-y-4 hover:bg-tertiary-container"])}>

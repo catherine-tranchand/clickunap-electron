@@ -8,14 +8,19 @@ export default function useOffices() {
   const [ data, setData ] = useState([]); // the current list of managers
 
 
-  const getAll = useCallback((offset = 0, limit = -1) => {
+  const getAll = useCallback((offset = 0, limit = 50) => {
     return fetch(`https://clickunap-api.vercel.app/offices?limit=${limit}&offset=${offset}`)
       .then((response) => response.json())
       .then(({data: resData, count: resCount, total: resTotal}) => {
         
+
+        // tell me about it
+        console.log(`[useOffices]: resData => `, resData);
+
         setData(resData);
         setCount(resCount);
         setTotal(resTotal);
+
 
         /*
         setData(resData.map((admin) => ({
