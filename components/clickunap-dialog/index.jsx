@@ -1,9 +1,21 @@
 import { useState, useEffect } from "react";
+
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import LinearProgress from '@mui/material/LinearProgress';
+
 import ClickunapIcon from '@/components/clickunap-icon';
 import clsx from 'clsx'
 
 
 export default function ClickunapDialog({ 
+  title = '',
+  subtitle = '',
+  loadingColor = 'primary',
+  loading = false,
+  returnButtonHidden = true,
   name, 
   closeIcon,
   opened, 
@@ -11,7 +23,8 @@ export default function ClickunapDialog({
   backdropHidden, 
   className, 
   style, 
-  onCloseButtonClick, 
+  onCloseButtonClick,
+  onReturnButtonClick,
   children, 
   onClose, // callback fired when the dialog is closed
   onOpen, // callback fired when the dialog is opened
@@ -52,12 +65,14 @@ export default function ClickunapDialog({
   return (
     <div 
       className={clsx(['ClickunapDialog', name, className], 
-        "fixed z-50 size-full p-6 flex flex-col items-center justify-end overflow-hidden",
+        "fixed inset-0 z-50 size-full p-6 flex flex-col items-center justify-end overflow-hidden transition-all",
         {"!pointer-events-none": isClosed && !opened}
-      )} 
+      )}
+      data-opened={opened}
       style={style}
       //onClick={onClick}
     >
+
 
     {/* Backdrop */}
     <div className={clsx("Backdrop",
@@ -75,8 +90,37 @@ export default function ClickunapDialog({
         {"!opacity-0 duration-900": !opened},
         {"!pointer-events-auto": opened},
       )}>
+      
+      {loading && <LinearProgress color={loadingColor} className="absolute top-0 left-0 w-[120%] h-2 lg:h-4 z-10 m-0" />}
+
+      {(title.length > 0) && (
+        <AppBar position="static" className="h-25 !text-on-background !shadow-none" style={{ background: "none" }}>
+          <Toolbar>
+            {!returnButtonHidden && (
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="return"
+                sx={{ mr: 2 }}
+                onClick={onReturnButtonClick}
+              >
+                <ClickunapIcon name="arrow_back" />
+              </IconButton>
+            )}
+
+            <div className="flex flex-col w-full h-auto">
+              <h6 className="Title text-lg font-bold">{title}</h6>
+              {/* (subtitle.length > 0) && <p className="Subtitle text-xs opacity-50">{subtitle}</p>*/}
+              <p className="Subtitle text-xs opacity-50">{subtitle}</p>
+            </div>
+
+          </Toolbar>
+        </AppBar>
+      )}
+
       {children}
- 
+      
       {/* Clickunap Icon */}
       <ClickunapIcon 
         className="rounded-full absolute top-0 right-0 m-6 lg:m-8 z-10 transition-all hover:scale-105 cursor-pointer"
