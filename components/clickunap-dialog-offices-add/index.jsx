@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -13,6 +13,8 @@ import Button from '@mui/material/Button';
 
 import ClickunapDialog from "@/components/clickunap-dialog";
 import ClickunapIcon from "@/components/clickunap-icon";
+
+import useTerritories from "@/hooks/useTerritories";
 
 
 import clsx from "clsx";
@@ -31,9 +33,19 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
   const [ newTerritoryId, setNewTerritoryId ] = useState('');
   const [ newTerritoryName, setNewTerritoryName ] = useState('');
+
+  const [ hasNewTerritoryIdError, setHasNewTerritoryIdError ] = useState(false);
+  const [ hasNewTerritoryNameError, setHasNewTerritoryNameError ] = useState(false);
+
+  const [ newTerritoryIdErrorMessage, setNewTerritoryIdErrorMessage ] = useState('');
+  const [ newTerritoryNameErrorMessage, setNewTerritoryNameErrorMessage ] = useState('');
+  
   
 
+  const territories = useTerritories();
   
+  
+  const dialogRef = useRef(null);
 
   
   
@@ -83,12 +95,136 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
   }, [ selectedView, listItems ]);
 
+  
+
+
+
+  // memoize the territoryId update
+  const memoizedTerritoryIdUpdate = useMemo(() => {
+    return () => {
+
+      // Do nothing if there's no `newTerritoryId`
+      if (!newTerritoryId.length) {
+        return;
+      }
+
+
+      // reset the error state
+      setHasNewTerritoryIdError(false);
+      setNewTerritoryIdErrorMessage('');
+
+
+      // Now, try to find the territory with the given `territoryId`/nameId
+      territories.search({ nameId: newTerritoryId })
+      .then(({ found, data, count }) => {
+        if (found) {
+          setHasNewTerritoryIdError(true);
+          setNewTerritoryIdErrorMessage('This territory ID already exists');
+        } else {
+          setHasNewTerritoryIdError(false);
+          setNewTerritoryIdErrorMessage('');
+        }
+
+        // tell me about it ;)
+        console.log(`\x1b[34m[memoizedTerritoryIdUpdate]\x1b[0m: found => ${found} & count => ${count} & data => `, data);
+
+      })
+      .catch((error) => {
+        setHasNewTerritoryIdError(true);
+        setNewTerritoryIdErrorMessage(error.message);
+      });
+
+    }
+    
+  }, [ newTerritoryId ]);
+
+
+
+  // use effect to call the `memoizedTerritoryIdUpdate` function
+  useEffect(() => {
+    memoizedTerritoryIdUpdate();
+  }, [ memoizedTerritoryIdUpdate ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  /**
+   * Method used to create a new territory
+   */
+  const createTerritory = useCallback(() => {
+    return new Promise((resolve, reject) => {
+      
+     // Do nothing if there's no `newTerritoryId` or `newTerritoryName`
+     if (!newTerritoryId.length || !newTerritoryName.length) {
+      return reject({message: 'Please provide a territory ID and name'});
+    }
+
+    // reset the error state
+    setHasNewTerritoryIdError(false);
+    setHasNewTerritoryNameError(false);
+    setNewTerritoryIdErrorMessage('');
+    setNewTerritoryNameErrorMessage('');
+
+    // set the `isLoading` state to `true`
+    setLoading(true);
+
+    territories.create({ nameId: newTerritoryId, name: newTerritoryName })
+    .then((response) => {
+      
+      // set the `isLoading` state to `false`
+      setLoading(false);
+
+      // if there's no error (i.e. territory has been created successfully)
+      // else reject with the error
+      (!response.error) ? resolve(response.data[0]) : reject(response.error);
+      
+    })
+    .catch((error) => {
+      setHasNewTerritoryIdError(true);
+      setHasNewTerritoryNameError(true);
+      setNewTerritoryIdErrorMessage(error.message);
+      setNewTerritoryNameErrorMessage(error.message);
+
+      console.error(`\x1b[34m[createTerritory]\x1b[0m: error => `, error);
+
+      // set the `isLoading` state to `false`
+      setLoading(false);
+    });
+
+  });
+
+
+
+  }, [ newTerritoryId, newTerritoryName ]);
+
+
+
+
+
+
+
+
+
 
   
 
   return (
     <ClickunapDialog 
+      ref={dialogRef}
       name="AddOfficeDialog" 
+      contentClassName={clsx({"!h-[270px]": selectedView === null, "!h-[380px]": selectedView === "create_territory"})}
       opened={opened} 
       locked={locked}
       onCloseButtonClick={onCloseButtonClick}
@@ -135,11 +271,14 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
               className="!w-full"
               id="name_id"
               required={true}
+              disabled={isLoading}
               type="text"
               label="Id"
               value={newTerritoryId}
               placeholder="territory1"
               // InputProps={territoryIdInputProps}
+              error={hasNewTerritoryIdError}
+              helperText={newTerritoryIdErrorMessage}
               onChange={(event) => setNewTerritoryId(event.target.value)}
               //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
             />
@@ -149,30 +288,38 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
               className="w-full"
               id="name"
               required={true}
+              disabled={isLoading}
               type="text"
               label="Name"
               value={newTerritoryName}
               placeholder="Territory 01"
               // InputProps={territoryNameInputProps}
+              error={hasNewTerritoryNameError}
+              helperText={newTerritoryNameErrorMessage}
               onChange={(event) => setNewTerritoryName(event.target.value)}
               //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
             />
 
+            <div className={clsx("ButtonWrapper flex flex-col w-full h-auto px-5 lg:px-10 pt-4 pb-6 justify-center items-center")}>
+              <Button
+                type="submit"
+                variant="contained" 
+                color="primary" 
+                // onClick={() => createTerritory()}
+                disabled={isLoading || hasNewTerritoryIdError || !newTerritoryId.length || !newTerritoryName.length }
+                className={clsx("w-full !rounded-full uppercase !text-md lg:!text-lg !py-2 !tracking-wider")}>
+                create territory
+              </Button>
+            </div>
+
           </Box>
 
 
-          <div className={clsx("ButtonWrapper flex flex-col w-full h-auto px-5 lg:px-10 pt-4 pb-6 justify-center items-center")}>
-            <Button
-              variant="contained" 
-              color="primary" 
-              onClick={() => setLoading(true)}
-              className={clsx("w-full !rounded-full uppercase !text-md lg:!text-lg !py-2 !tracking-wider")}>
-              create territory
-            </Button>
-          </div>
-
         </div>
       )}
+
+
+
 
 
       </ClickunapDialog>
@@ -181,18 +328,54 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
 
 
-  async function handleTerritoryCreateFormSubmit(event) {
+
+
+
+
+
+  function handleTerritoryCreateFormSubmit(event) {
 
     event.preventDefault();
 
-    // create form data 
-    const formData = new FormData(event.currentTarget);
+    // create the territory
+    createTerritory().then((data) => {
+      
+      // reset the form
+      resetTerritoryForm();
+      
+      // go back
+      goBack();
+
+      // show snackbar
+      dialogRef.current.showSnackbar({ type: "success", message: `New territory created: ${data.name}` });
+
+      // tell me about it ;)
+      console.log(`\x1b[30m[handleTerritoryCreateFormSubmit]\x1b[0m: data => `, data);
+    })
+
 
     // tell me about it ;)
-    console.log(`\x1b[30m[handleTerritoryCreateFormSubmit]\x1b[0m: formData => `, formData);
+    console.log(`\x1b[32m[handleTerritoryCreateFormSubmit]\x1b[0m: event => `, event);
 
-    // territory.create({id: newTerritoryId, name: newTerritoryName});
 
+  }
+
+
+
+  /**
+   * Reset the `territoryId` and `territoryName` values 
+   * NOTE: This method also resets the `territoryIdError`, `territoryNameError` values 
+   *        and their corresponding messages
+   */
+  function resetTerritoryForm() {
+    setNewTerritoryId("");
+    setNewTerritoryName("");
+
+    setHasNewTerritoryIdError(false);
+    setHasNewTerritoryNameError(false);
+
+    setNewTerritoryIdErrorMessage("");
+    setNewTerritoryNameErrorMessage("");
   }
 
 

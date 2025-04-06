@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import LinearProgress from '@mui/material/LinearProgress';
+import Snackbar from '@mui/material/Snackbar';
 
 import ClickunapIcon from '@/components/clickunap-icon';
 import clsx from 'clsx'
 
 
-export default function ClickunapDialog({ 
+
+
+const ClickunapDialog = ({ 
   title = '',
   subtitle = '',
   loadingColor = 'primary',
@@ -22,6 +25,7 @@ export default function ClickunapDialog({
   locked,
   backdropHidden, 
   className, 
+  contentClassName,
   style, 
   onCloseButtonClick,
   onReturnButtonClick,
@@ -29,10 +33,41 @@ export default function ClickunapDialog({
   onClose, // callback fired when the dialog is closed
   onOpen, // callback fired when the dialog is opened
   // onClick 
-}) {
+}, ref) => {
 
   
   const [ isClosed, setIsClosed ] = useState(true);
+  const [ snackbarType, setSackbarType ] = useState('success');
+  const [ snackbarMessage, setSnackbarMessage ] = useState('');
+  const [ snackbarHideDuration, setSnackbarHideDuration ] = useState(6000);
+  const [ isSnackbarOpened, setSnackbarOpened ] = useState(false);
+
+  
+
+  const dialogRef = useRef(null);
+  const snackbarRef = useRef(null);
+
+
+
+
+
+  
+  useImperativeHandle(ref, () => ({
+    element: dialogRef.current,
+    snackbarEl: snackbarRef.current,
+
+    showSnackbar: ({ type, message }) => {
+      setSackbarType(type);
+      setSnackbarMessage(message);
+      setSnackbarOpened(true);
+    },
+
+  }));
+
+
+
+
+
 
 
   
@@ -63,7 +98,7 @@ export default function ClickunapDialog({
 
 
   return (
-    <div 
+    <div ref={dialogRef}
       className={clsx(['ClickunapDialog', name, className], 
         "fixed inset-0 z-50 size-full p-6 flex flex-col items-center justify-end overflow-hidden transition-all",
         {"!pointer-events-none": isClosed && !opened}
@@ -85,10 +120,11 @@ export default function ClickunapDialog({
     <div 
       className={clsx("Content", 
         ["bg-white dark:bg-[#0b080b] rounded-lg overflow-scroll flex flex-col z-20 relative items-center justify-start mx-auto"],
-        ["w-full min-h-50 h-auto lg:w-fit lg:h-auto lg:min-w-lg lg:min-h-50 mx-auto translate-y-full transition-all duration-700"],
+        ["w-full min-h-50 h-auto lg:w-fit lg:h-auto lg:min-w-lg lg:min-h-50 mx-auto translate-y-full transition-all duration-500"],
         {"!translate-y-0": opened},
         {"!opacity-0 duration-900": !opened},
         {"!pointer-events-auto": opened},
+        contentClassName,
       )}>
       
       {loading && <LinearProgress color={loadingColor} className="absolute top-0 left-0 w-[120%] h-2 lg:h-4 z-10 m-0" />}
@@ -131,5 +167,19 @@ export default function ClickunapDialog({
       />
     </div>
 
+    {/* Snackbar */}
+    <Snackbar
+      ref={snackbarRef}
+      open={isSnackbarOpened}
+      autoHideDuration={snackbarHideDuration}
+      message={snackbarMessage}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      onClose={() => setSnackbarOpened(false)}
+    />
+
   </div>)
 }
+
+
+
+export default forwardRef(ClickunapDialog);
