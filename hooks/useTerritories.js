@@ -1,14 +1,18 @@
 import { useEffect, useState, useCallback } from "react";
 
 
-export default function useTerritories() {
+export default function useTerritories(initOffset = 0, initLimit = 10) {
 
   const [ count, setCount ] = useState(0); // the current number of territories
   const [ total, setTotal ] = useState(0); // the total number of territories
   const [ data, setData ] = useState([]); // the current list of territories
+  const [ offset, setOffset ] = useState(initOffset); // the current offset
+  const [ limit, setLimit ] = useState(initLimit); // the current limit
+
+  
 
 
-  const getAll = useCallback((offset = 0, limit = -1) => {
+  const getAll = useCallback((offset = 0, limit = 10) => {
     // return fetch(`https://clickunap-api.vercel.app/users?limit=${limit}&offset=${offset}`)
     return fetch(`https://clickunap-api.vercel.app/territories?limit=${limit}&offset=${offset}`)
       .then((response) => response.json())
@@ -18,7 +22,7 @@ export default function useTerritories() {
         if (resData) {
           // map the `resData` array and update the `data`
           setData(resData.map((territory) => ({
-            territoryId: territory.id,
+            id: territory.id,
             nameId: territory.name_id,
             name: territory.name,
           })));
@@ -32,6 +36,13 @@ export default function useTerritories() {
       .catch((error) => console.error(error));
   }, [setData, setCount]);
   
+
+
+
+  const reload = useCallback(() => {
+    getAll(offset, limit);
+  }, [offset, limit]);
+
 
 
   
@@ -108,18 +119,24 @@ export default function useTerritories() {
 
 
   useEffect(() => {
-    getAll();
-  }, []);
+    getAll(offset, limit);
+  }, [offset, limit]);
 
 
   return {
     data,
     count,
     total,
+    offset,
+    limit,
 
     getAll,
     search,
     create,
+    reload,
+
+    setOffset,
+    setLimit,
 
   }
 }
