@@ -1,11 +1,18 @@
 import { useState } from "react";
+
 import ClickunapBox from "@/components/clickunap-box";
 
 import ClickunapDashboardOverviewList from "@/components/clickunap-dashboard-overview-list";
+
 import ClickunapDashboardManagersList from "@/components/clickunap-dashboard-managers-list";
 import ClickunapDashboardManagersDialog from "@/components/clickunap-dashboard-managers-dialog";
 
+import ClickunapDashboardOfficesList from "@/components/clickunap-dashboard-offices-list";
+import ClickunapDashboardOfficesDialog from "@/components/clickunap-dashboard-offices-dialog";
+
 import useManagers from "@/hooks/useManagers";
+import useOffices from "@/hooks/useOffices";
+
 import clsx from "clsx";
 
 
@@ -19,8 +26,13 @@ export default function ClickunapDashboardSection({
   const [ managersDialogCurrentId, setManagersDialogCurrentId ] = useState(null);
   const [ isManagersDialogOpened, setManagersDialogOpened ] = useState(false);
 
+  const [ officesDialogType, setOfficesDialogType ] = useState("view");
+  const [ officesDialogCurrentId, setOfficesDialogCurrentId ] = useState(null);
+  const [ isOfficesDialogOpened, setOfficesDialogOpened ] = useState(false);
+
   
   const { data: managersData, total: managersTotal } = useManagers();
+  const { data: officesData, total: officesTotal } = useOffices();
 
 
 
@@ -40,7 +52,7 @@ export default function ClickunapDashboardSection({
       
       {/* Overview - Box */}
       <ClickunapBox title="Overview" searchHidden addHidden moreHidden>
-        <ClickunapDashboardOverviewList managerCount={managersTotal} officeCount={420} postCount={69} appCount={19} resourceCount={10}/>
+        <ClickunapDashboardOverviewList managerCount={managersTotal} officeCount={officesTotal} postCount={69} appCount={19} resourceCount={10}/>
       </ClickunapBox>
 
       {/* Managers - Box */}
@@ -58,7 +70,15 @@ export default function ClickunapDashboardSection({
 
 
       {/* Offices - Box */}
-      <ClickunapBox title="Offices" moreHidden> </ClickunapBox>
+      <ClickunapBox title="Offices" moreHidden
+        onSearchButtonClick={() => openOfficesDialog("search")}
+        onAddButtonClick={() => openOfficesDialog("add")}> 
+        
+        <ClickunapDashboardOfficesList
+          data={officesData}
+          onItemClick={(officeId) => openOfficesDialog("view", officeId)}
+        />
+      </ClickunapBox>
         
 
       {/* Posts - Box */}
@@ -89,6 +109,19 @@ export default function ClickunapDashboardSection({
           onDeleteButtonClick={(managerId) => openManagersDialog("delete", managerId)}
         />
 
+
+        {/* Offices Dialog */}
+        <ClickunapDashboardOfficesDialog 
+          type={officesDialogType} 
+          opened={isOfficesDialogOpened}
+          locked={true}
+          onCloseButtonClick={() => setOfficesDialogOpened(false)}
+          currentId={officesDialogCurrentId}
+          data={officesData}
+          onEditButtonClick={(officeId) => openOfficesDialog("edit", officeId)}
+          onDeleteButtonClick={(officeId) => openOfficesDialog("delete", officeId)}
+        />
+
       </div>
 
     </div>
@@ -101,6 +134,18 @@ export default function ClickunapDashboardSection({
 
     if (currentId !== -1) {
       setManagersDialogCurrentId(currentId);
+    }
+
+  }
+
+
+
+  function openOfficesDialog(type, currentId = -1) {
+    setOfficesDialogType(type);
+    setOfficesDialogOpened(true);
+
+    if (currentId !== -1) {
+      setOfficesDialogCurrentId(currentId);
     }
 
   }
