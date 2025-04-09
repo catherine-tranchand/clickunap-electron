@@ -13,7 +13,7 @@ import clsx from "clsx";
 
 
 
-export default function ClickunapDialogOfficesView({ data: currentOffice, opened, locked, onCloseButtonClick, onClose, onOpen }) {
+export default function ClickunapDialogOfficesView({ data: currentOffice, opened, locked, onCloseButtonClick, onClose, onOpen, offices }) {
 
 
   

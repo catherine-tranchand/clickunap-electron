@@ -11,29 +11,48 @@ export default function useComplexes(initOffset = 0, initLimit = 10) {
 
 
   const getAll = useCallback((offset = 0, limit = 10) => {
-    // return fetch(`https://clickunap-api.vercel.app/users?limit=${limit}&offset=${offset}`)
-    return fetch(`https://clickunap-api.vercel.app/complexes?limit=${limit}&offset=${offset}`)
-      .then((response) => response.json())
-      .then(({data: resData, count: resCount, total: resTotal}) => {
-        
-        // if the `resData` is not null
-        if (resData) {
-          // map the `resData` array and update the `data`
-          setData(resData.map((complex) => ({
-            complexId: complex.id,
-            nameId: complex.name_id,
-            territoryId: complex.territory_id,
-            name: complex.name,
-            directorName: complex.director_name,
-          })));
-        }
+    return new Promise((resolve, reject) => {
 
-        
-        setCount(resCount);
-        setTotal(resTotal);
+      fetch(`https://clickunap-api.vercel.app/complexes?limit=${limit}&offset=${offset}`)
+        .then((response) => response.json())
+        .then(({data: resData, count: resCount, total: resTotal}) => {
+          
+          // intialize the `newData` array.
+          let newData = [];
 
-      })
-      .catch((error) => console.error(error));
+          // if the `resData` is not null
+          if (resData) {
+            // map the newData
+            newData = resData.map((complex) => ({
+              id: complex.id,
+              nameId: complex.name_id,
+              territoryId: complex.territory_id,
+              name: complex.name,
+              directorName: complex.director_name,
+            }));
+
+
+            // update the `data`
+            setData(newData);
+          }
+
+          
+          setCount(resCount);
+          setTotal(resTotal);
+
+          // resolve this
+          resolve({data: newData, count: resCount, total: resTotal});
+
+        })
+        .catch((error) => {
+          console.error(error);
+          // reject this
+          reject(error);
+        });
+
+    })
+
+
   }, [setData, setCount]);
   
 
@@ -100,7 +119,7 @@ export default function useComplexes(initOffset = 0, initLimit = 10) {
           resolve(responseData);
 
         } else {
-          reject({message: `Failed to create a new complex: ${responseRequest.status} - ${responseRequest.statusText}`});
+          reject({message: `Failed to create a new complex: ${response.status} - ${response.statusText}`});
         }
 
 

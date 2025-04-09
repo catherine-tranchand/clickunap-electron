@@ -18,7 +18,7 @@ import clsx from "clsx";
 
 export default function ClickunapDashboardOfficesDialog({ 
   currentId, type, opened, locked, onCloseButtonClick, data: allOffices, onClose, onOpen, 
-  onEditButtonClick, onDeleteButtonClick }) {
+  onEditButtonClick, onDeleteButtonClick, offices }) {
 
     
   const [ currentOffice, setCurrentOffice ] = useState({});
@@ -60,6 +60,7 @@ export default function ClickunapDashboardOfficesDialog({
         onClose={onClose}
         onOpen={onOpen}
         onCloseButtonClick={onCloseButtonClick}
+        offices={offices}
       />
 
 
@@ -74,6 +75,7 @@ export default function ClickunapDashboardOfficesDialog({
         onClose={onClose}
         onOpen={onOpen}
         onCloseButtonClick={onCloseButtonClick}
+        offices={offices}
       />
 
 
@@ -88,6 +90,7 @@ export default function ClickunapDashboardOfficesDialog({
         onOpen={onOpen}
         onCloseButtonClick={onCloseButtonClick}
         onDeleteButtonClick={onDeleteButtonClick}
+        offices={offices}
       />
 
 
@@ -102,6 +105,7 @@ export default function ClickunapDashboardOfficesDialog({
         onClose={onClose}
         onOpen={onOpen}
         onCloseButtonClick={onCloseButtonClick}
+        offices={offices}
       />
 
 
@@ -115,6 +119,7 @@ export default function ClickunapDashboardOfficesDialog({
         onClose={onClose}
         onOpen={onOpen}
         onCloseButtonClick={onCloseButtonClick}
+        offices={offices}
       />
 
 

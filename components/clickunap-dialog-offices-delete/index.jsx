@@ -12,7 +12,7 @@ import clsx from "clsx";
 
 
 
-export default function ClickunapDialogOfficesDelete({ opened, locked, onCloseButtonClick, onClose, onOpen }) {
+export default function ClickunapDialogOfficesDelete({ opened, locked, onCloseButtonClick, onClose, onOpen, offices }) {
 
 
   

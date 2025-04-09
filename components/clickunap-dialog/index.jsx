@@ -119,7 +119,7 @@ const ClickunapDialog = ({
     {/* Content */}
     <div 
       className={clsx("Content", 
-        ["bg-white dark:bg-[#0b080b] rounded-lg overflow-scroll flex flex-col z-20 relative items-center justify-start mx-auto"],
+        ["bg-dialog-container rounded-lg overflow-scroll flex flex-col z-20 relative items-center justify-start mx-auto"],
         ["w-full min-h-50 h-auto lg:w-fit lg:h-auto lg:min-w-lg lg:min-h-50 mx-auto translate-y-full transition-all duration-500"],
         {"!translate-y-0": opened},
         {"!opacity-0 duration-900": !opened},

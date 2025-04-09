@@ -22,7 +22,7 @@ import clsx from "clsx";
 
 
 
-export default function ClickunapDialogOfficesEdit({ data, opened, currentOffice, locked, onClose, onOpen, onCloseButtonClick, onDeleteButtonClick }) {
+export default function ClickunapDialogOfficesEdit({ data, opened, currentOffice, locked, onClose, onOpen, onCloseButtonClick, onDeleteButtonClick, offices }) {
 
 
   const [hasUpdateError, setHasUpdateError] = useState(false);

@@ -32,6 +32,7 @@
   --tertiary-container: #50856124;
   --katia-container: #dde7f4;
   --resource-container: #d9f2f2;
+  --dialog-container: #ffffff;
 
   --on-primary-container: #413242;
   --on-secondary-container: #79637b;
@@ -56,6 +57,7 @@
     --tertiary-container: #50856124;
     --katia-container: #101d31;
     --resource-container: #002121;
+    --dialog-container: #0b080b;
 
     --on-primary-container: #947796;
     --on-secondary-container: #e4d1e5 /* #f092f9; */
@@ -126,6 +128,7 @@
   --color-tertiary-container: var(--tertiary-container);
   --color-katia-container: var(--katia-container);
   --color-resource-container: var(--resource-container);
+  --color-dialog-container: var(--dialog-container);
 
   --color-on-primary-container: var(--on-primary-container);
   --color-on-secondary-container: var(--on-secondary-container);

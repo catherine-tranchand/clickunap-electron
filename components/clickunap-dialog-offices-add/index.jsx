@@ -1,6 +1,7 @@
 
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
+import { useTheme } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -8,8 +9,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
@@ -30,7 +33,7 @@ import clsx from "clsx";
 
 
 
-export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButtonClick, onClose, onOpen }) {
+export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButtonClick, onClose, onOpen, offices }) {
   
   const [ isLoading, setLoading ] = useState(false);
   const [ selectedView, setSelectedView ] = useState(null);
@@ -55,15 +58,54 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
   const [ hasNewComplexIdError, setHasNewComplexIdError ] = useState(false);
   const [ hasNewComplexNameError, setHasNewComplexNameError ] = useState(false);
-  const [ hasNewComplexTerritoryIdError, setHasNewComplexTerritoryIdError ] = useState(false);
+  const [ hasNewComplexTerritoryError, setHasNewComplexTerritoryError ] = useState(false);
   const [ hasNewComplexDirectorNameError, setHasNewComplexDirectorNameError ] = useState(false);
 
   const [ newComplexIdErrorMessage, setNewComplexIdErrorMessage ] = useState('');
   const [ newComplexNameErrorMessage, setNewComplexNameErrorMessage ] = useState('');
-  const [ newComplexTerritoryIdErrorMessage, setNewComplexTerritoryIdErrorMessage ] = useState('');
+  const [ newComplexTerritoryErrorMessage, setNewComplexTerritoryErrorMessage ] = useState('');
   const [ newComplexDirectorNameErrorMessage, setNewComplexDirectorNameErrorMessage ] = useState('');
   
+ 
+
   
+  const [ newOfficeTerritoryId, setNewOfficeTerritoryId ] = useState(0);
+  const [ newOfficeTerritoryNameId, setNewOfficeTerritoryNameId ] = useState('');
+  const [ newOfficeComplexId, setNewOfficeComplexId ] = useState(0);
+  const [ newOfficeComplexNameId, setNewOfficeComplexNameId ] = useState('');
+  const [ newOfficeAddress, setNewOfficeAddress ] = useState('');
+  const [ newOfficeNames, setNewOfficeNames ] = useState([]);
+  const [ newOfficeEmails, setNewOfficeEmails ] = useState([]);
+  const [ newOfficePhonenumbers, setNewOfficePhonenumbers ] = useState([]);
+
+  const [ hasNewOfficeTerritoryError, setHasNewOfficeTerritoryError ] = useState(false);
+  const [ hasNewOfficeComplexError, setHasNewOfficeComplexError ] = useState(false);
+  const [ hasNewOfficeAddressError, setHasNewOfficeAddressError ] = useState(false);
+  const [ hasNewOfficeNamesError, setHasNewOfficeNamesError ] = useState(false);
+  const [ hasNewOfficeEmailsError, setHasNewOfficeEmailsError ] = useState(false);
+  const [ hasNewOfficePhonenumbersError, setHasNewOfficePhonenumbersError ] = useState(false);
+   
+
+  const [ newOfficeTerritoryErrorMessage, setNewOfficeTerritoryErrorMessage ] = useState('');
+  const [ newOfficeComplexErrorMessage, setNewOfficeComplexErrorMessage ] = useState('');
+  const [ newOfficeAddressErrorMessage, setNewOfficeAddressErrorMessage ] = useState('');
+  const [ newOfficeNamesErrorMessage, setNewOfficeNamesErrorMessage ] = useState('');
+  const [ newOfficeEmailsErrorMessage, setNewOfficeEmailsErrorMessage ] = useState('');
+  const [ newOfficePhonenumbersErrorMessage, setNewOfficePhonenumbersErrorMessage ] = useState('');
+
+  
+  const [ currentComplexes, setCurrentComplexes ] = useState([]);
+
+
+  
+
+
+
+
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
+
+
 
   const territories = useTerritories(0, 1000);
   const complexes = useComplexes(0, 1000);
@@ -71,17 +113,21 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
   
   const dialogRef = useRef(null);
 
+  const newOfficeTerritoryInputRef = useRef(null);
+  const newOfficeComplexInputRef = useRef(null);
+
   
   
   // create a list items array as `listItems`
   const listItems = [
     {
-      id: 'add_office',
+      id: 'create_office',
       title: 'New Office', 
       subtitle: 'Fill out the form below to create a new office', 
-      icon: 'work_update', 
+      icon: 'work_update',
+      icon2: 'work',
       value: 'Add an Office', 
-      onClick: () => setSelectedView('add_office')
+      onClick: () => setSelectedView('create_office')
     },
 
     {
@@ -89,6 +135,7 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
       title: 'New Complex', 
       subtitle: 'Fill out the form below to create a new complex', 
       icon: 'add_business',
+      icon2: 'business',
       value: 'Create a Complex', 
       onClick: () => setSelectedView('create_complex')
     },
@@ -98,6 +145,7 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
       title: 'New Territory', 
       subtitle: 'Enter an id and name to create a new territory', 
       icon: 'add_location_alt', 
+      icon2: 'location_on',
       value: 'Create a Territory',
       onClick: () => setSelectedView('create_territory')
     },
@@ -121,6 +169,49 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
   
 
+  
+  // memoize the `currentComplexes` update
+  const memoizedCurrentComplexesUpdate = useMemo(() => {
+
+    return () => {
+
+      // Do nothing if there's no `newOfficeTerritoryId`
+      if (!newOfficeTerritoryId) {
+        // set the `currentComplexes` using the first item in `territories.data`
+        setCurrentComplexes(complexes.data.filter(({ territoryId}) => territoryId === territories.data[0]?.id));
+        return;
+      }
+      
+
+      // reset the error state of `newOfficeComplex`
+      setHasNewOfficeComplexError(false);
+      setNewOfficeComplexErrorMessage('');
+
+
+      // update the `currentComplexes` based on the `newOfficeTerritoryId`
+      setCurrentComplexes(complexes.data.filter(({ territoryId }) => territoryId === newOfficeTerritoryId));
+
+
+    }
+
+  }, [ newOfficeTerritoryId, complexes.data, territories.data ]);
+
+
+
+  
+  // use effect to call the `memoizedCurrentComplexesUpdate` function
+  useEffect(() => {
+    memoizedCurrentComplexesUpdate();
+  }, [ memoizedCurrentComplexesUpdate ]);
+
+
+  
+
+
+
+
+
+
 
 
   // memoize the territoryId update
@@ -139,7 +230,7 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
 
       // Now, try to find the territory with the given `territoryId`/nameId
-      territories.search({ nameId: newTerritoryId })
+      territories.search({ nameId: newTerritoryId.trim().toLowerCase() })
       .then(({ found, data, count }) => {
         if (found) {
           setHasNewTerritoryIdError(true);
@@ -194,7 +285,7 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
 
       // Now, try to find the complex with the given `complexId`/nameId
-      complexes.search({ nameId: newComplexId })
+      complexes.search({ nameId: newComplexId.trim().toLowerCase() })
       .then(({ found, data, count }) => {
         if (found) {
           setHasNewComplexIdError(true);
@@ -231,7 +322,230 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
 
 
+  
+  const getDefaultComplexTerritoryId = useCallback(() => {
+    return territories.data?.length ? territories.data[0].id : 0;
+  }, [ territories.data ]);
 
+
+  
+  const getDefaultComplexTerritoryNameId = useCallback(() => {
+    return territories.data?.length ? territories.data[0].nameId : '';
+  }, [ territories.data ]);
+  
+
+
+
+  
+  const getDefaultCurrentComplexId = useCallback(() => {
+    return currentComplexes.length ? currentComplexes[0].id : 0;
+  }, [ currentComplexes ]);
+
+
+  
+  const getDefaultCurrentComplexNameId = useCallback(() => {
+    return currentComplexes.length ? currentComplexes[0].nameId : '';
+  }, [ currentComplexes ]);
+
+  
+
+  
+!!newComplexTerritoryNameId.length ? newComplexTerritoryNameId : getDefaultComplexTerritoryNameId()
+
+  const memoizedInitialOfficeTerritories = useMemo(() => {
+
+    return () => {
+      
+      setNewOfficeTerritoryId((currentTerritoryId) => {
+        return (currentTerritoryId) ? currentTerritoryId : getDefaultTerritoryId();
+
+      });
+      
+
+      setNewOfficeTerritoryNameId((currentTerritoryNameId) => {
+        return (currentTerritoryNameId) ? currentTerritoryNameId : getDefaultTerritoryNameId();
+
+      });
+
+      
+      setNewComplexTerritoryId((currentTerritoryId) => {
+        return (currentTerritoryId) ? currentTerritoryId : getDefaultTerritoryId();
+
+      });
+      
+
+      setNewComplexTerritoryNameId((currentTerritoryNameId) => {
+        return (currentTerritoryNameId) ? currentTerritoryNameId : getDefaultTerritoryNameId();
+      });
+
+
+      function getDefaultTerritoryId() {
+        return territories.data?.length ? territories.data[0].id : 0;
+      }
+
+
+      function getDefaultTerritoryNameId() {
+        return territories.data?.length ? territories.data[0].nameId : '';
+      }
+
+
+    };
+
+  }, [ territories.data ]);
+
+  
+
+
+  // use effect to call the `memoizedInitialOfficeTerritories` function
+  useEffect(() => {
+    memoizedInitialOfficeTerritories();
+  }, [ memoizedInitialOfficeTerritories ]);
+
+
+
+
+
+
+
+  const memoizedInitialOfficeComplexes = useMemo(() => {
+
+    return () => {
+      
+      setNewOfficeComplexId((currentComplexId) => {
+        // do nothing if there's already a `currentComplexId`
+        return (currentComplexId) ? currentComplexId : getDefaultComplexId();
+
+      });
+      
+
+      setNewOfficeComplexNameId((currentComplexNameId) => {
+        // do nothing if there's already a `currentComplexNameId`
+        return (currentComplexNameId) ? currentComplexNameId : getDefaultComplexNameId();
+
+      });
+
+
+      function getDefaultComplexId() {
+        return currentComplexes?.length ? currentComplexes[0].id : 0;
+      }
+
+
+      function getDefaultComplexNameId() {
+        return currentComplexes?.length ? currentComplexes[0].nameId : '';
+      }
+
+
+    };
+
+  }, [ currentComplexes ]);
+
+  
+
+
+  // use effect to call the `memoizedInitialOfficeComplexes` function
+  useEffect(() => {
+    memoizedInitialOfficeComplexes();
+  }, [ memoizedInitialOfficeComplexes ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  /**
+   * Method used to create a new office
+   */
+  const createOffice = useCallback(() => {
+    return new Promise((resolve, reject) => {
+
+      // tell me about it ;)
+      console.log(`\x1b[34m[createOffice]\x1b[0m: \
+        newOfficeTerritoryId => ${newOfficeTerritoryId};
+        newOfficeTerritoryNameId => ${newOfficeTerritoryNameId};
+
+        newOfficeComplexId => ${newOfficeComplexId};
+        newOfficeComplexNameId => ${newOfficeComplexNameId};
+
+        newOfficeAddress => ${newOfficeAddress};
+        newOfficeNames => ${newOfficeNames.join(',')};
+        newOfficeEmails => ${newOfficeEmails.join(',')};
+        newOfficePhonenumbers => ${newOfficePhonenumbers.join(',')};
+
+      `);
+
+      
+      // Do nothing if there are no `newOfficeTerritoryId`, `newOfficeComplexId`
+      if (!newOfficeTerritoryId || !newOfficeComplexId || !newOfficeAddress.length) {
+        return reject({message: 'Please provide at least a territory ID, complex ID, and address'});
+
+      }
+
+      
+      // reset the error state
+      setHasNewOfficeTerritoryError(false);
+      setHasNewOfficeComplexError(false);
+      setHasNewOfficeAddressError(false);
+      setHasNewOfficeNamesError(false);
+      setHasNewOfficeEmailsError(false);
+      setHasNewOfficePhonenumbersError(false);
+
+      setNewOfficeTerritoryErrorMessage('');
+      setNewOfficeComplexErrorMessage('');
+      setNewOfficeAddressErrorMessage('');
+      setNewOfficeNamesErrorMessage('');
+      setNewOfficeEmailsErrorMessage('');
+      setNewOfficePhonenumbersErrorMessage('');
+
+      // set the `isLoading` state to `true` to show the loading indicator
+      setLoading(true);
+
+
+      
+      offices.create({
+        territoryId: newOfficeTerritoryId,
+        complexId: newOfficeComplexId,
+        address: newOfficeAddress,
+        names: !containsOnlyCommas(newOfficeNames.join(',')) ? newOfficeNames : [],
+        emails: !containsOnlyCommas(newOfficeEmails.join(',')) ? newOfficeEmails : [],
+        phonenumbers: !containsOnlyCommas(newOfficePhonenumbers.join(',')) ? newOfficePhonenumbers : [],
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+
+        setHasNewOfficeTerritoryError(true);
+        setHasNewOfficeComplexError(true);
+        setHasNewOfficeAddressError(true);
+        setHasNewOfficeNamesError(true);
+        setHasNewOfficeEmailsError(true);
+        setHasNewOfficePhonenumbersError(true);
+
+        setNewOfficeTerritoryErrorMessage(error.message);
+        setNewOfficeComplexErrorMessage(error.message);
+        setNewOfficeAddressErrorMessage(error.message);
+        setNewOfficeNamesErrorMessage(error.message);
+        setNewOfficeEmailsErrorMessage(error.message);
+        setNewOfficePhonenumbersErrorMessage(error.message);
+
+        reject(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+
+    })
+
+  }, [ newOfficeTerritoryId, newOfficeComplexId, newOfficeAddress, newOfficeNames, newOfficeEmails, newOfficePhonenumbers ]);
 
 
 
@@ -250,19 +564,19 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
     // reset the error state
     setHasNewComplexIdError(false);
     setHasNewComplexNameError(false);
-    setHasNewComplexTerritoryIdError(false);
+    setHasNewComplexTerritoryError(false);
     setHasNewComplexDirectorNameError(false);
 
     setNewComplexIdErrorMessage('');
     setNewComplexNameErrorMessage('');
-    setNewComplexTerritoryIdErrorMessage('');
+    setNewComplexTerritoryErrorMessage('');
     setNewComplexDirectorNameErrorMessage('');
 
     // set the `isLoading` state to `true`
     setLoading(true);
 
     complexes.create({ 
-      territoryId: newComplexTerritoryId, 
+      territoryId: newComplexTerritoryId ?? getDefaultTerritoryId(), 
       nameId: newComplexId, 
       name: newComplexName,
       directorName: newComplexDirectorName,
@@ -280,12 +594,12 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
     .catch((error) => {
       setHasNewComplexIdError(true);
       setHasNewComplexNameError(true);
-      setHasNewComplexTerritoryIdError(true);
+      setHasNewComplexTerritoryError(true);
       setHasNewComplexDirectorNameError(true);
 
       setNewComplexIdErrorMessage(error.message);
       setNewComplexNameErrorMessage(error.message);
-      setNewComplexTerritoryIdErrorMessage(error.message);
+      setNewComplexTerritoryErrorMessage(error.message);
       setNewComplexDirectorNameErrorMessage(error.message);
 
       console.error(`\x1b[34m[createComplex]\x1b[0m: error => `, error);
@@ -366,6 +680,177 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
 
 
+  
+  /**
+   * Adds a new office name using the given `index` and `value`
+   */
+  const addNewOfficeName = useCallback((index, value) => {
+    setNewOfficeNames(() => newOfficeNames.map((_, i) => i === index ? value : _));
+  }, [ newOfficeNames ]);
+
+  
+  /**
+   * Removes the office name using the given `index`
+   */
+  const removeOfficeName = useCallback((index) => {
+    setNewOfficeNames(() => newOfficeNames.filter((_, i) => i !== index));
+  }, [ newOfficeNames ]);
+
+
+
+
+  
+  /**
+   * Adds a new office phonenumber using the given `index` and `value`
+   */
+  const addNewOfficePhonenumber = useCallback((index, value) => {
+    setNewOfficePhonenumbers(() => newOfficePhonenumbers.map((_, i) => i === index ? value : _));
+  }, [ newOfficePhonenumbers ]);
+
+  
+  /**
+   * Removes the office phonenumber using the given `index`
+   */
+  const removeOfficePhonenumber = useCallback((index) => {
+    setNewOfficePhonenumbers(() => newOfficePhonenumbers.filter((_, i) => i !== index));
+  }, [ newOfficePhonenumbers ]);
+
+
+
+  
+  /**
+   * Adds a new office email using the given `index` and `value`
+   */
+  const addNewOfficeEmail = useCallback((index, value) => {
+    setNewOfficeEmails(() => newOfficeEmails.map((_, i) => i === index ? value : _));
+  }, [ newOfficeEmails ]);
+
+  
+  /**
+   * Removes the office email using the given `index`
+   */
+  const removeOfficeEmail = useCallback((index) => {
+    setNewOfficeEmails(() => newOfficeEmails.filter((_, i) => i !== index));
+  }, [ newOfficeEmails ]);
+
+
+
+
+  
+  const getAddOfficeBtnDisabled = useCallback(() => {
+    
+
+    return (
+      isLoading || 
+      hasNewOfficeTerritoryError || 
+      hasNewOfficeComplexError || 
+      newOfficeAddress.length === 0 ||
+      newOfficeTerritoryId === 0 ||
+      newOfficeComplexId === 0
+    );
+
+  }, [
+    isLoading, 
+    hasNewOfficeTerritoryError, 
+    hasNewOfficeComplexError, 
+    newOfficeAddress, 
+    newOfficeTerritoryId,
+    newOfficeComplexId,
+  ]);
+
+
+
+
+
+
+
+
+
+
+
+  
+  /**====== Slot Props - Adornments =====**/
+
+  const territoriesInputSlotProps = {
+    input: {
+      startAdornment: <InputAdornment position="start">
+        <ClickunapIcon name={listItems.find((item) => item.id === "create_territory")?.icon2} />
+      </InputAdornment>,
+    }
+  }
+
+
+
+  const complexesInputSlotProps = {
+    input: {
+      startAdornment: <InputAdornment position="start">
+        <ClickunapIcon name={listItems.find((item) => item.id === "create_complex")?.icon2} />
+      </InputAdornment>,
+    }
+  }
+
+  
+
+  const getNamesInputSlotProps = (inputIndex) => {
+    return { input: {
+      endAdornment: <InputAdornment position="end">
+        <IconButton 
+          title="Remove this name" 
+          className="hover:!text-[#ff0000] opacity-50 dark:opacity-30 hover:opacity-100 transition-opacity"
+          onClick={ () => removeOfficeName(inputIndex)}>
+          
+          <ClickunapIcon name="delete" />
+
+        </IconButton>
+      </InputAdornment>,
+    } };
+  }
+
+
+ 
+
+  const getPhonenumbersInputSlotProps = (inputIndex) => {
+    return { input: {
+      endAdornment: <InputAdornment position="end">
+        <IconButton 
+          title="Remove this phonenumber" 
+          className="hover:!text-[#ff0000] opacity-50 dark:opacity-30 hover:opacity-100 transition-opacity"
+          onClick={ () => removeOfficePhonenumber(inputIndex)}>
+          
+          <ClickunapIcon name="delete" />
+
+        </IconButton>
+      </InputAdornment>,
+    } };
+  }
+
+
+ 
+
+  const getEmailsInputSlotProps = (inputIndex) => {
+    return { input: {
+      endAdornment: <InputAdornment position="end">
+        <IconButton 
+          title="Remove this email" 
+          className="hover:!text-[#ff0000] opacity-50 dark:opacity-30 hover:opacity-100 transition-opacity"
+          onClick={ () => removeOfficeEmail(inputIndex)}>
+          
+          <ClickunapIcon name="delete" />
+
+        </IconButton>
+      </InputAdornment>,
+    } };
+  }
+
+
+
+
+
+  /**======== END OF SLOT PROPS ========**/
+
+
+
+
 
 
 
@@ -380,7 +865,8 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
       contentClassName={clsx({
         "!h-[270px]": selectedView === null, 
         "!h-[380px]": selectedView === "create_territory",
-        "!h-[510px]": selectedView === "create_complex"
+        "!h-[510px]": selectedView === "create_complex",
+        "!h-[700px]": selectedView === "create_office",
       })}
       opened={opened} 
       locked={locked}
@@ -390,7 +876,7 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
       onClose={onClose}
       onOpen={onOpen}
       loading={isLoading}
-      loadingColor="tertiary"
+      loadingColor={isDarkMode ? "secondary" : "tertiary"}
       title={currentTitle}
       subtitle={currentSubtitle}>
       
@@ -414,6 +900,217 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
         </List>
       )}
 
+      
+
+
+      {selectedView === "create_office" && (
+        <div className="flex flex-col w-full h-auto">
+          <Box 
+            component="form"
+            sx={{ '& .MuiTextField-root': { my: 1.5, mx: 0, width: '100%' } }}
+            className="!pt-4 !px-4 lg:!px-6 flex flex-col w-full h-[600px] max-h-[600px] overflow-y-auto"
+            onSubmit={handleOfficeCreateFormSubmit}>
+            
+            {/* Office Territories */}
+            <TextField
+              ref={newOfficeTerritoryInputRef}
+              className="!w-full"
+              id="territory_id"
+              select
+              label="Territory"
+              defaultValue={newOfficeTerritoryNameId}
+              value={newOfficeTerritoryNameId}
+              // defaultValue={getDefaultComplexTerritoryNameId()}
+              // value={!!newOfficeTerritoryNameId.length ? newOfficeTerritoryNameId : getDefaultComplexTerritoryNameId()}
+              disabled={isLoading}
+              required
+              onChange={handleNewOfficeTerritoryChange}
+              error={hasNewOfficeTerritoryError}
+              helperText={newOfficeTerritoryErrorMessage}
+              slotProps={territoriesInputSlotProps}>
+
+                {territories.data.map((territory) => (
+                  <MenuItem key={territory.nameId} value={territory.nameId} className="capitalize">
+                    {territory.name}
+                  </MenuItem>
+                ))}
+
+              
+            </TextField>
+
+
+            {/* Office Complexes */}
+            <TextField
+              ref={newOfficeComplexInputRef}
+              className="!w-full"
+              id="complex_id"
+              select
+              label="Complex"
+
+              defaultValue={newOfficeComplexNameId}
+              value={newOfficeComplexNameId}
+              // defaultValue={getDefaultCurrentComplexNameId()}
+              // value={!!newOfficeComplexNameId.length ? newOfficeComplexNameId : getDefaultCurrentComplexNameId()}
+              disabled={isLoading}
+              required
+              onChange={handleNewOfficeComplexChange}
+              error={hasNewOfficeComplexError}
+              helperText={newOfficeComplexErrorMessage}
+              slotProps={complexesInputSlotProps}>
+
+                {currentComplexes.map((complexe) => (
+                  <MenuItem key={complexe.nameId} value={complexe.nameId} className="capitalize">
+                    {complexe.name}
+                  </MenuItem>
+                ))}
+              
+            </TextField>
+
+            
+            {/* Address - Office - Input */}
+            <TextField
+              className="!w-full"
+              id="address"
+              required={true}
+              disabled={isLoading}
+              type="text"
+              label="Address"
+              value={newOfficeAddress}
+              placeholder={`26, Rue Elzéard Rougier - 13004 Marseille`}
+              // InputProps={territoryIdInputProps}
+              error={hasNewOfficeAddressError}
+              helperText={newOfficeAddressErrorMessage}
+              onChange={(event) => setNewOfficeAddress(event.target.value)}
+              //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
+            />
+
+
+
+            {/* Names - Office - Inputs */}
+            {newOfficeNames.map((name, index) => (
+              <TextField
+                key={index}
+                className={clsx(["!w-full"], 
+                  {"before:content-[''] before:block before:absolute before:inset-0 before:border-dashed before:-top-4 before:w-full before:opacity-50 before:dark:opacity-20 before:border-t-1 before:border-primary before:dark:border-white !mt-4": index === 0})}
+                id={`name-${index+1}`}
+                required={false}
+                disabled={isLoading}
+                type="text"
+                label={`Name ${index+1}`}
+                value={name}
+                error={hasNewOfficeNamesError}
+                helperText={newOfficeNamesErrorMessage}
+                slotProps={getNamesInputSlotProps(index)}
+                onChange={(event) => addNewOfficeName(index, event.target.value)}
+                //InputProps={{ startAdornment: <InputAdornment position="start">icon</InputAdornment> }}
+              />
+            ))}
+
+
+            {/* Add another name - Button */}
+            <Button
+              className="self-start !uppercase !text-sm !text-tertiary !mt-0 !mb-4 lg:!mb-6"
+              variant="text" 
+              color="primary"
+              type="button"
+              startIcon={<ClickunapIcon name="add" className="!size-4 !m-0 !p-0" />}
+              onClick={() => setNewOfficeNames([...newOfficeNames, ''])}
+              disabled={isLoading}>
+              Add name {(newOfficeNames.length > 0) && `#${newOfficeNames.length + 1}`}
+            </Button>
+
+
+
+            {/* Phonenumbers - Office - Inputs */}
+            {newOfficePhonenumbers.map((phonenumber, index) => (
+              <TextField
+                key={index}
+                className={clsx(["!w-full"], 
+                  {"before:content-[''] before:block before:absolute before:inset-0 before:border-dashed before:-top-4 before:w-full before:opacity-50 before:dark:opacity-20 before:border-t-1 before:border-primary before:dark:border-white !mt-4": index === 0})}
+                id={`phonenumber-${index+1}`}
+                required={false}
+                disabled={isLoading}
+                type="text"
+                label={`Phone Number ${index+1}`}
+                value={phonenumber}
+                error={hasNewOfficePhonenumbersError}
+                helperText={newOfficePhonenumbersErrorMessage}
+                slotProps={getPhonenumbersInputSlotProps(index)}
+                onChange={(event) => addNewOfficePhonenumber(index, event.target.value)}
+              />
+            ))}
+
+
+            {/* Add another phonenumber - Button */}
+            <Button
+              className="self-start !uppercase !text-sm !text-tertiary !mt-0 !mb-4 lg:!mb-6"
+              variant="text" 
+              color="primary"
+              type="button"
+              startIcon={<ClickunapIcon name="add" className="!size-4 !m-0 !p-0" />}
+              onClick={() => setNewOfficePhonenumbers([...newOfficePhonenumbers, ''])}
+              disabled={isLoading}>
+              Add phonenumber {(newOfficePhonenumbers.length > 0) && `#${newOfficePhonenumbers.length + 1}`}
+            </Button>
+
+
+
+            {/* Emails - Office - Inputs */}
+            {newOfficeEmails.map((email, index) => (
+              <TextField
+                key={index}
+                className={clsx(["!w-full"], 
+                  {"before:content-[''] before:block before:absolute before:inset-0 before:border-dashed before:-top-4 before:w-full before:opacity-50 before:dark:opacity-20 before:border-t-1 before:border-primary before:dark:border-white !mt-4": index === 0})}
+                id={`email-${index+1}`}
+                required={false}
+                disabled={isLoading}
+                type="email"
+                label={`Email ${index+1}`}
+                value={email}
+                error={hasNewOfficeEmailsError}
+                helperText={newOfficeEmailsErrorMessage}
+                slotProps={getEmailsInputSlotProps(index)}
+                onChange={(event) => addNewOfficeEmail(index, event.target.value)}
+              />
+            ))}
+
+
+            {/* Add another email - Button */}
+            <Button
+              className="self-start !uppercase !text-sm !text-tertiary !mt-0 !mb-4 lg:!mb-6"
+              variant="text" 
+              color="primary"
+              type="button"
+              startIcon={<ClickunapIcon name="add" className="!size-4 !m-0 !p-0" />}
+              onClick={() => setNewOfficeEmails([...newOfficeEmails, ''])}
+              disabled={isLoading}>
+              Add email {(newOfficeEmails.length > 0) && `#${newOfficeEmails.length + 1}`}
+            </Button>
+
+
+
+          
+            <span className="flex flex-1"/>
+
+            <div className={clsx(["ButtonWrapper flex flex-col w-full h-auto px-5 lg:px-10 pt-4 pb-6 justify-center items-center"], 
+              ["sticky bottom-0 left-0 right-0 z-10 bg-dialog-container !mt-4"])}>
+              <Button
+                type="submit"
+                variant="contained" 
+                color="primary" 
+                // onClick={() => createTerritory()}
+                disabled={getAddOfficeBtnDisabled()}
+                className={clsx("w-full !rounded-full uppercase !text-md lg:!text-lg !py-2 !tracking-wider")}>
+                add office
+              </Button>
+            </div>
+
+          </Box>
+
+
+        </div>
+      )}
+
 
 
       {selectedView === "create_complex" && (
@@ -423,24 +1120,33 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
             sx={{ '& .MuiTextField-root': { my: 1.5, mx: 0, width: '100%' } }}
             className="!p-4 lg:!px-6 flex flex-col w-full"
             onSubmit={handleComplexCreateFormSubmit}>
+            
 
-            <FormControl fullWidth required>
-              <InputLabel id="territory_label">Territory</InputLabel>
-              <Select
-                labelId="territory_label"
-                id="territory_id"
-                value={newComplexTerritoryNameId}
-                disabled={isLoading}
-                label="Territory"
-                placeholder="Select a territory" 
-                onChange={handleNewComplexTerritoryChange}>
+            <TextField
+              className="!w-full"
+              id="territory_id"
+              select
+              label="Territory"
+
+              defaultValue={newComplexTerritoryNameId}
+              value={newComplexTerritoryNameId}
+              // defaultValue={getDefaultComplexTerritoryNameId()}
+              // value={!!newComplexTerritoryNameId.length ? newComplexTerritoryNameId : getDefaultComplexTerritoryNameId()}
+              disabled={isLoading}
+              required
+              onChange={handleNewComplexTerritoryChange}
+              error={hasNewComplexTerritoryError}
+              helperText={newComplexTerritoryErrorMessage}
+              slotProps={territoriesInputSlotProps}>
 
                 {territories.data.map((territory) => (
-                  <MenuItem key={territory.nameId} value={territory.nameId} className="capitalize">{territory.name}</MenuItem>
+                  <MenuItem key={territory.nameId} value={territory.nameId} className="capitalize">
+                    {territory.name}
+                  </MenuItem>
                 ))}
+              
+            </TextField>
 
-              </Select>
-            </FormControl>
 
           
             {/* Id - Complex - Input */}
@@ -587,6 +1293,49 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
   
 
 
+  /**
+   * Handler that is called whenever the new office territory changes
+   */
+  function handleNewOfficeTerritoryChange(event) {
+    // get the selecte element
+    const selectEl = event.target;
+
+    // get the current complex territory nameId and Id as `territoryNameId` and `territoryId`
+    const territoryId = territories.data.find((territory) => territory.nameId === selectEl.value).id;
+    const territoryNameId = selectEl.value;
+
+    // update the `newComplexTerritoryNameId` and `newComplexTerritoryId`
+    setNewOfficeTerritoryNameId(territoryNameId);
+    setNewOfficeTerritoryId(territoryId);
+
+    
+    // tell me about it ;)
+    console.log(`\x1b[33m[handleNewOfficeTerritoryChange]\x1b[0m: territoryId => ${territoryId} & territoryNameId => ${territoryNameId}, `, territories.data);
+  }
+
+  
+  /**
+   * Handler that is called whenever the new office complex changes
+   */
+  function handleNewOfficeComplexChange(event) {
+    // get the selecte element
+    const selectEl = event.target;
+
+    // get the current office complex nameId and Id as `officeComplexNameId` and `officeComplexId`
+    const officeComplexId = currentComplexes.find((officeComplex) => officeComplex.nameId === selectEl.value).id;
+    const officeComplexNameId = selectEl.value;
+
+    // update the `newOfficeComplexNameId` and `newOfficeComplexId`
+    setNewOfficeComplexNameId(officeComplexNameId);
+    setNewOfficeComplexId(officeComplexId);
+
+    // tell me about it ;)
+    console.log(`\x1b[33m[handleNewOfficeComplexChange]\x1b[0m: officeComplexId => ${officeComplexId} & officeComplexNameId => ${officeComplexNameId}, `, currentComplexes);
+  }
+
+
+  
+
 
 
   /**
@@ -616,6 +1365,41 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
 
 
+  function handleOfficeCreateFormSubmit(event) {
+    event.preventDefault();
+
+    // create the office
+    createOffice().then((data) => {
+      
+      // reset the form
+      resetOfficeForm();
+      
+      // go back
+      goBack();
+
+      // show snackbar
+      dialogRef.current.showSnackbar({ type: "success", message: `New office created: ${data.name?.toUpperCase() ?? data.address}` });
+
+      // reload the offices
+      offices.reload();
+
+      // tell me about it ;)
+      console.log(`\x1b[30m[handleOfficeCreateFormSubmit]\x1b[0m: data => `, data);
+
+    }).catch((error) => {
+
+      // show snackbar
+      dialogRef.current.showSnackbar({ type: "error", message: `Failed to create office: ${error.message}` });
+
+      console.log(`\x1b[31m[handleOfficeCreateFormSubmit]\x1b[0m: error => `, error);
+    });
+
+  }
+
+
+
+
+
 
 
   function handleComplexCreateFormSubmit(event) {
@@ -639,6 +1423,12 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
       // tell me about it ;)
       console.log(`\x1b[30m[handleComplexCreateFormSubmit]\x1b[0m: data => `, data);
+    }).catch((error) => {
+
+      // show snackbar
+      dialogRef.current.showSnackbar({ type: "error", message: `Failed to create complex: ${error.message}` });
+
+      console.log(`\x1b[31m[handleComplexCreateFormSubmit]\x1b[0m: error => `, error);
     })
 
 
@@ -694,6 +1484,43 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
 
   /**
+   * Reset the `newOfficeTerritoryId`, `newOfficeTerritoryNameId`, `newOfficeComplexId` and `newOfficeComplexNameId`, etc... values 
+   * NOTE: This method also resets the `officeTerritoryError`, `officeComplexError` values 
+   *        and their corresponding messages
+   */
+  function resetOfficeForm() {
+
+    setNewOfficeTerritoryId("");
+    setNewOfficeTerritoryNameId("");
+    setNewOfficeComplexId("");
+    setNewOfficeComplexNameId("");
+
+    setNewOfficeAddress("");
+
+    setNewOfficeNames([]);
+    setNewOfficeEmails([]);
+    setNewOfficePhonenumbers([]);
+    
+    
+    setHasNewOfficeTerritoryError(false);
+    setHasNewOfficeComplexError(false);
+    setHasNewOfficeAddressError(false);
+    setHasNewOfficeNamesError(false);
+    setHasNewOfficeEmailsError(false);
+    setHasNewOfficePhonenumbersError(false);
+
+    setNewOfficeTerritoryErrorMessage("");
+    setNewOfficeComplexErrorMessage("");
+    setNewOfficeAddressErrorMessage("");
+    setNewOfficeNamesErrorMessage("");
+    setNewOfficeEmailsErrorMessage("");
+    setNewOfficePhonenumbersErrorMessage("");
+
+
+  }
+
+
+  /**
    * Reset the `complexId` and `complexName` values 
    * NOTE: This method also resets the `complexIdError`, `complexNameError` values 
    *        and their corresponding messages
@@ -707,12 +1534,12 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
 
     setHasNewComplexIdError(false);
     setHasNewComplexNameError(false);
-    setHasNewComplexTerritoryIdError(false);
+    setHasNewComplexTerritoryError(false);
     setHasNewComplexDirectorNameError(false);
 
     setNewComplexIdErrorMessage("");
     setNewComplexNameErrorMessage("");
-    setNewComplexTerritoryIdErrorMessage("");
+    setNewComplexTerritoryErrorMessage("");
     setNewComplexDirectorNameErrorMessage("");
 
 
@@ -737,5 +1564,10 @@ export default function ClickunapDialogOfficesAdd({ opened, locked, onCloseButto
     setNewTerritoryNameErrorMessage("");
   }
 
+
+
+  function containsOnlyCommas(str) {
+    return /^,+$/.test(str);
+  }
 
 }
