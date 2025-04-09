@@ -32,10 +32,9 @@ export default function ClickunapDashboardSection({
 
   
   const { data: managersData, total: managersTotal } = useManagers();
-  const { data: officesData, total: officesTotal } = useOffices();
-
-
-
+  // const { data: officesData, total: officesTotal } = useOffices();
+  const offices = useOffices();
+ 
 
 
 
@@ -52,7 +51,7 @@ export default function ClickunapDashboardSection({
       
       {/* Overview - Box */}
       <ClickunapBox title="Overview" searchHidden addHidden moreHidden>
-        <ClickunapDashboardOverviewList managerCount={managersTotal} officeCount={officesTotal} postCount={69} appCount={19} resourceCount={10}/>
+        <ClickunapDashboardOverviewList managerCount={managersTotal} officeCount={offices.total} postCount={69} appCount={19} resourceCount={10}/>
       </ClickunapBox>
 
       {/* Managers - Box */}
@@ -75,7 +74,7 @@ export default function ClickunapDashboardSection({
         onAddButtonClick={() => openOfficesDialog("add")}> 
         
         <ClickunapDashboardOfficesList
-          data={officesData}
+          data={offices.data}
           onItemClick={(officeId) => openOfficesDialog("view", officeId)}
         />
       </ClickunapBox>
@@ -117,9 +116,10 @@ export default function ClickunapDashboardSection({
           locked={true}
           onCloseButtonClick={() => setOfficesDialogOpened(false)}
           currentId={officesDialogCurrentId}
-          data={officesData}
+          data={offices.data}
           onEditButtonClick={(officeId) => openOfficesDialog("edit", officeId)}
           onDeleteButtonClick={(officeId) => openOfficesDialog("delete", officeId)}
+          offices={offices}
         />
 
       </div>
