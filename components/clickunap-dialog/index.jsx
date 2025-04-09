@@ -127,7 +127,7 @@ const ClickunapDialog = ({
         contentClassName,
       )}>
       
-      {loading && <LinearProgress color={loadingColor} className="absolute top-0 left-0 w-[120%] h-2 lg:h-4 z-10 m-0" />}
+      {loading && <LinearProgress color={loadingColor} className="!fixed inset-0 top-0 left-0 w-[120%] !h-1 min-h-1 z-10 m-0" />}
 
       {(title.length > 0) && (
         <AppBar position="static" className="h-25 !text-on-background !shadow-none" style={{ background: "none" }}>
